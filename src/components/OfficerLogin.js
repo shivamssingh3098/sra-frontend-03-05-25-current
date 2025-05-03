@@ -1,13 +1,8 @@
 import React, { useState } from "react";
-import {
-  FaSync,
-  FaUser,
-  FaKey,
-  FaUserPlus,
-  FaSignInAlt,
-} from "react-icons/fa";
+import { FaSync, FaUser, FaKey, FaUserPlus, FaSignInAlt } from "react-icons/fa";
 import { MdLock } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import CONFIG from "../app.config"; // adjust path as needed
 
 const OfficerLogin = ({ onSwitchToUser }) => {
   const [formData, setFormData] = useState({
@@ -50,7 +45,7 @@ const OfficerLogin = ({ onSwitchToUser }) => {
 
     try {
       const response = await fetch(
-        "/api/v1/department-managers/login",
+        CONFIG.API_BASE_URL + "/api/v1/department-managers/login",
         {
           method: "POST",
           headers: {
@@ -66,7 +61,10 @@ const OfficerLogin = ({ onSwitchToUser }) => {
       const data = await response.json();
       console.log("API Response:", data);
 
-      if (response.ok && data.data?.departmentManager?.userType === "DEPARTMENT_MANAGER") {
+      if (
+        response.ok &&
+        data.data?.departmentManager?.userType === "DEPARTMENT_MANAGER"
+      ) {
         localStorage.setItem("isAuthenticated", "true");
         localStorage.setItem("accessToken", data.data.accessToken);
         localStorage.setItem("refreshToken", data.data.refreshToken);
@@ -147,7 +145,9 @@ const OfficerLogin = ({ onSwitchToUser }) => {
           </div>
 
           <div className="officer-captcha-section">
-            <div className="captcha-instruction">Enter the captcha shown below</div>
+            <div className="captcha-instruction">
+              Enter the captcha shown below
+            </div>
             <input
               type="text"
               name="captcha"
@@ -180,9 +180,7 @@ const OfficerLogin = ({ onSwitchToUser }) => {
           </div>
 
           {message && (
-            <div className={`form-message ${messageType}`}>
-              {message}
-            </div>
+            <div className={`form-message ${messageType}`}>{message}</div>
           )}
 
           <button type="submit" className="officer-submit-btn">

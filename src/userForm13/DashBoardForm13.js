@@ -1,10 +1,10 @@
 import CONFIG from "../app.config"; // adjust path as needed
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useImperativeHandle } from "react";
 import servicesData from "../data/services.json";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 
-const DashboardForm13 = ({ setCanProceed, onFormSubmit }) => {
+const DashboardForm13 = ({ setCanProceed, onFormSubmit, ref }) => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const serviceId = parseInt(queryParams.get("serviceId"));
@@ -26,7 +26,17 @@ const DashboardForm13 = ({ setCanProceed, onFormSubmit }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-
+  useImperativeHandle(ref, () => ({
+    setSuccessMsg(data) {
+      setSuccessMessage(data);
+    },
+    setErrorMsg(data) {
+      setErrorMessage(data);
+    },
+    setIsSubmit(data) {
+      setIsSubmitting(data);
+    },
+  }));
   // Check for existing submission
   useEffect(() => {
     const storedUserId = localStorage.getItem("currentUserId");
@@ -45,39 +55,54 @@ const DashboardForm13 = ({ setCanProceed, onFormSubmit }) => {
       [name]: value,
     }));
   };
-
+  useEffect(() => {
+    if (serviceId) {
+      // Find the service in services.json
+      const service = servicesData[0].services.find((s) => s.id === serviceId);
+      if (service) {
+        // Update the formData with the department from services.json
+        setFormData((prev) => ({
+          ...prev,
+          department: service.department,
+          // Set the schemeDeveloper based on the department
+          schemeDeveloper: service.department,
+        }));
+      }
+    }
+  }, [serviceId, setFormData]);
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     setErrorMessage("");
-
+    const submitData = { ...formData };
     try {
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        withCredentials: true,
-      };
+      console.log("form 13 ", submitData);
 
-      const response = await axios.post(
-        "/api/v1/users/create-certified-ren-deposit-copies",
-        formData,
-        config
-      );
+      onFormSubmit(submitData);
 
-      if (onFormSubmit && response.data?.data) {
-        onFormSubmit(response.data.data);
-      }
-
-      setSuccessMessage("Form submitted successfully!");
-      setCanProceed(true);
-    } catch (error) {
-      console.error("Error:", error);
-      setErrorMessage(
-        error.response?.data?.message ||
-          "An error occurred while submitting the form"
-      );
-      setCanProceed(false);
+      //   const config = {
+      // //     headers: {
+      // //       "Content-Type": "application/json",
+      // //     },
+      // //     withCredentials: true,
+      // //   };
+      // //   const response = await axios.post(
+      // //     "/api/v1/users/create-certified-ren-deposit-copies",
+      // //     formData,
+      // //     config
+      // //   );
+      // //   if (onFormSubmit && response.data?.data) {
+      // //     onFormSubmit(response.data.data);
+      // //   }
+      // //   setSuccessMessage("Form submitted successfully!");
+      // //   setCanProceed(true);
+      // // } catch (error) {
+      // //   console.error("Error:", error);
+      // //   setErrorMessage(
+      // //     error.response?.data?.message ||
+      // //       "An error occurred while submitting the form"
+      // //   );
+      // //   setCanProceed(false);
     } finally {
       setIsSubmitting(false);
     }

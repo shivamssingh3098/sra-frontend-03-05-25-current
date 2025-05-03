@@ -412,7 +412,6 @@ const DashboardForm17 = forwardRef(
                 />
               </div>
 
-
               {/* District */}
               <div className="flex-1">
                 <label className="font-medium block mb-1">
@@ -453,11 +452,8 @@ const DashboardForm17 = forwardRef(
                   readOnly
                 />
               </div>
-              
 
-              
               {/* Scheme Developer */}
-            
 
               {/* Sarkari */}
               <div className="flex-1">
@@ -476,7 +472,7 @@ const DashboardForm17 = forwardRef(
 
               <div className="flex-1">
                 <label className="font-medium block mb-1">
-                झोपडी क्र.   <span className="text-red-500">*</span>
+                  झोपडी क्र. <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"

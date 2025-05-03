@@ -1,9 +1,10 @@
-import CONFIG from "../app.config"; // adjust path as needed
+// import CONFIG from "../app.config"; // adjust path as needed
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Captcha from "./Captcha";
 import { FaUser, FaKey, FaSignInAlt } from "react-icons/fa";
+import CONFIG from "../app.config"; // adjust path as needed
 
 const UserLoginForm = () => {
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ const UserLoginForm = () => {
   const [actualCaptcha, setActualCaptcha] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
- 
+
   const handleCaptchaChange = (value) => {
     setActualCaptcha(value);
   };
@@ -28,12 +29,23 @@ const UserLoginForm = () => {
       setIsLoading(false);
       return;
     }
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem("accessToken"),
+      },
+      withCredentials: true,
+    };
 
     try {
-      const response = await axios.post("/api/v1/users/login", {
-        email: userId,
-        password: password,
-      });
+      const response = await axios.post(
+        CONFIG.API_BASE_URL + "/api/v1/users/login",
+        {
+          email: userId,
+          password: password,
+        },
+        config
+      );
 
       if (response.data.success) {
         localStorage.setItem("isAuthenticated", "true");
@@ -44,22 +56,21 @@ const UserLoginForm = () => {
           JSON.stringify(response.data.data.user)
         );
 
-        
         localStorage.setItem(
           "userType",
           JSON.stringify(response.data.data.user.userType)
         );
-        
+
         // 🔁 Redirect to protected page
         navigate("/services", { replace: true });
-        
+
         window.location.reload();
       } else {
         setError(response.data.message || "Login failed");
       }
     } catch (err) {
       setError(err.response?.data?.message || "Invalid credentials");
-    }finally {
+    } finally {
       setIsLoading(false);
     }
   };
@@ -108,8 +119,9 @@ const UserLoginForm = () => {
         <button
           type="submit"
           disabled={isLoading}
-          className={`w-full py-3 rounded-lg flex items-center justify-center gap-2 ${isLoading ? 'bg-gray-400' : 'bg-blue-600 hover:bg-blue-700'
-            } text-white`}
+          className={`w-full py-3 rounded-lg flex items-center justify-center gap-2 ${
+            isLoading ? "bg-gray-400" : "bg-blue-600 hover:bg-blue-700"
+          } text-white`}
         >
           {isLoading ? (
             <div
@@ -128,7 +140,6 @@ const UserLoginForm = () => {
             </>
           )}
         </button>
-
       </form>
     </div>
   );

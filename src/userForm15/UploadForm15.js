@@ -5,14 +5,13 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 
 const UploadForm15 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
-  
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const serviceId = parseInt(queryParams.get("serviceId"));
 
   const serviceDescription =
-    servicesData[0].services.find((service) => service.id === serviceId)?.description ||
-    "";
+    servicesData[0].services.find((service) => service.id === serviceId)
+      ?.description || "";
 
   // State for files and previews
   const [files, setFiles] = useState({
@@ -28,7 +27,6 @@ const UploadForm15 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
     propertyTaxReceipt: null,
     nonAgriculturalTaxPenaltyReceipt: null,
     duplicateGumastaLicense: null,
-   
   });
 
   // State for file previews
@@ -45,7 +43,6 @@ const UploadForm15 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
     propertyTaxReceipt: null,
     nonAgriculturalTaxPenaltyReceipt: null,
     duplicateGumastaLicense: null,
-
   });
 
   // State for loading and error
@@ -138,8 +135,10 @@ const UploadForm15 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
       });
       const token = localStorage.getItem("accessToken");
       // Make API call with user ID as query parameter
+      console.log("userId documen submit  15", userId);
+
       const response = await axios.post(
-        `https://sra-government-project-thane-1.onrender.com/api/v1/users/documents-upload?id=${userId}`,
+        `${CONFIG.API_BASE_URL}/api/v1/users/documents-upload?formId=${userId}`,
         formDataObj,
         {
           headers: {
@@ -180,7 +179,7 @@ const UploadForm15 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
         aadharCard: null,
         buyerRegisteredDocument: null,
         buyerAffidavit: null,
-        signature: null,
+
         otherDocument1: null,
         otherDocument2: null,
       });
@@ -200,7 +199,7 @@ const UploadForm15 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
         aadharCard: null,
         buyerRegisteredDocument: null,
         buyerAffidavit: null,
-        signature: null,
+
         otherDocument1: null,
         otherDocument2: null,
       });
@@ -236,11 +235,13 @@ const UploadForm15 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
             सेवा क्र. {serviceId} {serviceDescription}
           </div>
 
-          <div
-            className="w-100 d-flex justify-content-center flex-column align-items-start mb-4 gap-3">
+          <div className="w-100 d-flex justify-content-center flex-column align-items-start mb-4 gap-3">
             <p className="p-4 font-bold">मूळ पात्र सभासद</p>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 rounded gap-6 p-3 w-100" style={{border:'1px solid black'}}>
+            <div
+              className="grid grid-cols-1 md:grid-cols-2 rounded gap-6 p-3 w-100"
+              style={{ border: "1px solid black" }}
+            >
               {/* Aadhar Card Upload */}
               <div className="space-y-2">
                 <label className="flex items-start text-sm font-medium text-gray-700">
@@ -253,9 +254,7 @@ const UploadForm15 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
                     className="hidden"
                     id="aadharCard"
                     accept=".pdf,.jpg,.jpeg,.png"
-                    onChange={(e) =>
-                      handleFileChange(e, "aadharCard")
-                    }
+                    onChange={(e) => handleFileChange(e, "aadharCard")}
                   />
                   <label
                     htmlFor="aadharCard"
@@ -286,9 +285,7 @@ const UploadForm15 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
                   </label>
                   {files.aadharCard && (
                     <div className="mt-2 text-sm text-gray-600">
-                      <p>
-                        Selected: {files.aadharCard.name}
-                      </p>
+                      <p>Selected: {files.aadharCard.name}</p>
                       {previews.aadharCard && (
                         <img
                           src={previews.aadharCard}
@@ -304,7 +301,7 @@ const UploadForm15 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
               <div className="space-y-2">
                 <label className="flex items-start text-sm font-medium text-gray-700">
                   <span className="text-red-500 mr-1">*</span>
-                  मूळ पात्र सभासद पॅन कार्ड    
+                  स्वाक्षरी
                 </label>
                 <div className="relative">
                   <input
@@ -312,9 +309,7 @@ const UploadForm15 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
                     className="hidden"
                     id="signature"
                     accept=".pdf,.jpg,.jpeg,.png"
-                    onChange={(e) =>
-                      handleFileChange(e, "signature")
-                    }
+                    onChange={(e) => handleFileChange(e, "signature")}
                   />
                   <label
                     htmlFor="signature"
@@ -345,9 +340,7 @@ const UploadForm15 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
                   </label>
                   {files.signature && (
                     <div className="mt-2 text-sm text-gray-600">
-                      <p>
-                        Selected: {files.signature.name}
-                      </p>
+                      <p>Selected: {files.signature.name}</p>
                       {previews.signature && (
                         <img
                           src={previews.signature}
@@ -372,9 +365,7 @@ const UploadForm15 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
                     className="hidden"
                     id="otherDocument1"
                     accept=".pdf,.jpg,.jpeg,.png"
-                    onChange={(e) =>
-                      handleFileChange(e, "otherDocument1")
-                    }
+                    onChange={(e) => handleFileChange(e, "otherDocument1")}
                   />
                   <label
                     htmlFor="otherDocument1"
@@ -405,9 +396,7 @@ const UploadForm15 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
                   </label>
                   {files.otherDocument1 && (
                     <div className="mt-2 text-sm text-gray-600">
-                      <p>
-                        Selected: {files.otherDocument1.name}
-                      </p>
+                      <p>Selected: {files.otherDocument1.name}</p>
                       {previews.otherDocument1 && (
                         <img
                           src={previews.otherDocument1}
@@ -432,12 +421,7 @@ const UploadForm15 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
                     className="hidden"
                     id="otherDocument2"
                     accept=".pdf,.jpg,.jpeg,.png"
-                    onChange={(e) =>
-                      handleFileChange(
-                        e,
-                        "otherDocument2"
-                      )
-                    }
+                    onChange={(e) => handleFileChange(e, "otherDocument2")}
                   />
                   <label
                     htmlFor="otherDocument2"
@@ -468,10 +452,7 @@ const UploadForm15 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
                   </label>
                   {files.otherDocument2 && (
                     <div className="mt-2 text-sm text-gray-600">
-                      <p>
-                        Selected:{" "}
-                        {files.otherDocument2.name}
-                      </p>
+                      <p>Selected: {files.otherDocument2.name}</p>
                       {previews.otherDocument2 && (
                         <img
                           src={previews.otherDocument2}
@@ -487,7 +468,7 @@ const UploadForm15 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
               <div className="space-y-2">
                 <label className="flex items-start text-sm font-medium text-gray-700">
                   <span className="text-red-500 mr-1">*</span>
-                  मूळ पात्र सभासद भागधारक प्रमाणपत्र      
+                  मूळ पात्र सभासद भागधारक प्रमाणपत्र
                 </label>
                 <div className="relative">
                   <input
@@ -495,12 +476,7 @@ const UploadForm15 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
                     className="hidden"
                     id="annexure3_4"
                     accept=".pdf,.jpg,.jpeg,.png"
-                    onChange={(e) =>
-                      handleFileChange(
-                        e,
-                        "annexure3_4"
-                      )
-                    }
+                    onChange={(e) => handleFileChange(e, "annexure3_4")}
                   />
                   <label
                     htmlFor="annexure3_4"
@@ -531,10 +507,7 @@ const UploadForm15 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
                   </label>
                   {files.annexure3_4 && (
                     <div className="mt-2 text-sm text-gray-600">
-                      <p>
-                        Selected:{" "}
-                        {files.annexure3_4.name}
-                      </p>
+                      <p>Selected: {files.annexure3_4.name}</p>
                       {previews.annexure3_4 && (
                         <img
                           src={previews.annexure3_4}
@@ -549,7 +522,7 @@ const UploadForm15 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
               <div className="space-y-2">
                 <label className="flex items-start text-sm font-medium text-gray-700">
                   <span className="text-red-500 mr-1">*</span>
-                  मूळ पात्र सभासद पात्रता यादी       
+                  मूळ पात्र सभासद पात्रता यादी
                 </label>
                 <div className="relative">
                   <input
@@ -558,10 +531,7 @@ const UploadForm15 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
                     id="formASelfDeclaration"
                     accept=".pdf,.jpg,.jpeg,.png"
                     onChange={(e) =>
-                      handleFileChange(
-                        e,
-                        "formASelfDeclaration"
-                      )
+                      handleFileChange(e, "formASelfDeclaration")
                     }
                   />
                   <label
@@ -593,10 +563,7 @@ const UploadForm15 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
                   </label>
                   {files.formASelfDeclaration && (
                     <div className="mt-2 text-sm text-gray-600">
-                      <p>
-                        Selected:{" "}
-                        {files.formASelfDeclaration.name}
-                      </p>
+                      <p>Selected: {files.formASelfDeclaration.name}</p>
                       {previews.formASelfDeclaration && (
                         <img
                           src={previews.formASelfDeclaration}
@@ -620,10 +587,7 @@ const UploadForm15 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
                     id="voterIDCardElectorList"
                     accept=".pdf,.jpg,.jpeg,.png"
                     onChange={(e) =>
-                      handleFileChange(
-                        e,
-                        "voterIDCardElectorList"
-                      )
+                      handleFileChange(e, "voterIDCardElectorList")
                     }
                   />
                   <label
@@ -655,10 +619,7 @@ const UploadForm15 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
                   </label>
                   {files.voterIDCardElectorList && (
                     <div className="mt-2 text-sm text-gray-600">
-                      <p>
-                        Selected:{" "}
-                        {files.voterIDCardElectorList.name}
-                      </p>
+                      <p>Selected: {files.voterIDCardElectorList.name}</p>
                       {previews.voterIDCardElectorList && (
                         <img
                           src={previews.voterIDCardElectorList}
@@ -681,12 +642,7 @@ const UploadForm15 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
                     className="hidden"
                     id="electricityBill"
                     accept=".pdf,.jpg,.jpeg,.png"
-                    onChange={(e) =>
-                      handleFileChange(
-                        e,
-                        "electricityBill"
-                      )
-                    }
+                    onChange={(e) => handleFileChange(e, "electricityBill")}
                   />
                   <label
                     htmlFor="electricityBill"
@@ -717,10 +673,7 @@ const UploadForm15 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
                   </label>
                   {files.electricityBill && (
                     <div className="mt-2 text-sm text-gray-600">
-                      <p>
-                        Selected:{" "}
-                        {files.electricityBill.name}
-                      </p>
+                      <p>Selected: {files.electricityBill.name}</p>
                       {previews.electricityBill && (
                         <img
                           src={previews.electricityBill}
@@ -732,15 +685,14 @@ const UploadForm15 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
                   )}
                 </div>
               </div>
-
             </div>
 
-           
-         
-          {/*2nd div Upload */}
+            {/*2nd div Upload */}
 
-          <div className="grid grid-cols-1 md:grid-cols-2 rounded gap-6 p-3 w-100 mb-5" style={{ border: "1px solid" }}>
-        
+            <div
+              className="grid grid-cols-1 md:grid-cols-2 rounded gap-6 p-3 w-100 mb-5"
+              style={{ border: "1px solid" }}
+            >
               {/* Aadhar Card Upload */}
               <div className="space-y-2">
                 <label className="flex items-start text-sm font-medium text-gray-700">
@@ -896,7 +848,9 @@ const UploadForm15 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
                   </label>
                   {files.nonAgriculturalTaxPenaltyReceipt && (
                     <div className="mt-2 text-sm text-gray-600">
-                      <p>Selected: {files.nonAgriculturalTaxPenaltyReceipt.name}</p>
+                      <p>
+                        Selected: {files.nonAgriculturalTaxPenaltyReceipt.name}
+                      </p>
                       {previews.nonAgriculturalTaxPenaltyReceipt && (
                         <img
                           src={previews.nonAgriculturalTaxPenaltyReceipt}
@@ -913,7 +867,7 @@ const UploadForm15 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
               <div className="space-y-2">
                 <label className="flex items-start text-sm font-medium text-gray-700">
                   <span className="text-red-500 mr-1">*</span>
-                खरेदीदार नौदणीकृत दस्ताऐवज         
+                  खरेदीदार नौदणीकृत दस्ताऐवज
                 </label>
                 <div className="relative">
                   <input
@@ -968,7 +922,6 @@ const UploadForm15 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
               </div>
             </div>
 
-            
             {/* Error Message */}
             {error && (
               <div className="md:col-span-2 bg-red-50 text-red-600 p-3 rounded">
@@ -976,6 +929,12 @@ const UploadForm15 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
               </div>
             )}
 
+            {/* Success Message */}
+            {successMessage && (
+              <div className="md:col-span-2 bg-green-50 text-green-600 p-3 rounded">
+                {successMessage}
+              </div>
+            )}
             {/* Submit Button */}
             <div className="md:col-span-2 flex justify-center mt-6">
               <button
