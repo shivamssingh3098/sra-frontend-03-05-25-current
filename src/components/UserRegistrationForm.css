@@ -1,0 +1,145 @@
+.user-registration-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.section-header {
+  background-color: #f0f5ff;
+  padding: 8px 16px;
+  margin-bottom: 20px;
+}
+
+.section-title {
+  color: #333;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+.form-content {
+  padding: 0 16px;
+}
+
+.form-with-profile {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.main-form-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.auth-fields {
+  border-top: 1px solid #e5e7eb;
+  padding-top: 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-group {
+  position: relative;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 8px;
+  color: #333;
+  font-size: 14px;
+}
+
+.required::before {
+  content: "*";
+  color: #ff0000;
+  margin-right: 4px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.form-select {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: white;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 16px;
+}
+
+.profile-section {
+  width: 200px;
+}
+
+.profile-preview {
+  text-align: center;
+}
+
+.profile-image-container {
+  width: 150px;
+  height: 150px;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-photo-btn {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 4px 16px;
+  border: 1px solid #333;
+  border-radius: 4px;
+  background: white;
+  color: #333;
+  cursor: pointer;
+}
+
+.submit-button {
+  background-color: #dc3545;
+  color: white;
+  padding: 12px 32px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  display: block;
+  margin: 24px auto 0;
+}
+
+.submit-button:hover {
+  background-color: #c82333;
+}
+
+@media (max-width: 768px) {
+  .form-with-profile {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+
+  .main-form-grid,
+  .auth-fields {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  .profile-section {
+    width: 100%;
+    margin-bottom: 24px;
+  }
+}
