@@ -205,7 +205,7 @@ const Form13 = ({ formData: initialFormData, formId }) => {
                   </span>
                 </div>
                 <div className="flex">
-                  <span>दि. :</span>
+                  <span>दि. </span>
                   <span className="mx-2">:</span>
                   <span className="flex-1 border-b border-gray-300">
                     {formData.applyDate || "_____________"}

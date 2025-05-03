@@ -200,7 +200,7 @@ const Form18 = ({ formData: initialFormData, formId }) => {
                   </span>
                 </div>
                 <div className="flex">
-                  <span>दि. :</span>
+                  <span>दि. </span>
                   <span className="mx-2">:</span>
                   <span className="flex-1 border-b border-gray-300">
                     {formData.applyDate || "_____________"}
@@ -211,10 +211,10 @@ const Form18 = ({ formData: initialFormData, formId }) => {
               <div className="mt-8">
                 <p className="">प्रति,</p>
                 <div className="space-y-1">
-                  <p>उपलेखापाल</p>
-                  <p>वित्त विभाग</p>
-                  <p>मुंबई महानगर प्रदेश</p>
-                  <p>झोपडपट्टी पुनर्वसन प्राधिकरण ठाणे.</p>
+                  <p>सक्षम प्राधिकारी क्र......</p>
+                  <p>मुंबई महानगर प्रदेश ,</p>
+                  <p>झोपडपट्टी पुनर्वसन प्राधिकरण </p>
+                  <p>ठाणे .</p>
                 </div>
               </div>
 
@@ -268,7 +268,7 @@ const Form18 = ({ formData: initialFormData, formId }) => {
                     उपरोक्त विषयास अनुसरुन मला मौजे -
                     {formData.village || "_______"} तालुका{" "}
                     {formData.taluka || "_______"} जिल्हा{" "}
-                    {formData.city || "_______"} ये थील. {getMunicipalDisplay()}{" "}
+                    {formData.city || "_______"} येथील. {getMunicipalDisplay()}{" "}
                     महानगरपालिका हद्दीतील सेक्टर क्र./वार्ड क्र{" "}
                     {getWardDisplay()} मधील न.भू.क्र {getPlotDisplay()} या
                     मिलकतीवर झोपडपट्टी पुनर्वसन योजना राबवित आहे{" "}

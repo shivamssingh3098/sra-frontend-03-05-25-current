@@ -67,7 +67,7 @@ const Form1 = () => {
               </span>
             </div>
             <div className="flex">
-              <span>दि. :</span>
+              <span>दि. </span>
               <span className="mx-2">:</span>
               <span className="flex-1 border-b border-gray-300">
                 {formData.date || "_____________"}
@@ -103,10 +103,10 @@ const Form1 = () => {
               <p>
                 उपरोक्त विषयास अनुसरुन मौजे -{formData.mouje || "_______"}{" "}
                 तालुका {formData.taluka || "_______"} जिल्हा{" "}
-                {formData.district || "_______"} ये थील.{" "}
+                {formData.district || "_______"} येथील.{" "}
                 {formData.nagarpalika || "_______"} महानगरपालिका हद्दीतील सेक्टर
                 क्र./वार्ड क्र {formData.wardNo || "_______"} मधील न.भू.क्र{" "}
-                {formData.bhukhandNo || "_______"} ये थील{" "}
+                {formData.bhukhandNo || "_______"} येथील{" "}
                 {formData.sahakari || "_______"} सहकारी गृहनिर्माण संस्थेच्या
                 झोपडपट्टी पुनर्वसन योजनेमद्धे अनु क्र{" "}
                 {formData.sahakari || "_______"} झोपडी क्र.{" "}

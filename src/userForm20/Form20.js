@@ -3,6 +3,7 @@ import React from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import CustomButton from "../components/CustomButton";
 import axios from "axios";
+import servicesData from "../data/services.json";
 import DownloadPDF from "../UserForm/DownloadPDF";
 import { useLocation } from "react-router-dom";
 
@@ -11,6 +12,9 @@ const Form20 = ({ formData: initialFormData, formId }) => {
   const queryParams = new URLSearchParams(location.search);
   const serviceId = parseInt(queryParams.get("serviceId"));
 
+  const serviceDescription =
+    servicesData[0].services.find((service) => service.id === serviceId)
+      ?.description || "";
   console.log("Form20 Component Rendered with:", { initialFormData, formId });
 
   const [formData, setFormData] = useState(
@@ -160,7 +164,7 @@ const Form20 = ({ formData: initialFormData, formId }) => {
             <div className="text-center mb-6">
               <div className="flex justify-between items-start mb-4">
                 <div className="text-left flex  ml-[50%]">
-                  सेवा क्र.{serviceId}
+                  सेवा क्र. २०
                 </div>
               </div>
               <p className="text-sm mb-4">
@@ -200,7 +204,7 @@ const Form20 = ({ formData: initialFormData, formId }) => {
                   </span>
                 </div>
                 <div className="flex">
-                  <span>दि. :</span>
+                  <span>दि. </span>
                   <span className="mx-2">:</span>
                   <span className="flex-1 border-b border-gray-300">
                     {formData.applyDate || "_____________"}
@@ -211,10 +215,10 @@ const Form20 = ({ formData: initialFormData, formId }) => {
               <div className="mt-8">
                 <p className="">प्रति,</p>
                 <div className="space-y-1">
-                  <p>उपलेखापाल</p>
-                  <p>वित्त विभाग</p>
-                  <p>मुंबई महानगर प्रदेश</p>
-                  <p>झोपडपट्टी पुनर्वसन प्राधिकरण ठाणे.</p>
+                  <p>कार्यकारी अभियंता ,</p>
+                  <p>अभियांत्रिकी विभाग ,</p>
+                  <p>मुंबई महानगर प्रदेश झोपडपट्टी ,</p>
+                  <p>पुनर्वसन प्राधिकरण ठाणे ४०० ६१० .</p>
                 </div>
               </div>
 
@@ -223,8 +227,7 @@ const Form20 = ({ formData: initialFormData, formId }) => {
                   className="font-medium text-wrap d-flex"
                   style={{ marginLeft: "40px" }}
                 >
-                  विषय :- सुविधा ( Amenities), बालवाडी, सोसायटी, ऑफिस यांचा ताबा
-                  देणे.
+                  विषय:- <b>{serviceDescription}</b>
                 </p>
 
                 <p className="mt-5">महोदय,</p>
@@ -234,9 +237,9 @@ const Form20 = ({ formData: initialFormData, formId }) => {
                     उपरोक्त विषयास अनुसरुन मला मौजे -
                     {formData.village || "_______"} तालुका{" "}
                     {formData.taluka || "_______"} जिल्हा{" "}
-                    {formData.city || "_______"} ये थील. {getMunicipalDisplay()}{" "}
+                    {formData.city || "_______"} येथील. {getMunicipalDisplay()}{" "}
                     महानगरपालिका हद्दीतील सेक्टर क्र./वार्ड क्र{" "}
-                    {getWardDisplay()} मधील न.भू.क्र {getPlotDisplay()} ये थील{" "}
+                    {getWardDisplay()} मधील न.भू.क्र {getPlotDisplay()} येथील{" "}
                     {formData.governmentServiceBranch || "_______"} सहकारी
                     गृहनिर्माण संस्थेसाठी मंजूर आराखडयानुसार विकसित केलेल्या
                     सुविधा/ बालवाडी/ सोसायटी ऑफिस याचा ताबा संस्थेकडे देण्याची
