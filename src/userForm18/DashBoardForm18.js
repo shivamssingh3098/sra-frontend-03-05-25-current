@@ -479,8 +479,8 @@ const DashboardForm18 = forwardRef(
                   <span className="text-red-500">*</span>
                 </label>
                 <input
-                  type="text"
-                  name=""
+                  type="date"
+                  name="deathCertificateHusbandWifeSonDaughter"
                   placeholder="deathCertificateHusbandWifeSonDaughter"
                   value={formData.deathCertificateHusbandWifeSonDaughter}
                   onChange={handleChange}

@@ -67,7 +67,7 @@ const Form11 = () => {
               </span>
             </div>
             <div className="flex">
-              <span>दि. :</span>
+              <span>दि. </span>
               <span className="mx-2">:</span>
               <span className="flex-1 border-b border-gray-300">
                 {formData.date || "_____________"}
@@ -103,10 +103,10 @@ const Form11 = () => {
               <p>
                 उपरोक्त विषयास अनुसरुन मला मौजे -{formData.mouje || "_______"}{" "}
                 तालुका {formData.taluka || "_______"} जिल्हा{" "}
-                {formData.district || "_______"} ये थील.{" "}
+                {formData.district || "_______"} येथील.{" "}
                 {formData.nagarpalika || "_______"} महानगरपालिका हद्दीतील सेक्टर
                 क्र./वार्ड क्र {formData.wardNo || "_______"} मधील न.भू.क्र{" "}
-                {formData.bhukhandNo || "_______"} ये थील{" "}
+                {formData.bhukhandNo || "_______"} येथील{" "}
                 {formData.sahakari || "_______"} सहकारी गृहनिर्माण संस्थेसाठी
                 परिपत्रक क्र. ३ अन्वये विकसकाने सादर केलेल्या GIS सीडीची प्रत
                 उपलब्ध करून देणेत याव्यात ही विनंती.

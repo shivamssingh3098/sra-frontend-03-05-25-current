@@ -36,7 +36,12 @@ const Form12 = ({ formData: initialFormData, formId }) => {
       surveyNo: "",
       cityCouncil: "",
       villageCouncil: "",
+      punervasanDate: "",
+      sadnika: "",
+      punervasan: "",
+      hutNo: "",
       landNumber: "",
+      spouseDeathDate: "",
     }
   );
 
@@ -247,12 +252,19 @@ const Form12 = ({ formData: initialFormData, formId }) => {
                     {getWardDisplay()} मधील न.भू.क्र {getPlotDisplay()} ये थील{" "}
                     {formData.governmentServiceBranch || "_______"} सहकारी
                     गृहनिर्माण संस्थेच्या झोपडपट्टी पुनर्वसन योजनेमद्धे अनु क्र{" "}
-                    {formData.punervasanDate || "_______"} झोपडी क्र.{" "}
-                    {formData.hutNo || "_______"} वर पात्र आसून मला दि. रोजीच्या
-                    पुनर्वसन योजनेच्या सोडती मध्ये सदनिका क्र. वाटप करण्यात
-                    आलेली आहे. माझे पती / पत्नी यांचे दि. रोजी निधन झाले असून
-                    माझे पती / पत्नीच्या नंतर संस्थेमधील संभासदत्व न सदानिकेचे
-                    हस्तांतरण करण्यात यावे ही विनंती.
+                    {formData.punervasan || "_______"} झोपडी क्र.{" "}
+                    {formData.hutNo || "_______"} वर पात्र आसून मला दि{" "}
+                    {formData.punervasanDate || "_______"} . रोजीच्या पुनर्वसन
+                    योजनेच्या सोडती मध्ये सदनिका क्र. वाटप करण्यात आलेली आहे.
+                    माझे पती / पत्नी यांचे दि.
+                    {formData.spouseDeathDate
+                      ? new Date(formData.spouseDeathDate).toLocaleDateString(
+                          "en-GB"
+                        ) // or "en-US"
+                      : "_______"}
+                     रोजी निधन झाले असून माझे पती / पत्नीच्या नंतर संस्थेमधील
+                    सदनिकेचे सभासदत्व व सदनिकेचे हस्तांतरण करण्यात यावे ही
+                    विनंती.
                   </p>
                 </div>
               </div>

@@ -182,7 +182,7 @@ const UserForm = ({ formData: initialFormData, formId }) => {
                     </span>
                   </div>
                   <div className="flex">
-                    <span>दि. :</span>
+                    <span>दि. </span>
                     <span className="mx-2">:</span>
                     <span className="flex-1 border-b border-gray-300">
                       {formData.date || "_____________"}
@@ -217,10 +217,10 @@ const UserForm = ({ formData: initialFormData, formId }) => {
                       उपरोक्त विषयास अनुसरुन मला मौजे -
                       {formData.village || "_______"} तालुका{" "}
                       {formData.taluka || "_______"} जिल्हा{" "}
-                      {formData.district || "_______"} ये थील.{" "}
+                      {formData.district || "_______"} येथील.{" "}
                       {getNagarpalikaDisplay()} महानगरपालिका हद्दीतील सेक्टर
                       क्र./वार्ड क्र {getWardDisplay()} मधील न.भू.क्र{" "}
-                      {getBhukhandDisplay()} ये थील{" "}
+                      {getBhukhandDisplay()} येथील{" "}
                       {formData.governmentServiceBranch || "_______"} सहकारी
                       गृहनिर्माण संस्थेच्या झोपडपट्टी पुनर्वसन योजना विकासक{" "}
                       {formData.schemeDeveloper || "_______"} यांचेमार्फत विकसित

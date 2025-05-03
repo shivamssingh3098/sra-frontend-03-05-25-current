@@ -46,6 +46,7 @@ import Form19 from "../userForm19/Form19";
 import Form20 from "../userForm20/Form20";
 import Form21 from "../userForm21/Form21";
 import Form22 from "../userForm22/Form22";
+import DashboardForm8 from "../UserForm8/DashBoardForm8";
 
 const stages = ["मूलभूत माहिती", "कागदपत्रे", "प्रमाणपत्र"];
 
@@ -480,7 +481,6 @@ const ApplicationForm = () => {
             serviceId == 5 ||
             serviceId == 6 ||
             serviceId == 7 ||
-            serviceId == 8 ||
             serviceId == 11 ||
             serviceId == 14 ||
             serviceId == 19 ||
@@ -488,6 +488,17 @@ const ApplicationForm = () => {
             serviceId == 21 ||
             serviceId == 22 ? (
             <DashboardForm3
+              ref={childRef}
+              formData={formData}
+              handleChange={handleChange}
+              nextStage={nextStage}
+              prevStage={prevStage}
+              setCanProceed={setCanProceed}
+              onFormSubmit={handleFormSubmit}
+            />
+          ):
+          serviceId == 8 ? (
+            <DashboardForm8
               ref={childRef}
               formData={formData}
               handleChange={handleChange}
@@ -543,7 +554,7 @@ const ApplicationForm = () => {
               handleChange={handleChange}
               nextStage={nextStage}
               prevStage={prevStage}
-              setCanProceed={setCanProceed}
+              set CanProceed={setCanProceed}
               onFormSubmit={handleFormSubmit}
             />
           ) : serviceId == 18 ? (

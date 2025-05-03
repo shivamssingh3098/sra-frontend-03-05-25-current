@@ -114,6 +114,9 @@ const DashBoardForm12 = forwardRef(
       nagarpalika: "",
       WordNo: "",
       schemeDeveloper: "",
+      punervasanDate: "",
+      hutNo: "",
+      punervasan:""
     });
 
     const [errorMessage, setErrorMessage] = useState("");
@@ -487,11 +490,11 @@ const DashBoardForm12 = forwardRef(
                 </label>
                 <input
                   type="text"
-                  name="zopadi"
-                  value={formData.hotNo}
+                  name="hutNo"
+                  value={formData.hutNo}
                   onChange={handleChange}
                   className="w-full border rounded px-3 py-2"
-                  required
+                  required 
                 />
               </div>
 

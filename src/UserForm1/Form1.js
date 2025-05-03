@@ -4,7 +4,7 @@ import { Modal, Button, Form } from "react-bootstrap";
 import CustomButton from "../components/CustomButton";
 import servicesData from "../data/services.json";
 import axios from "axios";
-import DownloadPDF from '../UserForm/DownloadPDF';
+import DownloadPDF from "../UserForm/DownloadPDF";
 import { useLocation } from "react-router-dom";
 
 const Form1 = ({ formData: initialFormData, formId }) => {
@@ -14,7 +14,6 @@ const Form1 = ({ formData: initialFormData, formId }) => {
   const queryParams = new URLSearchParams(location.search);
   const serviceId = parseInt(queryParams.get("serviceId"));
 
-  
   const [formData, setFormData] = useState(
     initialFormData || {
       name: "",
@@ -41,9 +40,10 @@ const Form1 = ({ formData: initialFormData, formId }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [signatureUrl, setSignatureUrl] = useState(null);
- const serviceDescription =
-      servicesData[0].services.find((service) => service.id === FormData?.serviceNumber)?.description ||
-      "";
+  const serviceDescription =
+    servicesData[0].services.find(
+      (service) => service.id === FormData?.serviceNumber
+    )?.description || "";
   // Function to fetch certified rent deposit copies data
   // const fetchDepositData = async () => {
   //   try {
@@ -119,27 +119,22 @@ const Form1 = ({ formData: initialFormData, formId }) => {
     const getPlotDisplay = () => {
       if (formData.finalPlot) {
         return formData.finalPlot;
-      }
-      else if (formData.landNumber) {
+      } else if (formData.landNumber) {
         return formData.landNumber;
-      }
-      else if (formData.surveyNo) {
+      } else if (formData.surveyNo) {
         return formData.surveyNo;
       }
       return "_____________";
     };
 
-
     const getWardDisplay = () => {
       if (formData.wardNo) {
         return formData.wardNo;
-      }
-      else if (formData.sectorNo) {
+      } else if (formData.sectorNo) {
         return formData.sectorNo;
       }
       return "_____________";
     };
-    
 
     const getMunicipalDisplay = () => {
       if (
@@ -152,24 +147,18 @@ const Form1 = ({ formData: initialFormData, formId }) => {
         formData.villageCouncil !== "NONE"
       ) {
         return formData.villageCouncil;
-      } else if (
-        formData.cityCouncil &&
-        formData.cityCouncil !== "NONE"
-      ) {
+      } else if (formData.cityCouncil && formData.cityCouncil !== "NONE") {
         return formData.cityCouncil;
       }
       return "_____________";
     };
-    
-    
 
     const serviceDescription =
-      servicesData[0].services.find((service) => service.id === 1)?.description ||
-      "";
+      servicesData[0].services.find((service) => service.id === 1)
+        ?.description || "";
 
     return (
-      <div className="min-h-screen bg-gray-50 p-4 flex justify-center" >
-
+      <div className="min-h-screen bg-gray-50 p-4 flex justify-center">
         <div className="w-full max-w-4xl bg-white rounded-lg shadow-lg ">
           <div className="flex justify-end p-2">
             <DownloadPDF fileName={formData ? formData?.name : "sample"} />
@@ -181,8 +170,8 @@ const Form1 = ({ formData: initialFormData, formId }) => {
                 <div className="text-left">सेवा क्र.१</div>
               </div>
               <p className="text-sm mb-4">
-                (महाराष्ट्र लोकसेवा हक्क अनियमित २०१५ अंतर्गत सेवा मिळणेकरीत सादर
-                करावयाचा आरजाचा नमूना)
+                (महाराष्ट्र लोकसेवा हक्क अनियमित २०१५ अंतर्गत सेवा मिळणेकरीत
+                सादर करावयाचा आरजाचा नमूना)
               </p>
               {/* Photo Box */}
               <div className="flex justify-end mb-4">
@@ -217,7 +206,7 @@ const Form1 = ({ formData: initialFormData, formId }) => {
                   </span>
                 </div>
                 <div className="flex">
-                  <span>दि. :</span>
+                  <span>दि.</span>
                   <span className="mx-2">:</span>
                   <span className="flex-1 border-b border-gray-300">
                     {formData.applyDate || "_____________"}
@@ -240,30 +229,26 @@ const Form1 = ({ formData: initialFormData, formId }) => {
                   className="font-medium text-wrap d-flex"
                   style={{ marginLeft: "40px" }}
                 >
-                  विषय:- <b>
-                    {serviceDescription}
-                  </b>
+                  विषय:- <b>{serviceDescription}</b>
                 </p>
 
                 <p className="mt-5">महोदय,</p>
 
                 <div className="space-y-4">
                   <p>
-                    उपरोक्त विषयास अनुसरुन मला मौजे -
-                    {formData.village || "_______"} तालुका{" "}
-                    {formData.taluka || "_______"} जिल्हा{" "}
-                    {formData.city || "_______"} ये थील.{" "}
-                    {getMunicipalDisplay()} महानगरपालिका हद्दीतील सेक्टर क्र./वार्ड क्र.
-                    {getWardDisplay()} मधील न.भू.क्र{" "}
-                    {getPlotDisplay()} ये थील{" "}
+                    उपरोक्त विषयास अनुसरुन मौजे -{formData.village || "_______"}{" "}
+                    तालुका {formData.taluka || "_______"} जिल्हा{" "}
+                    {formData.city || "_______"} येथील. {getMunicipalDisplay()}{" "}
+                    महानगरपालिका हद्दीतील सेक्टर क्र./वार्ड क्र.
+                    {getWardDisplay()} मधील न.भू.क्र {getPlotDisplay()} येथील{" "}
                     {formData.governmentServiceBranch || "_______"} सहकारी
                     गृहनिर्माण संस्थेच्या झोपडपट्टी पुनर्वसन योजना विकासक{" "}
                     {formData.schemeDeveloper || "_______"} यांचेमार्फत विकसित
                     करण्यात येत आहे.
                   </p>
                   <p>
-                    भाडे परिपत्रक क्र.41 अन्वये झोपडपट्टीधारक यांना विकासकामार्फत
-                    भाडे अदा करण्याच्या कार्यपध्दती व तरतुदीनुसार
+                    भाडे परिपत्रक क्र.41 अन्वये झोपडपट्टीधारक यांना
+                    विकासकामार्फत भाडे अदा करण्याच्या कार्यपध्दती व तरतुदीनुसार
                     झोपडपट्टीधारकांच्या बँक खात्यावर भाडे प्रदान तपशिलाच्या
                     सत्यप्रति उपलब्ध करुन द्याव्यात ही विनंती.
                   </p>

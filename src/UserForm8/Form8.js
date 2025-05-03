@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import servicesData from "../data/services.json";
 import React from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import CustomButton from "../components/CustomButton";
@@ -7,7 +8,8 @@ import DownloadPDF from "../UserForm/DownloadPDF";
 
 const Form8 = ({ formData: initialFormData, formId }) => {
   console.log("Form8 Component Rendered with:", { initialFormData, formId });
-
+  const serviceDescription =
+    servicesData[0].services.find((service) => service.id === 8)?.title || "";
   const [formData, setFormData] = useState(
     initialFormData || {
       name: "",
@@ -26,6 +28,7 @@ const Form8 = ({ formData: initialFormData, formId }) => {
       surveyNo: "",
       cityCouncil: "",
       villageCouncil: "",
+      hutNo:"",
       landNumber: "",
     }
   );
@@ -154,7 +157,7 @@ const Form8 = ({ formData: initialFormData, formId }) => {
             {/* Certificate Header */}
             <div className="text-center mb-6">
               <div className="flex justify-between items-start mb-4">
-                <div className="text-left flex  ml-[50%]">सेवा क्र.1</div>
+                <div className="text-left flex  ml-[50%]">सेवा क्र. ८</div>
               </div>
               <p className="text-sm mb-4">
                 (महाराष्ट्र लोकसेवा हक्क अनियमित २०१५ अंतर्गत सेवा मिळणेकरीत
@@ -193,7 +196,7 @@ const Form8 = ({ formData: initialFormData, formId }) => {
                   </span>
                 </div>
                 <div className="flex">
-                  <span>दि. :</span>
+                  <span>दि. </span>
                   <span className="mx-2">:</span>
                   <span className="flex-1 border-b border-gray-300">
                     {formData.applyDate || "_____________"}
@@ -204,10 +207,11 @@ const Form8 = ({ formData: initialFormData, formId }) => {
               <div className="mt-8">
                 <p className="">प्रति,</p>
                 <div className="space-y-1">
-                  <p>उपलेखापाल</p>
-                  <p>वित्त विभाग</p>
-                  <p>मुंबई महानगर प्रदेश</p>
-                  <p>झोपडपट्टी पुनर्वसन प्राधिकरण ठाणे.</p>
+                  <p>सहायक निबंधक ,</p>
+                  <p>सहकारी संस्था ,</p>
+                  <p>मुंबई महानगर प्रदेश ,</p>
+                  <p>झोपडपट्टी पुनर्वसन प्राधिकरण,</p>
+                  <p> ठाणे.</p>
                 </div>
               </div>
 
@@ -216,10 +220,7 @@ const Form8 = ({ formData: initialFormData, formId }) => {
                   className="font-medium text-wrap d-flex"
                   style={{ marginLeft: "40px" }}
                 >
-                  विषय :- परिपत्रक क्र. ३ अन्वये एकात्रिकुत विकास नियंत्रक व
-                  प्रोत्साहन नियमावलीतिल विनियम क्र. १४.७ अंतर्गत प्राप्त
-                  प्रस्थावांच्या अनुषंगाने निर्गमित केलेल्या परिशिष्ट - VI च्या
-                  प्रमाणित प्रती देणे.{" "}
+                  विषय :- {serviceDescription}
                 </p>
 
                 <p className="mt-5">महोदय,</p>
@@ -229,17 +230,18 @@ const Form8 = ({ formData: initialFormData, formId }) => {
                     उपरोक्त विषयास अनुसरुन मला मौजे -
                     {formData.village || "_______"} तालुका{" "}
                     {formData.taluka || "_______"} जिल्हा{" "}
-                    {formData.city || "_______"} ये थील. {getMunicipalDisplay()}{" "}
+                    {formData.city || "_______"} येथील. {getMunicipalDisplay()}{" "}
                     महानगरपालिका हद्दीतील सेक्टर क्र./वार्ड क्र{" "}
-                    {getWardDisplay()} मधील न.भू.क्र {getPlotDisplay()} ये थील{" "}
+                    {getWardDisplay()} मधील न.भू.क्र {getPlotDisplay()} येथील{" "}
                     {formData.governmentServiceBranch || "_______"} सहकारी
-                    गृहनिर्माण संस्थेच्या झोपडपट्टी पुनर्वसन योजना विकासक{" "}
-                    {formData.schemeDeveloper || "_______"} सहकारी गृहनिर्माण
-                    संस्थेच्या झोपडपट्टी पुनर्वसन योजनेच्या अनुषंगाने मुंबई
-                    महानगर प्रदेश झोपडपट्टी पुनर्वसन प्राधिकारणकडील परिपत्रक
-                    क्र. ३ अंतर्गत प्रस्तावाच्या अनुषंगाने नगर रचना विभागाने
-                    निर्गमित केलेल्या परिशिष्ट IV च्या अभिप्रायची प्रत उपलब्ध
-                    करून देण्यात यावी, ही विनंती
+                    गृहनिर्माण संस्थेच्या झोपडपट्टी पुनर्वसन योजना विकासक मे{" "}
+                    {formData.schemeDeveloper || "_______"}
+                    यांचेमार्फत विकसित करण्यात येत आहे
+                    </p> 
+                    <p>
+                     सदर योजनेत झोपडी क्र.   {formData.hutNo|| "_______"}  च्या निवासी वापरासाठी
+                    मला पात्र करण्यात आले असुनही मला पर्यायी जागेपोटी भाडे
+                    मिळालेले नाही. तरी मला भाडे देण्यात यावे, ही विनंती.
                   </p>
                 </div>
               </div>

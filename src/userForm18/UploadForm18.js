@@ -1,27 +1,55 @@
-import CONFIG from "../app.config"; // adjust path as needed
 import React, { useState, useEffect } from "react";
 import servicesData from "../data/services.json";
 import axios from "axios";
 
-const UploadForm18 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
+const UploadForm1 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
   const serviceDescription =
-    servicesData[0].services.find((service) => service.id === 18)
-      ?.description || "";
+    servicesData[0].services.find((service) => service.id === 1)?.description ||
+    "";
 
   // State for files and previews
   const [files, setFiles] = useState({
-    identityCard: null,
-    panCard: null,
+    specifiedApplicationFormat: null,
+    deathCertificateHusbandWifeSonDaughter: null,
+    originalEligibleMemberAadhaarCard: null,
+    ownVoterIDCard: null,
+    voterIDFamilyMembers: null,
+    rationCardNo: null,
+    certifiedTrueCopyAnnexure2: null,
+    electricityBill: null,
+    affidavit: null,
+    certifiedNOCFromCooperativeHousingSociety: null,
+    aadharCard: null,
+    buyerResidenceCertificate: null,
+    aadharCard: null,
+    buyerRegisteredDocument: null,
+    buyerAffidavit: null,
     signature: null,
-    otherDocument: null,
+    otherDocument1: null,
+    otherDocument2: null,
   });
 
   // State for file previews
   const [previews, setPreviews] = useState({
-    identityCard: null,
-    panCard: null,
+    specifiedApplicationFormat: null,
+    deathCertificateHusbandWifeSonDaughter: null,
+    originalEligibleMemberAadhaarCard: null,
+    ownVoterIDCard: null,
+    voterIDFamilyMembers: null,
+    rationCardNo: null,
+    certifiedTrueCopyAnnexure2: null,
+    electricityBill: null,
+    affidavit: null,
+    certifiedNOCFromCooperativeHousingSociety: null,
+    aadharCard: null,
+    buyerResidenceCertificate: null,
+    aadharCard: null,
+  
+    buyerRegisteredDocument: null,
+    buyerAffidavit: null,
     signature: null,
-    otherDocument: null,
+    otherDocument1: null,
+    otherDocument2: null,
   });
 
   // State for loading and error
@@ -115,7 +143,7 @@ const UploadForm18 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
       const token = localStorage.getItem("accessToken");
       // Make API call with user ID as query parameter
       const response = await axios.post(
-        `https://sra-government-project-thane-1.onrender.com/api/v1/users/documents-upload?formId=${userId}`,
+        `https://sra-government-project-thane-1.onrender.com/api/v1/users/documents-upload?id=${userId}`,
         formDataObj,
         {
           headers: {
@@ -141,16 +169,44 @@ const UploadForm18 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
 
       // Clear form
       setFiles({
-        identityCard: null,
-        panCard: null,
+        specifiedApplicationFormat: null,
+        deathCertificateHusbandWifeSonDaughter: null,
+        originalEligibleMemberAadhaarCard: null,
+        ownVoterIDCard: null,
+        voterIDFamilyMembers: null,
+        rationCardNo: null,
+        certifiedTrueCopyAnnexure2: null,
+        electricityBill: null,
+        affidavit: null,
+        certifiedNOCFromCooperativeHousingSociety: null,
+        aadharCard: null,
+        buyerResidenceCertificate: null,
+        aadharCard: null,
+        buyerRegisteredDocument: null,
+        buyerAffidavit: null,
         signature: null,
-        otherDocument: null,
+        otherDocument1: null,
+        otherDocument2: null,
       });
       setPreviews({
-        identityCard: null,
-        panCard: null,
+        specifiedApplicationFormat: null,
+        deathCertificateHusbandWifeSonDaughter: null,
+        originalEligibleMemberAadhaarCard: null,
+        ownVoterIDCard: null,
+        voterIDFamilyMembers: null,
+        rationCardNo: null,
+        certifiedTrueCopyAnnexure2: null,
+        electricityBill: null,
+        affidavit: null,
+        certifiedNOCFromCooperativeHousingSociety: null,
+        aadharCard: null,
+        buyerResidenceCertificate: null,
+        aadharCard: null,
+        buyerRegisteredDocument: null,
+        buyerAffidavit: null,
         signature: null,
-        otherDocument: null,
+        otherDocument1: null,
+        otherDocument2: null,
       });
     } catch (err) {
       setError(err.response?.data?.message || "Error uploading files");
@@ -177,124 +233,684 @@ const UploadForm18 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
 
   return (
     <div>
-      <div className="min-h-screen bg-gray-50 px-0 py-0 flex justify-center items-center">
+      <div className="min-h-screen w-full bg-gray-50 p-4 flex justify-center">
         <div className="w-full max-w-6xl bg-white rounded-lg shadow p-6">
           {/* Header */}
           <div className="bg-blue-900 text-white text-center p-2 rounded text-sm md:text-base font-semibold mb-6">
-            सेवा क्र.{servicesData[0].services[17].id}: {serviceDescription}
+            सेवा क्र. १० {serviceDescription}
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 mb-3 gap-6">
-            {/* Aadhar Card Upload */}
-            <div className="space-y-2">
-              <label className="flex items-start text-sm font-medium text-gray-700">
-                <span className="text-red-500 mr-1">*</span>
-                ओळखपत्र
-              </label>
-              <div className="relative">
-                <input
-                  type="file"
-                  className="hidden"
-                  id="identityCard"
-                  accept=".pdf,.jpg,.jpeg,.png"
-                  onChange={(e) => handleFileChange(e, "identityCard")}
-                />
-                <label
-                  htmlFor="identityCard"
-                  className="flex items-center gap-2 w-full border-2 border-dashed border-gray-300 rounded-lg p-4 hover:border-blue-500 cursor-pointer transition-colors group"
-                >
-                  <div className="p-2 rounded-full bg-blue-50 group-hover:bg-blue-100">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6 text-blue-600"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
-                      />
-                    </svg>
-                  </div>
-                  <div className="flex-1 text-sm text-gray-500">
-                    <span className="font-medium">Choose from files</span>
-                    <p className="text-xs">PDF, JPG, JPEG or PNG (max. 2MB)</p>
-                  </div>
+          <div
+            className="w-100 d-flex justify-content-center flex-column align-items-start rounded mb-4"
+            style={{ border: "1px solid" }}
+          >
+            <p className="p-4 font-bold">मूळ पात्र सभासद</p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2  gap-6 p-3 w-100">
+              {/* Aadhar Card Upload */}
+              <div className="space-y-2">
+                <label className="flex items-start text-sm font-medium text-gray-700">
+                  <span className="text-red-500 mr-1">*</span>
+                  विवहीत नमुन्यातील अर्ज 
                 </label>
-                {files.identityCard && (
-                  <div className="mt-2 text-sm text-gray-600">
-                    <p>Selected: {files.identityCard.name}</p>
-                    {previews.identityCard && (
-                      <img
-                        src={previews.identityCard}
-                        alt="Preview"
-                        className="mt-2 max-w-full sm:max-w-xs rounded mx-auto"
-                      />
-                    )}
-                  </div>
-                )}
+                <div className="relative">
+                  <input
+                    type="file"
+                    className="hidden"
+                    id="specifiedApplicationFormat"
+                    accept=".pdf,.jpg,.jpeg,.png"
+                    onChange={(e) =>
+                      handleFileChange(e, "specifiedApplicationFormat")
+                    }
+                  />
+                  <label
+                    htmlFor="specifiedApplicationFormat"
+                    className="flex items-center gap-2 w-full border-2 border-dashed border-gray-300 rounded-lg p-4 hover:border-blue-500 cursor-pointer transition-colors group"
+                  >
+                    <div className="p-2 rounded-full bg-blue-50 group-hover:bg-blue-100">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6 text-blue-600"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
+                        />
+                      </svg>
+                    </div>
+                    <div className="flex-1 text-sm text-gray-500">
+                      <span className="font-medium">Choose from files</span>
+                      <p className="text-xs">
+                        PDF, JPG, JPEG or PNG (max. 2MB)
+                      </p>
+                    </div>
+                  </label>
+                  {files.specifiedApplicationFormat && (
+                    <div className="mt-2 text-sm text-gray-600">
+                      <p>
+                        Selected: {files.specifiedApplicationFormat.name}
+                      </p>
+                      {previews.specifiedApplicationFormat && (
+                        <img
+                          src={previews.specifiedApplicationFormat}
+                          alt="Preview"
+                          className="mt-2 max-w-full sm:max-w-xs rounded mx-auto"
+                        />
+                      )}
+                    </div>
+                  )}
+                </div>
               </div>
+
+              <div className="space-y-2">
+                <label className="flex items-start text-sm font-medium text-gray-700">
+                  <span className="text-red-500 mr-1">*</span>
+                  पती/पत्नी/मुलगा मुलगी च मृत्यू च दाखला  
+                </label>
+                <div className="relative">
+                  <input
+                    type="file"
+                    className="hidden"
+                    id="deathCertificateHusbandWifeSonDaughter"
+                    accept=".pdf,.jpg,.jpeg,.png"
+                    onChange={(e) =>
+                      handleFileChange(e, "deathCertificateHusbandWifeSonDaughter")
+                    }
+                  />
+                  <label
+                    htmlFor="deathCertificateHusbandWifeSonDaughter"
+                    className="flex items-center gap-2 w-full border-2 border-dashed border-gray-300 rounded-lg p-4 hover:border-blue-500 cursor-pointer transition-colors group"
+                  >
+                    <div className="p-2 rounded-full bg-blue-50 group-hover:bg-blue-100">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6 text-blue-600"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
+                        />
+                      </svg>
+                    </div>
+                    <div className="flex-1 text-sm text-gray-500">
+                      <span className="font-medium">Choose from files</span>
+                      <p className="text-xs">
+                        PDF, JPG, JPEG or PNG (max. 2MB)
+                      </p>
+                    </div>
+                  </label>
+                  {files.deathCertificateHusbandWifeSonDaughter && (
+                    <div className="mt-2 text-sm text-gray-600">
+                      <p>
+                        Selected: {files.deathCertificateHusbandWifeSonDaughter.name}
+                      </p>
+                      {previews.deathCertificateHusbandWifeSonDaughter && (
+                        <img
+                          src={previews.deathCertificateHusbandWifeSonDaughter}
+                          alt="Preview"
+                          className="mt-2 max-w-full sm:max-w-xs rounded mx-auto"
+                        />
+                      )}
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* PAN Card Upload */}
+              <div className="space-y-2">
+                <label className="flex items-start text-sm font-medium text-gray-700">
+                  <span className="text-red-500 mr-1">*</span>
+                  मतदार यादी /मतदार ओळखपत्र
+                </label>
+                <div className="relative">
+                  <input
+                    type="file"
+                    className="hidden"
+                    id="originalEligibleMemberAadhaarCard"
+                    accept=".pdf,.jpg,.jpeg,.png"
+                    onChange={(e) =>
+                      handleFileChange(e, "originalEligibleMemberAadhaarCard")
+                    }
+                  />
+                  <label
+                    htmlFor="originalEligibleMemberAadhaarCard"
+                    className="flex items-center gap-2 w-full border-2 border-dashed border-gray-300 rounded-lg p-4 hover:border-blue-500 cursor-pointer transition-colors group"
+                  >
+                    <div className="p-2 rounded-full bg-blue-50 group-hover:bg-blue-100">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6 text-blue-600"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
+                        />
+                      </svg>
+                    </div>
+                    <div className="flex-1 text-sm text-gray-500">
+                      <span className="font-medium">Choose from files</span>
+                      <p className="text-xs">
+                        PDF, JPG, JPEG or PNG (max. 2MB)
+                      </p>
+                    </div>
+                  </label>
+                  {files.originalEligibleMemberAadhaarCard && (
+                    <div className="mt-2 text-sm text-gray-600">
+                      <p>
+                        Selected: {files.originalEligibleMemberAadhaarCard.name}
+                      </p>
+                      {previews.originalEligibleMemberAadhaarCard && (
+                        <img
+                          src={previews.originalEligibleMemberAadhaarCard}
+                          alt="Preview"
+                          className="mt-2 max-w-full sm:max-w-xs rounded mx-auto"
+                        />
+                      )}
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* etc Upload */}
+              <div className="space-y-2">
+                <label className="flex items-start text-sm font-medium text-gray-700">
+                  <span className="text-red-500 mr-1">*</span>
+                  स्वत:चे मतदार ओळखपत्र     
+                </label>
+                <div className="relative">
+                  <input
+                    type="file"
+                    className="hidden"
+                    id="ownVoterIDCard"
+                    accept=".pdf,.jpg,.jpeg,.png"
+                    onChange={(e) =>
+                      handleFileChange(
+                        e,
+                        "ownVoterIDCard"
+                      )
+                    }
+                  />
+                  <label
+                    htmlFor="ownVoterIDCard"
+                    className="flex items-center gap-2 w-full border-2 border-dashed border-gray-300 rounded-lg p-4 hover:border-blue-500 cursor-pointer transition-colors group"
+                  >
+                    <div className="p-2 rounded-full bg-blue-50 group-hover:bg-blue-100">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6 text-blue-600"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
+                        />
+                      </svg>
+                    </div>
+                    <div className="flex-1 text-sm text-gray-500">
+                      <span className="font-medium">Choose from files</span>
+                      <p className="text-xs">
+                        PDF, JPG, JPEG or PNG (max. 2MB)
+                      </p>
+                    </div>
+                  </label>
+                  {files.ownVoterIDCard && (
+                    <div className="mt-2 text-sm text-gray-600">
+                      <p>
+                        Selected:{" "}
+                        {files.ownVoterIDCard.name}
+                      </p>
+                      {previews.ownVoterIDCard && (
+                        <img
+                          src={previews.ownVoterIDCard}
+                          alt="Preview"
+                          className="mt-2 max-w-full sm:max-w-xs rounded mx-auto"
+                        />
+                      )}
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <label className="flex items-start text-sm font-medium text-gray-700">
+                  <span className="text-red-500 mr-1">*</span>
+                  पती/पत्नी / मुलगा मुलगी मतदार ओळखपत्र              
+                </label>
+                <div className="relative">
+                  <input
+                    type="file"
+                    className="hidden"
+                    id="voterIDFamilyMembers"
+                    accept=".pdf,.jpg,.jpeg,.png"
+                    onChange={(e) =>
+                      handleFileChange(
+                        e,
+                        "voterIDFamilyMembers"
+                      )
+                    }
+                  />
+                  <label
+                    htmlFor="voterIDFamilyMembers"
+                    className="flex items-center gap-2 w-full border-2 border-dashed border-gray-300 rounded-lg p-4 hover:border-blue-500 cursor-pointer transition-colors group"
+                  >
+                    <div className="p-2 rounded-full bg-blue-50 group-hover:bg-blue-100">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6 text-blue-600"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
+                        />
+                      </svg>
+                    </div>
+                    <div className="flex-1 text-sm text-gray-500">
+                      <span className="font-medium">Choose from files</span>
+                      <p className="text-xs">
+                        PDF, JPG, JPEG or PNG (max. 2MB)
+                      </p>
+                    </div>
+                  </label>
+                  {files.voterIDFamilyMembers && (
+                    <div className="mt-2 text-sm text-gray-600">
+                      <p>
+                        Selected:{" "}
+                        {files.voterIDFamilyMembers.name}
+                      </p>
+                      {previews.voterIDFamilyMembers && (
+                        <img
+                          src={previews.voterIDFamilyMembers}
+                          alt="Preview"
+                          className="mt-2 max-w-full sm:max-w-xs rounded mx-auto"
+                        />
+                      )}
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div className="space-y-2">
+                <label className="flex items-start text-sm font-medium text-gray-700">
+                  <span className="text-red-500 mr-1">*</span>
+                  शिधापत्रिका क्र     
+                </label>
+                <div className="relative">
+                  <input
+                    type="file"
+                    className="hidden"
+                    id="rationCardNo"
+                    accept=".pdf,.jpg,.jpeg,.png"
+                    onChange={(e) =>
+                      handleFileChange(
+                        e,
+                        "rationCardNo"
+                      )
+                    }
+                  />
+                  <label
+                    htmlFor="rationCardNo"
+                    className="flex items-center gap-2 w-full border-2 border-dashed border-gray-300 rounded-lg p-4 hover:border-blue-500 cursor-pointer transition-colors group"
+                  >
+                    <div className="p-2 rounded-full bg-blue-50 group-hover:bg-blue-100">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6 text-blue-600"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
+                        />
+                      </svg>
+                    </div>
+                    <div className="flex-1 text-sm text-gray-500">
+                      <span className="font-medium">Choose from files</span>
+                      <p className="text-xs">
+                        PDF, JPG, JPEG or PNG (max. 2MB)
+                      </p>
+                    </div>
+                  </label>
+                  {files.rationCardNo && (
+                    <div className="mt-2 text-sm text-gray-600">
+                      <p>
+                        Selected:{" "}
+                        {files.rationCardNo.name}
+                      </p>
+                      {previews.rationCardNo && (
+                        <img
+                          src={previews.rationCardNo}
+                          alt="Preview"
+                          className="mt-2 max-w-full sm:max-w-xs rounded mx-auto"
+                        />
+                      )}
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div className="space-y-2">
+                <label className="flex items-start text-sm font-medium text-gray-700">
+                  <span className="text-red-500 mr-1">*</span>
+                  प्रमाणित परिशिष्ट -२ ची सत्यप्रत  
+                </label>
+                <div className="relative">
+                  <input
+                    type="file"
+                    className="hidden"
+                    id="certifiedTrueCopyAnnexure2"
+                    accept=".pdf,.jpg,.jpeg,.png"
+                    onChange={(e) =>
+                      handleFileChange(
+                        e,
+                        "certifiedTrueCopyAnnexure2"
+                      )
+                    }
+                  />
+                  <label
+                    htmlFor="certifiedTrueCopyAnnexure2"
+                    className="flex items-center gap-2 w-full border-2 border-dashed border-gray-300 rounded-lg p-4 hover:border-blue-500 cursor-pointer transition-colors group"
+                  >
+                    <div className="p-2 rounded-full bg-blue-50 group-hover:bg-blue-100">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6 text-blue-600"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
+                        />
+                      </svg>
+                    </div>
+                    <div className="flex-1 text-sm text-gray-500">
+                      <span className="font-medium">Choose from files</span>
+                      <p className="text-xs">
+                        PDF, JPG, JPEG or PNG (max. 2MB)
+                      </p>
+                    </div>
+                  </label>
+                  {files.certifiedTrueCopyAnnexure2 && (
+                    <div className="mt-2 text-sm text-gray-600">
+                      <p>
+                        Selected:{" "}
+                        {files.certifiedTrueCopyAnnexure2.name}
+                      </p>
+                      {previews.certifiedTrueCopyAnnexure2 && (
+                        <img
+                          src={previews.certifiedTrueCopyAnnexure2}
+                          alt="Preview"
+                          className="mt-2 max-w-full sm:max-w-xs rounded mx-auto"
+                        />
+                      )}
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div className="space-y-2">
+                <label className="flex items-start text-sm font-medium text-gray-700">
+                  <span className="text-red-500 mr-1">*</span>
+                  वीज बिल
+                </label>
+                <div className="relative">
+                  <input
+                    type="file"
+                    className="hidden"
+                    id="electricityBill"
+                    accept=".pdf,.jpg,.jpeg,.png"
+                    onChange={(e) =>
+                      handleFileChange(
+                        e,
+                        "electricityBill"
+                      )
+                    }
+                  />
+                  <label
+                    htmlFor="electricityBill"
+                    className="flex items-center gap-2 w-full border-2 border-dashed border-gray-300 rounded-lg p-4 hover:border-blue-500 cursor-pointer transition-colors group"
+                  >
+                    <div className="p-2 rounded-full bg-blue-50 group-hover:bg-blue-100">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6 text-blue-600"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
+                        />
+                      </svg>
+                    </div>
+                    <div className="flex-1 text-sm text-gray-500">
+                      <span className="font-medium">Choose from files</span>
+                      <p className="text-xs">
+                        PDF, JPG, JPEG or PNG (max. 2MB)
+                      </p>
+                    </div>
+                  </label>
+                  {files.electricityBill && (
+                    <div className="mt-2 text-sm text-gray-600">
+                      <p>
+                        Selected:{" "}
+                        {files.electricityBill.name}
+                      </p>
+                      {previews.electricityBill && (
+                        <img
+                          src={previews.electricityBill}
+                          alt="Preview"
+                          className="mt-2 max-w-full sm:max-w-xs rounded mx-auto"
+                        />
+                      )}
+                    </div>
+                  )}
+                </div>
+              </div>
+
             </div>
 
-            {/* PAN Card Upload */}
-            <div className="space-y-2">
-              <label className="flex items-start text-sm font-medium text-gray-700">
-                <span className="text-red-500 mr-1">*</span>
-                इतर कागद पत्रे
-              </label>
-              <div className="relative">
-                <input
-                  type="file"
-                  className="hidden"
-                  id="panCard"
-                  accept=".pdf,.jpg,.jpeg,.png"
-                  onChange={(e) => handleFileChange(e, "panCard")}
-                />
-                <label
-                  htmlFor="panCard"
-                  className="flex items-center gap-2 w-full border-2 border-dashed border-gray-300 rounded-lg p-4 hover:border-blue-500 cursor-pointer transition-colors group"
-                >
-                  <div className="p-2 rounded-full bg-blue-50 group-hover:bg-blue-100">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6 text-blue-600"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
-                      />
-                    </svg>
-                  </div>
-                  <div className="flex-1 text-sm text-gray-500">
-                    <span className="font-medium">Choose from files</span>
-                    <p className="text-xs">PDF, JPG, JPEG or PNG (max. 2MB)</p>
-                  </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-3">
+              {/* Aadhar Card Upload */}
+              <div className="space-y-2">
+                <label className="flex items-start text-sm font-medium text-gray-700">
+                  <span className="text-red-500 mr-1">*</span>
+                  प्रतिज्ञापत्र  
                 </label>
-                {files.panCard && (
-                  <div className="mt-2 text-sm text-gray-600">
-                    <p>Selected: {files.panCard.name}</p>
-                    {previews.panCard && (
-                      <img
-                        src={previews.panCard}
-                        alt="Preview"
-                        className="mt-2 max-w-full sm:max-w-xs rounded mx-auto"
-                      />
-                    )}
-                  </div>
-                )}
+                <div className="relative">
+                  <input
+                    type="file"
+                    className="hidden"
+                    id="affidavit"
+                    accept=".pdf,.jpg,.jpeg,.png"
+                    onChange={(e) => handleFileChange(e, "affidavit")}
+                  />
+                  <label
+                    htmlFor="affidavit"
+                    className="flex items-center gap-2 w-full border-2 border-dashed border-gray-300 rounded-lg p-4 hover:border-blue-500 cursor-pointer transition-colors group"
+                  >
+                    <div className="p-2 rounded-full bg-blue-50 group-hover:bg-blue-100">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6 text-blue-600"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
+                        />
+                      </svg>
+                    </div>
+                    <div className="flex-1 text-sm text-gray-500">
+                      <span className="font-medium">Choose from files</span>
+                      <p className="text-xs">
+                        PDF, JPG, JPEG or PNG (max. 2MB)
+                      </p>
+                    </div>
+                  </label>
+                  {files.affidavit && (
+                    <div className="mt-2 text-sm text-gray-600">
+                      <p>Selected: {files.affidavit.name}</p>
+                      {previews.affidavit && (
+                        <img
+                          src={previews.affidavit}
+                          alt="Preview"
+                          className="mt-2 max-w-full sm:max-w-xs rounded mx-auto"
+                        />
+                      )}
+                    </div>
+                  )}
+                </div>
               </div>
-            </div>
 
-            {/* Signature Upload */}
-            <div className="space-y-2">
+              <div className="space-y-2">
+                <label className="flex items-start text-sm font-medium text-gray-700">
+                  <span className="text-red-500 mr-1">*</span>
+                  प्रमाणित सहकारी गृहनिर्माण संस्थेचे ना हरकत प्रमाणपत्र  
+                </label>
+                <div className="relative">
+                  <input
+                    type="file"
+                    className="hidden"
+                    id="certifiedNOCFromCooperativeHousingSociety"
+                    accept=".pdf,.jpg,.jpeg,.png"
+                    onChange={(e) => handleFileChange(e, "certifiedNOCFromCooperativeHousingSociety")}
+                  />
+                  <label
+                    htmlFor="certifiedNOCFromCooperativeHousingSociety"
+                    className="flex items-center gap-2 w-full border-2 border-dashed border-gray-300 rounded-lg p-4 hover:border-blue-500 cursor-pointer transition-colors group"
+                  >
+                    <div className="p-2 rounded-full bg-blue-50 group-hover:bg-blue-100">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6 text-blue-600"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
+                        />
+                      </svg>
+                    </div>
+                    <div className="flex-1 text-sm text-gray-500">
+                      <span className="font-medium">Choose from files</span>
+                      <p className="text-xs">
+                        PDF, JPG, JPEG or PNG (max. 2MB)
+                      </p>
+                    </div>
+                  </label>
+                  {files.certifiedNOCFromCooperativeHousingSociety && (
+                    <div className="mt-2 text-sm text-gray-600">
+                      <p>Selected: {files.certifiedNOCFromCooperativeHousingSociety.name}</p>
+                      {previews.certifiedNOCFromCooperativeHousingSociety && (
+                        <img
+                          src={previews.certifiedNOCFromCooperativeHousingSociety}
+                          alt="Preview"
+                          className="mt-2 max-w-full sm:max-w-xs rounded mx-auto"
+                        />
+                      )}
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <label className="flex items-start text-sm font-medium text-gray-700">
+                  <span className="text-red-500 mr-1">*</span>
+                  आधार कार्ड .      
+                </label>
+                <div className="relative">
+                  <input
+                    type="file"
+                    className="hidden"
+                    id="aadharCard"
+                    accept=".pdf,.jpg,.jpeg,.png"
+                    onChange={(e) =>
+                      handleFileChange(e, "aadharCard")
+                    }
+                  />
+                  <label
+                    htmlFor="aadharCard"
+                    className="flex items-center gap-2 w-full border-2 border-dashed border-gray-300 rounded-lg p-4 hover:border-blue-500 cursor-pointer transition-colors group"
+                  >
+                    <div className="p-2 rounded-full bg-blue-50 group-hover:bg-blue-100">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6 text-blue-600"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
+                        />
+                      </svg>
+                    </div>
+                    <div className="flex-1 text-sm text-gray-500">
+                      <span className="font-medium">Choose from files</span>
+                      <p className="text-xs">
+                        PDF, JPG, JPEG or PNG (max. 2MB)
+                      </p>
+                    </div>
+                  </label>
+                  {files.aadharCard && (
+                    <div className="mt-2 text-sm text-gray-600">
+                      <p>Selected: {files.aadharCard.name}</p>
+                      {previews.aadharCard && (
+                        <img
+                          src={previews.aadharCard}
+                          alt="Preview"
+                          className="mt-2 max-w-full sm:max-w-xs rounded mx-auto"
+                        />
+                      )}
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div className="space-y-2">
               <label className="flex items-start text-sm font-medium text-gray-700">
                 <span className="text-red-500 mr-1">*</span>
                 स्वाक्षरी
@@ -347,7 +963,6 @@ const UploadForm18 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
               </div>
             </div>
 
-            {/* etc Upload */}
             <div className="space-y-2">
               <label className="flex items-start text-sm font-medium text-gray-700">
                 <span className="text-red-500 mr-1">*</span>
@@ -357,12 +972,12 @@ const UploadForm18 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
                 <input
                   type="file"
                   className="hidden"
-                  id="otherDocument"
+                  id="otherDocument2"
                   accept=".pdf,.jpg,.jpeg,.png"
-                  onChange={(e) => handleFileChange(e, "otherDocument")}
+                  onChange={(e) => handleFileChange(e, "otherDocument2")}
                 />
                 <label
-                  htmlFor="otherDocument"
+                  htmlFor="otherDocument2"
                   className="flex items-center gap-2 w-full border-2 border-dashed border-gray-300 rounded-lg p-4 hover:border-blue-500 cursor-pointer transition-colors group"
                 >
                   <div className="p-2 rounded-full bg-blue-50 group-hover:bg-blue-100">
@@ -386,70 +1001,12 @@ const UploadForm18 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
                     <p className="text-xs">PDF, JPG, JPEG or PNG (max. 2MB)</p>
                   </div>
                 </label>
-                {files.otherDocument && (
+                {files.otherDocument2 && (
                   <div className="mt-2 text-sm text-gray-600">
-                    <p>Selected: {files.otherDocument.name}</p>
-                    {previews.otherDocument && (
+                    <p>Selected: {files.otherDocument2.name}</p>
+                    {previews.otherDocument2 && (
                       <img
-                        src={previews.otherDocument}
-                        alt="Preview"
-                        className="mt-2 max-w-full sm:max-w-xs rounded mx-auto"
-                      />
-                    )}
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-
-          {/* Secound Div */}
-
-          <div className="grid grid-cols-1 mb-3  md:grid-cols-2 gap-6">
-            {/* Aadhar Card Upload */}
-            <div className="space-y-2">
-              <label className="flex items-start text-sm font-medium text-gray-700">
-                <span className="text-red-500 mr-1">*</span>
-                ओळखपत्र
-              </label>
-              <div className="relative">
-                <input
-                  type="file"
-                  className="hidden"
-                  id="identityCard"
-                  accept=".pdf,.jpg,.jpeg,.png"
-                  onChange={(e) => handleFileChange(e, "identityCard")}
-                />
-                <label
-                  htmlFor="identityCard"
-                  className="flex items-center gap-2 w-full border-2 border-dashed border-gray-300 rounded-lg p-4 hover:border-blue-500 cursor-pointer transition-colors group"
-                >
-                  <div className="p-2 rounded-full bg-blue-50 group-hover:bg-blue-100">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6 text-blue-600"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
-                      />
-                    </svg>
-                  </div>
-                  <div className="flex-1 text-sm text-gray-500">
-                    <span className="font-medium">Choose from files</span>
-                    <p className="text-xs">PDF, JPG, JPEG or PNG (max. 2MB)</p>
-                  </div>
-                </label>
-                {files.identityCard && (
-                  <div className="mt-2 text-sm text-gray-600">
-                    <p>Selected: {files.identityCard.name}</p>
-                    {previews.identityCard && (
-                      <img
-                        src={previews.identityCard}
+                        src={previews.otherDocument2}
                         alt="Preview"
                         className="mt-2 max-w-full sm:max-w-xs rounded mx-auto"
                       />
@@ -469,12 +1026,12 @@ const UploadForm18 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
                 <input
                   type="file"
                   className="hidden"
-                  id="panCard"
+                  id="otherDocument1"
                   accept=".pdf,.jpg,.jpeg,.png"
-                  onChange={(e) => handleFileChange(e, "panCard")}
+                  onChange={(e) => handleFileChange(e, "otherDocument1")}
                 />
                 <label
-                  htmlFor="panCard"
+                  htmlFor="otherDocument1"
                   className="flex items-center gap-2 w-full border-2 border-dashed border-gray-300 rounded-lg p-4 hover:border-blue-500 cursor-pointer transition-colors group"
                 >
                   <div className="p-2 rounded-full bg-blue-50 group-hover:bg-blue-100">
@@ -498,12 +1055,12 @@ const UploadForm18 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
                     <p className="text-xs">PDF, JPG, JPEG or PNG (max. 2MB)</p>
                   </div>
                 </label>
-                {files.panCard && (
+                {files.otherDocument1 && (
                   <div className="mt-2 text-sm text-gray-600">
-                    <p>Selected: {files.panCard.name}</p>
-                    {previews.panCard && (
+                    <p>Selected: {files.otherDocument1.name}</p>
+                    {previews.otherDocument1 && (
                       <img
-                        src={previews.panCard}
+                        src={previews.otherDocument1}
                         alt="Preview"
                         className="mt-2 max-w-full sm:max-w-xs rounded mx-auto"
                       />
@@ -512,776 +1069,14 @@ const UploadForm18 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
                 )}
               </div>
             </div>
-
-            {/* Signature Upload */}
-            <div className="space-y-2">
-              <label className="flex items-start text-sm font-medium text-gray-700">
-                <span className="text-red-500 mr-1">*</span>
-                स्वाक्षरी
-              </label>
-              <div className="relative">
-                <input
-                  type="file"
-                  className="hidden"
-                  id="signature"
-                  accept=".pdf,.jpg,.jpeg,.png"
-                  onChange={(e) => handleFileChange(e, "signature")}
-                />
-                <label
-                  htmlFor="signature"
-                  className="flex items-center gap-2 w-full border-2 border-dashed border-gray-300 rounded-lg p-4 hover:border-blue-500 cursor-pointer transition-colors group"
-                >
-                  <div className="p-2 rounded-full bg-blue-50 group-hover:bg-blue-100">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6 text-blue-600"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
-                      />
-                    </svg>
-                  </div>
-                  <div className="flex-1 text-sm text-gray-500">
-                    <span className="font-medium">Choose from files</span>
-                    <p className="text-xs">PDF, JPG, JPEG or PNG (max. 2MB)</p>
-                  </div>
-                </label>
-                {files.signature && (
-                  <div className="mt-2 text-sm text-gray-600">
-                    <p>Selected: {files.signature.name}</p>
-                    {previews.signature && (
-                      <img
-                        src={previews.signature}
-                        alt="Preview"
-                        className="mt-2 max-w-full sm:max-w-xs rounded mx-auto"
-                      />
-                    )}
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* etc Upload */}
-            <div className="space-y-2">
-              <label className="flex items-start text-sm font-medium text-gray-700">
-                <span className="text-red-500 mr-1">*</span>
-                इतर कागद पत्रे
-              </label>
-              <div className="relative">
-                <input
-                  type="file"
-                  className="hidden"
-                  id="otherDocument"
-                  accept=".pdf,.jpg,.jpeg,.png"
-                  onChange={(e) => handleFileChange(e, "otherDocument")}
-                />
-                <label
-                  htmlFor="otherDocument"
-                  className="flex items-center gap-2 w-full border-2 border-dashed border-gray-300 rounded-lg p-4 hover:border-blue-500 cursor-pointer transition-colors group"
-                >
-                  <div className="p-2 rounded-full bg-blue-50 group-hover:bg-blue-100">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6 text-blue-600"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
-                      />
-                    </svg>
-                  </div>
-                  <div className="flex-1 text-sm text-gray-500">
-                    <span className="font-medium">Choose from files</span>
-                    <p className="text-xs">PDF, JPG, JPEG or PNG (max. 2MB)</p>
-                  </div>
-                </label>
-                {files.otherDocument && (
-                  <div className="mt-2 text-sm text-gray-600">
-                    <p>Selected: {files.otherDocument.name}</p>
-                    {previews.otherDocument && (
-                      <img
-                        src={previews.otherDocument}
-                        alt="Preview"
-                        className="mt-2 max-w-full sm:max-w-xs rounded mx-auto"
-                      />
-                    )}
-                  </div>
-                )}
-              </div>
             </div>
           </div>
 
-          {/* Third Div */}
 
-          <div className="grid grid-cols-1 mb-3 md:grid-cols-2 gap-6">
-            {/* Aadhar Card Upload */}
-            <div className="space-y-2">
-              <label className="flex items-start text-sm font-medium text-gray-700">
-                <span className="text-red-500 mr-1">*</span>
-                ओळखपत्र
-              </label>
-              <div className="relative">
-                <input
-                  type="file"
-                  className="hidden"
-                  id="identityCard"
-                  accept=".pdf,.jpg,.jpeg,.png"
-                  onChange={(e) => handleFileChange(e, "identityCard")}
-                />
-                <label
-                  htmlFor="identityCard"
-                  className="flex items-center gap-2 w-full border-2 border-dashed border-gray-300 rounded-lg p-4 hover:border-blue-500 cursor-pointer transition-colors group"
-                >
-                  <div className="p-2 rounded-full bg-blue-50 group-hover:bg-blue-100">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6 text-blue-600"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
-                      />
-                    </svg>
-                  </div>
-                  <div className="flex-1 text-sm text-gray-500">
-                    <span className="font-medium">Choose from files</span>
-                    <p className="text-xs">PDF, JPG, JPEG or PNG (max. 2MB)</p>
-                  </div>
-                </label>
-                {files.identityCard && (
-                  <div className="mt-2 text-sm text-gray-600">
-                    <p>Selected: {files.identityCard.name}</p>
-                    {previews.identityCard && (
-                      <img
-                        src={previews.identityCard}
-                        alt="Preview"
-                        className="mt-2 max-w-full sm:max-w-xs rounded mx-auto"
-                      />
-                    )}
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* PAN Card Upload */}
-            <div className="space-y-2">
-              <label className="flex items-start text-sm font-medium text-gray-700">
-                <span className="text-red-500 mr-1">*</span>
-                इतर कागद पत्रे
-              </label>
-              <div className="relative">
-                <input
-                  type="file"
-                  className="hidden"
-                  id="panCard"
-                  accept=".pdf,.jpg,.jpeg,.png"
-                  onChange={(e) => handleFileChange(e, "panCard")}
-                />
-                <label
-                  htmlFor="panCard"
-                  className="flex items-center gap-2 w-full border-2 border-dashed border-gray-300 rounded-lg p-4 hover:border-blue-500 cursor-pointer transition-colors group"
-                >
-                  <div className="p-2 rounded-full bg-blue-50 group-hover:bg-blue-100">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6 text-blue-600"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
-                      />
-                    </svg>
-                  </div>
-                  <div className="flex-1 text-sm text-gray-500">
-                    <span className="font-medium">Choose from files</span>
-                    <p className="text-xs">PDF, JPG, JPEG or PNG (max. 2MB)</p>
-                  </div>
-                </label>
-                {files.panCard && (
-                  <div className="mt-2 text-sm text-gray-600">
-                    <p>Selected: {files.panCard.name}</p>
-                    {previews.panCard && (
-                      <img
-                        src={previews.panCard}
-                        alt="Preview"
-                        className="mt-2 max-w-full sm:max-w-xs rounded mx-auto"
-                      />
-                    )}
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Signature Upload */}
-            <div className="space-y-2">
-              <label className="flex items-start text-sm font-medium text-gray-700">
-                <span className="text-red-500 mr-1">*</span>
-                स्वाक्षरी
-              </label>
-              <div className="relative">
-                <input
-                  type="file"
-                  className="hidden"
-                  id="signature"
-                  accept=".pdf,.jpg,.jpeg,.png"
-                  onChange={(e) => handleFileChange(e, "signature")}
-                />
-                <label
-                  htmlFor="signature"
-                  className="flex items-center gap-2 w-full border-2 border-dashed border-gray-300 rounded-lg p-4 hover:border-blue-500 cursor-pointer transition-colors group"
-                >
-                  <div className="p-2 rounded-full bg-blue-50 group-hover:bg-blue-100">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6 text-blue-600"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
-                      />
-                    </svg>
-                  </div>
-                  <div className="flex-1 text-sm text-gray-500">
-                    <span className="font-medium">Choose from files</span>
-                    <p className="text-xs">PDF, JPG, JPEG or PNG (max. 2MB)</p>
-                  </div>
-                </label>
-                {files.signature && (
-                  <div className="mt-2 text-sm text-gray-600">
-                    <p>Selected: {files.signature.name}</p>
-                    {previews.signature && (
-                      <img
-                        src={previews.signature}
-                        alt="Preview"
-                        className="mt-2 max-w-full sm:max-w-xs rounded mx-auto"
-                      />
-                    )}
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* etc Upload */}
-            <div className="space-y-2">
-              <label className="flex items-start text-sm font-medium text-gray-700">
-                <span className="text-red-500 mr-1">*</span>
-                इतर कागद पत्रे
-              </label>
-              <div className="relative">
-                <input
-                  type="file"
-                  className="hidden"
-                  id="otherDocument"
-                  accept=".pdf,.jpg,.jpeg,.png"
-                  onChange={(e) => handleFileChange(e, "otherDocument")}
-                />
-                <label
-                  htmlFor="otherDocument"
-                  className="flex items-center gap-2 w-full border-2 border-dashed border-gray-300 rounded-lg p-4 hover:border-blue-500 cursor-pointer transition-colors group"
-                >
-                  <div className="p-2 rounded-full bg-blue-50 group-hover:bg-blue-100">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6 text-blue-600"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
-                      />
-                    </svg>
-                  </div>
-                  <div className="flex-1 text-sm text-gray-500">
-                    <span className="font-medium">Choose from files</span>
-                    <p className="text-xs">PDF, JPG, JPEG or PNG (max. 2MB)</p>
-                  </div>
-                </label>
-                {files.otherDocument && (
-                  <div className="mt-2 text-sm text-gray-600">
-                    <p>Selected: {files.otherDocument.name}</p>
-                    {previews.otherDocument && (
-                      <img
-                        src={previews.otherDocument}
-                        alt="Preview"
-                        className="mt-2 max-w-full sm:max-w-xs rounded mx-auto"
-                      />
-                    )}
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-
-          {/* Fourth Div */}
-
-          <div className="grid grid-cols-1 mb-3 md:grid-cols-2 gap-6">
-            {/* Aadhar Card Upload */}
-            <div className="space-y-2">
-              <label className="flex items-start text-sm font-medium text-gray-700">
-                <span className="text-red-500 mr-1">*</span>
-                *आधार कार्ड .
-              </label>
-              <div className="relative">
-                <input
-                  type="file"
-                  className="hidden"
-                  id="aadharCard"
-                  accept=".pdf,.jpg,.jpeg,.png"
-                  onChange={(e) => handleFileChange(e, "identityCard")}
-                />
-                <label
-                  htmlFor="aadharCard"
-                  className="flex items-center gap-2 w-full border-2 border-dashed border-gray-300 rounded-lg p-4 hover:border-blue-500 cursor-pointer transition-colors group"
-                >
-                  <div className="p-2 rounded-full bg-blue-50 group-hover:bg-blue-100">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6 text-blue-600"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
-                      />
-                    </svg>
-                  </div>
-                  <div className="flex-1 text-sm text-gray-500">
-                    <span className="font-medium">Choose from files</span>
-                    <p className="text-xs">PDF, JPG, JPEG or PNG (max. 2MB)</p>
-                  </div>
-                </label>
-                {files.identityCard && (
-                  <div className="mt-2 text-sm text-gray-600">
-                    <p>Selected: {files.aadharCard.name}</p>
-                    {previews.aadharCard && (
-                      <img
-                        src={previews.identityCard}
-                        alt="Preview"
-                        className="mt-2 max-w-full sm:max-w-xs rounded mx-auto"
-                      />
-                    )}
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Signature Upload */}
-            <div className="space-y-2">
-              <label className="flex items-start text-sm font-medium text-gray-700">
-                <span className="text-red-500 mr-1">*</span>
-                स्वाक्षरी
-              </label>
-              <div className="relative">
-                <input
-                  type="file"
-                  className="hidden"
-                  id="signature"
-                  accept=".pdf,.jpg,.jpeg,.png"
-                  onChange={(e) => handleFileChange(e, "signature")}
-                />
-                <label
-                  htmlFor="signature"
-                  className="flex items-center gap-2 w-full border-2 border-dashed border-gray-300 rounded-lg p-4 hover:border-blue-500 cursor-pointer transition-colors group"
-                >
-                  <div className="p-2 rounded-full bg-blue-50 group-hover:bg-blue-100">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6 text-blue-600"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
-                      />
-                    </svg>
-                  </div>
-                  <div className="flex-1 text-sm text-gray-500">
-                    <span className="font-medium">Choose from files</span>
-                    <p className="text-xs">PDF, JPG, JPEG or PNG (max. 2MB)</p>
-                  </div>
-                </label>
-                {files.signature && (
-                  <div className="mt-2 text-sm text-gray-600">
-                    <p>Selected: {files.signature.name}</p>
-                    {previews.signature && (
-                      <img
-                        src={previews.signature}
-                        alt="Preview"
-                        className="mt-2 max-w-full sm:max-w-xs rounded mx-auto"
-                      />
-                    )}
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* PAN Card Upload */}
-            <div className="space-y-2">
-              <label className="flex items-start text-sm font-medium text-gray-700">
-                <span className="text-red-500 mr-1">*</span>
-                इतर कागद पत्रे
-              </label>
-              <div className="relative">
-                <input
-                  type="file"
-                  className="hidden"
-                  id="panCard"
-                  accept=".pdf,.jpg,.jpeg,.png"
-                  onChange={(e) => handleFileChange(e, "panCard")}
-                />
-                <label
-                  htmlFor="panCard"
-                  className="flex items-center gap-2 w-full border-2 border-dashed border-gray-300 rounded-lg p-4 hover:border-blue-500 cursor-pointer transition-colors group"
-                >
-                  <div className="p-2 rounded-full bg-blue-50 group-hover:bg-blue-100">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6 text-blue-600"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
-                      />
-                    </svg>
-                  </div>
-                  <div className="flex-1 text-sm text-gray-500">
-                    <span className="font-medium">Choose from files</span>
-                    <p className="text-xs">PDF, JPG, JPEG or PNG (max. 2MB)</p>
-                  </div>
-                </label>
-                {files.panCard && (
-                  <div className="mt-2 text-sm text-gray-600">
-                    <p>Selected: {files.panCard.name}</p>
-                    {previews.panCard && (
-                      <img
-                        src={previews.panCard}
-                        alt="Preview"
-                        className="mt-2 max-w-full sm:max-w-xs rounded mx-auto"
-                      />
-                    )}
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* etc Upload */}
-            <div className="space-y-2">
-              <label className="flex items-start text-sm font-medium text-gray-700">
-                <span className="text-red-500 mr-1">*</span>
-                इतर कागद पत्रे
-              </label>
-              <div className="relative">
-                <input
-                  type="file"
-                  className="hidden"
-                  id="otherDocument"
-                  accept=".pdf,.jpg,.jpeg,.png"
-                  onChange={(e) => handleFileChange(e, "otherDocument")}
-                />
-                <label
-                  htmlFor="otherDocument"
-                  className="flex items-center gap-2 w-full border-2 border-dashed border-gray-300 rounded-lg p-4 hover:border-blue-500 cursor-pointer transition-colors group"
-                >
-                  <div className="p-2 rounded-full bg-blue-50 group-hover:bg-blue-100">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6 text-blue-600"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
-                      />
-                    </svg>
-                  </div>
-                  <div className="flex-1 text-sm text-gray-500">
-                    <span className="font-medium">Choose from files</span>
-                    <p className="text-xs">PDF, JPG, JPEG or PNG (max. 2MB)</p>
-                  </div>
-                </label>
-                {files.otherDocument && (
-                  <div className="mt-2 text-sm text-gray-600">
-                    <p>Selected: {files.otherDocument.name}</p>
-                    {previews.otherDocument && (
-                      <img
-                        src={previews.otherDocument}
-                        alt="Preview"
-                        className="mt-2 max-w-full sm:max-w-xs rounded mx-auto"
-                      />
-                    )}
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* File Upload Guidelines */}
-            <div className="md:col-span-2 mt-4 bg-blue-50 p-4 rounded-lg">
-              <h3 className="font-medium text-blue-800 mb-2">
-                फाइल अपलोड मार्गदर्शक सूचना:
-              </h3>
-              <ul className="list-disc list-inside text-sm text-blue-700 space-y-1">
-                <li>फाइल साइज 2MB पेक्षा कमी असावी</li>
-                <li>फक्त PDF, JPG, JPEG किंवा PNG फॉरमॅट स्वीकारले जातील</li>
-                <li>कागदपत्रे स्पष्ट आणि वाचनीय असावीत</li>
-              </ul>
-            </div>
-
-            {/* Error Message */}
-            {error && (
-              <div className="md:col-span-2 bg-red-50 text-red-600 p-3 rounded">
-                {error}
-              </div>
-            )}
-
-            {/* Success Message */}
-            {successMessage && (
-              <div className="md:col-span-2 bg-green-50 text-green-600 p-3 rounded">
-                {successMessage}
-              </div>
-            )}
-
-            {/* Submit Button */}
-            <div className="md:col-span-2 flex justify-center mt-6">
-              <button
-                onClick={handleSubmit}
-                disabled={
-                  isLoading || !Object.values(files).some((file) => file)
-                }
-                className={`px-6 py-2 rounded-md text-white font-medium ${
-                  isLoading || !Object.values(files).some((file) => file)
-                    ? "bg-gray-400 cursor-not-allowed"
-                    : "bg-blue-600 hover:bg-blue-700"
-                }`}
-              >
-                {isLoading ? "Uploading..." : "Upload Files"}
-              </button>
-            </div>
-          </div>
-
-          {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label className="block text-gray-700 mb-2">
-                आधार कार्ड <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="file"
-                name="aadharCard"
-                onChange={handleChange}
-                className="w-full p-2 border rounded"
-                accept=".pdf,.jpg,.jpeg,.png"
-                required
-              />
-              <p className="text-sm text-gray-500 mt-1">
-                स्वीकार्य फॉरमॅट: PDF, JPG, JPEG, PNG (कमाल आकार: 2MB)
-              </p>
-            </div>
-
-            <div>
-              <label className="block text-gray-700 mb-2">
-                स्वाक्षरी <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="file"
-                name="signature"
-                onChange={handleChange}
-                className="w-full p-2 border rounded"
-                accept=".pdf,.jpg,.jpeg,.png"
-                required
-              />
-              <p className="text-sm text-gray-500 mt-1">
-                स्वीकार्य फॉरमॅट: PDF, JPG, JPEG, PNG (कमाल आकार: 2MB)
-              </p>
-            </div>
-
-            <div>
-              <label className="block text-gray-700 mb-2">
-                पॅन कार्ड <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="file"
-                name="panCard"
-                onChange={handleChange}
-                className="w-full p-2 border rounded"
-                accept=".pdf,.jpg,.jpeg,.png"
-                required
-              />
-              <p className="text-sm text-gray-500 mt-1">
-                स्वीकार्य फॉरमॅट: PDF, JPG, JPEG, PNG (कमाल आकार: 2MB)
-              </p>
-            </div>
-
-            <div>
-              <label className="block text-gray-700 mb-2">
-                इतर दस्तऐवज <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="file"
-                name="otherDocuments"
-                onChange={handleChange}
-                className="w-full p-2 border rounded"
-                accept=".pdf,.jpg,.jpeg,.png"
-                required
-              />
-              <p className="text-sm text-gray-500 mt-1">
-                स्वीकार्य फॉरमॅट: PDF, JPG, JPEG, PNG (कमाल आकार: 2MB)
-              </p>
-            </div>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label className="block text-gray-700 mb-2">
-                आधार कार्ड <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="file"
-                name="aadharCard"
-                onChange={handleChange}
-                className="w-full p-2 border rounded"
-                accept=".pdf,.jpg,.jpeg,.png"
-                required
-              />
-              <p className="text-sm text-gray-500 mt-1">
-                स्वीकार्य फॉरमॅट: PDF, JPG, JPEG, PNG (कमाल आकार: 2MB)
-              </p>
-            </div>
-
-            <div>
-              <label className="block text-gray-700 mb-2">
-                स्वाक्षरी <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="file"
-                name="signature"
-                onChange={handleChange}
-                className="w-full p-2 border rounded"
-                accept=".pdf,.jpg,.jpeg,.png"
-                required
-              />
-              <p className="text-sm text-gray-500 mt-1">
-                स्वीकार्य फॉरमॅट: PDF, JPG, JPEG, PNG (कमाल आकार: 2MB)
-              </p>
-            </div>
-
-            <div>
-              <label className="block text-gray-700 mb-2">
-                पॅन कार्ड <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="file"
-                name="panCard"
-                onChange={handleChange}
-                className="w-full p-2 border rounded"
-                accept=".pdf,.jpg,.jpeg,.png"
-                required
-              />
-              <p className="text-sm text-gray-500 mt-1">
-                स्वीकार्य फॉरमॅट: PDF, JPG, JPEG, PNG (कमाल आकार: 2MB)
-              </p>
-            </div>
-
-            <div>
-              <label className="block text-gray-700 mb-2">
-                इतर दस्तऐवज <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="file"
-                name="otherDocuments"
-                onChange={handleChange}
-                className="w-full p-2 border rounded"
-                accept=".pdf,.jpg,.jpeg,.png"
-                required
-              />
-              <p className="text-sm text-gray-500 mt-1">
-                स्वीकार्य फॉरमॅट: PDF, JPG, JPEG, PNG (कमाल आकार: 2MB)
-              </p>
-            </div>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label className="block text-gray-700 mb-2">
-                आधार कार्ड <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="file"
-                name="aadharCard"
-                onChange={handleChange}
-                className="w-full p-2 border rounded"
-                accept=".pdf,.jpg,.jpeg,.png"
-                required
-              />
-              <p className="text-sm text-gray-500 mt-1">
-                स्वीकार्य फॉरमॅट: PDF, JPG, JPEG, PNG (कमाल आकार: 2MB)
-              </p>
-            </div>
-
-            <div>
-              <label className="block text-gray-700 mb-2">
-                स्वाक्षरी <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="file"
-                name="signature"
-                onChange={handleChange}
-                className="w-full p-2 border rounded"
-                accept=".pdf,.jpg,.jpeg,.png"
-                required
-              />
-              <p className="text-sm text-gray-500 mt-1">
-                स्वीकार्य फॉरमॅट: PDF, JPG, JPEG, PNG (कमाल आकार: 2MB)
-              </p>
-            </div>
-          </div> */}
         </div>
       </div>
     </div>
   );
 };
 
-export default UploadForm18;
+export default UploadForm1;

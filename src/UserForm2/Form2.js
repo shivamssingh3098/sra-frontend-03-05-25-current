@@ -164,7 +164,6 @@ const Form2 = ({ formData: initialFormData, formId }) => {
           <div id="formFinal" className="p-4">
             <div className="flex justify-between items-start mb-4">
               <div className="text-left">सेवा क्र.२</div>
-             
             </div>
             <p className="text-sm mb-4">
               (महाराष्ट्र लोकसेवा हक्क अनियमित २०१५ अंतर्गत सेवा मिळणेकरीत सादर
@@ -202,7 +201,7 @@ const Form2 = ({ formData: initialFormData, formId }) => {
                   </span>
                 </div>
                 <div className="flex">
-                  <span>दि. :</span>
+                  <span>दि. </span>
                   <span className="mx-2">:</span>
                   <span className="flex-1 border-b border-gray-300">
                     {formData.applyDate || "_____________"}
@@ -235,10 +234,12 @@ const Form2 = ({ formData: initialFormData, formId }) => {
                     उपरोक्त विषयास अनुसरुन मला मौजे -
                     {formData.village || "_______"} तालुका{" "}
                     {formData.taluka || "_______"} जिल्हा{" "}
-                    {formData.city || "_______"} ये थील. {getMunicipalDisplay()}{" "}
+                    {formData.city || "_______"} येथील. {getMunicipalDisplay()}{" "}
                     महानगरपालिका हद्दीतील{" "}
-                    {formData.wordType ? formData.wordType : " सेक्टर क्र./वार्ड क्र"}{" "}
-                    {getWardDisplay()} मधील न.भू.क्र {getPlotDisplay()} ये थील{" "}
+                    {formData.wordType
+                      ? formData.wordType
+                      : " सेक्टर क्र./वार्ड क्र"}{" "}
+                    {getWardDisplay()} मधील न.भू.क्र {getPlotDisplay()} येथील{" "}
                     {formData.governmentServiceBranch || "_______"} सहकारी
                     गृहनिर्माण संस्थेच्या झोपडपट्टी पुनर्वसन योजना विकासक मे
                     {formData.schemeDeveloper || "_______"} यांना वित्त विभाग
