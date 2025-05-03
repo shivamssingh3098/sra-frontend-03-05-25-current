@@ -496,8 +496,7 @@ const ApplicationForm = () => {
               setCanProceed={setCanProceed}
               onFormSubmit={handleFormSubmit}
             />
-          ):
-          serviceId == 8 ? (
+          ) : serviceId == 8 ? (
             <DashboardForm8
               ref={childRef}
               formData={formData}
@@ -554,7 +553,8 @@ const ApplicationForm = () => {
               handleChange={handleChange}
               nextStage={nextStage}
               prevStage={prevStage}
-              set CanProceed={setCanProceed}
+              set
+              setCanProceed={setCanProceed}
               onFormSubmit={handleFormSubmit}
             />
           ) : serviceId == 18 ? (
