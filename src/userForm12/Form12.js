@@ -36,9 +36,9 @@ const Form12 = ({ formData: initialFormData, formId }) => {
       surveyNo: "",
       cityCouncil: "",
       villageCouncil: "",
-      punervasanDate: "",
+      leavingDate: "",
       sadnika: "",
-      punervasan: "",
+      srNo: "",
       hutNo: "",
       landNumber: "",
       spouseDeathDate: "",
@@ -174,8 +174,7 @@ const Form12 = ({ formData: initialFormData, formId }) => {
                 </div>
               </div>
               <p className="text-sm mb-4">
-                (महाराष्ट्र लोकसेवा हक्क अनियमित २०१५ अंतर्गत सेवा मिळणेकरीत
-                सादर करावयाचा आरजाचा नमूना)
+              (महाराष्ट्र लोकसेवा हक्क अधिनियम २०१५ अंतर्गत अधिसूचित सेवा मिळणेबाबतच्या अर्जाचा नमुना )
               </p>
               {/* Photo Box */}
               <div className="flex justify-end mb-4">
@@ -252,9 +251,9 @@ const Form12 = ({ formData: initialFormData, formId }) => {
                     {getWardDisplay()} मधील न.भू.क्र {getPlotDisplay()} ये थील{" "}
                     {formData.governmentServiceBranch || "_______"} सहकारी
                     गृहनिर्माण संस्थेच्या झोपडपट्टी पुनर्वसन योजनेमद्धे अनु क्र{" "}
-                    {formData.punervasan || "_______"} झोपडी क्र.{" "}
+                    {formData.srNo || "_______"} झोपडी क्र.{" "}
                     {formData.hutNo || "_______"} वर पात्र आसून मला दि{" "}
-                    {formData.punervasanDate || "_______"} . रोजीच्या पुनर्वसन
+                    {formData.leavingDate || "_______"} . रोजीच्या पुनर्वसन
                     योजनेच्या सोडती मध्ये सदनिका क्र. वाटप करण्यात आलेली आहे.
                     माझे पती / पत्नी यांचे दि.
                     {formData.spouseDeathDate

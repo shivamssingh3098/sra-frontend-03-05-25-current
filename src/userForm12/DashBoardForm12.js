@@ -114,9 +114,9 @@ const DashBoardForm12 = forwardRef(
       nagarpalika: "",
       WordNo: "",
       schemeDeveloper: "",
-      punervasanDate: "",
+      leavingDate: "",
       hutNo: "",
-      punervasan:""
+      srNo:""
     });
 
     const [errorMessage, setErrorMessage] = useState("");
@@ -477,8 +477,8 @@ const DashBoardForm12 = forwardRef(
                 </label>
                 <input
                   type="text"
-                  name="punervasan"
-                  value={formData.punervasan}
+                  name="srNo"
+                  value={formData.srNo}
                   onChange={handleChange}
                   className="w-full border rounded px-3 py-2"
                   required
@@ -504,8 +504,8 @@ const DashBoardForm12 = forwardRef(
                 </label>
                 <input
                   type="date"
-                  name="punervasanDate"
-                  value={formData.punervasanDate}
+                  name="leavingDate"
+                  value={formData.leavingDate}
                   onChange={handleChange}
                   className="w-full border rounded px-3 py-2"
                   required

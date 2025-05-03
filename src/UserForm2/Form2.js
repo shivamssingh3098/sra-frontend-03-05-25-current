@@ -166,8 +166,7 @@ const Form2 = ({ formData: initialFormData, formId }) => {
               <div className="text-left">सेवा क्र.२</div>
             </div>
             <p className="text-sm mb-4">
-              (महाराष्ट्र लोकसेवा हक्क अनियमित २०१५ अंतर्गत सेवा मिळणेकरीत सादर
-              करावयाचा आरजाचा नमूना)
+            (महाराष्ट्र लोकसेवा हक्क अधिनियम २०१५ अंतर्गत अधिसूचित सेवा मिळणेबाबतच्या अर्जाचा नमुना )
             </p>
             {/* Photo Box */}
             <div className="flex justify-end mb-4">

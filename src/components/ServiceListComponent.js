@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import ServiceForm from "../commponents/ServiceForm";
 import servicesData from "../data/services.json";
 
-// 👇 Accept onServiceClick as a prop from parent
 function ServiceListComponent({ onServiceClick }) {
   const [showServices, setShowServices] = useState(false);
   const [services, setServices] = useState([]);
@@ -42,19 +41,29 @@ function ServiceListComponent({ onServiceClick }) {
         />
       )}
 
+      {/* Service Panel */}
       <div
-        className={`fixed sm:static top-0 right-0 vh-full sm:h-auto bg-white sm:bg-transparent z-50 transform transition-transform duration-300 ${
+        className={`fixed sm:static top-0 right-0 h-screen sm:h-auto bg-white sm:bg-transparent z-50 transform transition-transform duration-300 ${
           showServices ? "translate-x-0" : "translate-x-full"
         } sm:translate-x-0 w-4/5 sm:w-full max-w-md sm:max-w-none shadow-lg sm:shadow-none`}
       >
         {loading ? (
           <div className="p-4 text-center">Loading services...</div>
         ) : (
-          <ServiceForm
-            services={services}
-            onClose={() => setShowServices(false)}
-            onServiceClick={onServiceClick} // ✅ Now using the prop
-          />
+          // Scrollable section with always-visible scrollbar
+          <div
+            className="h-full overflow-y-scroll"
+            style={{
+              scrollbarWidth: "auto", // Firefox
+              msOverflowStyle: "auto", // IE 10+
+            }}
+          >
+            <ServiceForm
+              services={services}
+              onClose={() => setShowServices(false)}
+              onServiceClick={onServiceClick}
+            />
+          </div>
         )}
       </div>
     </div>

@@ -140,10 +140,8 @@ const AdminDashboard = () => {
   const [applications, setApplications] = useState([]);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
- useEffect(() => {
-  fetchApplications()
-
-  
+  useEffect(() => {
+    fetchApplications();
   }, []);
   const token = localStorage.getItem("accessToken");
 
@@ -153,9 +151,12 @@ const AdminDashboard = () => {
       Authorization: "Bearer ",
     };
     console.log(status);
-    const response = await axios.get(CONFIG.API_BASE_URL + `/api/v1/department-managers/form-request?page=1&limit=1000&serviceStatus=${
-          status || "PENDING"
-        }`,
+    const response = await axios
+      .get(
+        CONFIG.API_BASE_URL +
+          `/api/v1/department-managers/form-request?page=1&limit=1000&serviceStatus=${
+            status || "PENDING"
+          }`,
 
         {
           headers: {
@@ -195,6 +196,22 @@ const AdminDashboard = () => {
     //navigate("/applicationapproval?id=" + id);
     navigate("/applicationapproval", { state: { app } });
   };
+  const userData = JSON.parse(localStorage.getItem("userData") || "{}");
+  const departmentCode = localStorage.getItem("department");
+  const departmentName =
+    {
+      AD: "अकाउंट",
+      TPD: "नगर रचना",
+      CSD: "नगर भूमापन",
+      COD: "सहकारी",
+      EMD: "मिळकत",
+      TVD: "विशेषकक्ष",
+      CAD: "सक्षम प्राधिकरण",
+      ED: "अभियांत्रिकी",
+      // Add other departments as needed
+    }[departmentCode] || "Unknown Department";
+
+  const department = userData?.department;
   return (
     <div className="min-h-screen bg-gray-100">
       <div className="d-flex justify-content-start align-items-start flex-row ">
@@ -205,7 +222,9 @@ const AdminDashboard = () => {
             <div className="flex justify-between items-center px-6 py-4">
               <div className="flex items-center space-x-3">
                 <BsBriefcase className="text-xl" />
-                <h1 className="text-xl font-semibold">अकाऊंट डिपार्टमेंट</h1>
+                <h1 className="text-xl font-semibold">
+                  {departmentName} डिपार्टमेंट
+                </h1>
               </div>
               <div className="flex space-x-2">
                 <button
@@ -246,10 +265,10 @@ const AdminDashboard = () => {
                         Application ID
                       </th>
                       <th className="px-4 py-2 text-left font-medium">
-                        Service Name
+                        Service No
                       </th>
                       <th className="px-4 py-2 text-left font-medium">
-                        Payment Date
+                        Apply  Date
                       </th>
                       <th className="px-4 py-2 text-left font-medium">
                         Maximum Days
@@ -269,16 +288,24 @@ const AdminDashboard = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {applications && applications.map((app, index) => (
+                    {applications.map((app, index) => (
                       <tr key={index}>
                         <td>{index + 1}</td>
                         <td>
                           {app.applicationId} <br /> {app.applicationId2}
                         </td>
-                        <td className="px-4 py-3">{app.serviceName}</td>
-                        <td className="px-4 py-3">{app.paymentDate || "-"}</td>
-                        <td className="px-4 py-3">{app.maxDays}</td>
-                        <td className="px-4 py-3">{app.expectedDate || "-"}</td>
+                        <td className="px-4 py-3">{app.serviceNumber}</td>
+                        <td className="px-4 py-3">
+                          {app.applyDate ? app.applyDate.split("T")[0] : "-"}
+                        </td>
+                        <td className="px-2 py-3 align-center">
+                          {app.maximumDays}
+                        </td>
+                        <td className="px-4 py-3">
+                          {app.expectingServiceDeliveryDate
+                            ? app.expectingServiceDeliveryDate.split("T")[0]
+                            : "-"}
+                        </td>
                         <td>
                           <Button
                             variant={
