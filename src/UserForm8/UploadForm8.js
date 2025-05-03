@@ -5,21 +5,19 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 
 const UploadForm8 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
-
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const serviceId = parseInt(queryParams.get("serviceId"));
-  
 
   const serviceDescription =
-    servicesData[0].services.find((service) => service.id === serviceId)?.description ||
-    "";
+    servicesData[0].services.find((service) => service.id === serviceId)
+      ?.description || "";
 
   // State for files and previews
   const [files, setFiles] = useState({
     aadharCard: null,
-    bankPassbookFirstCopy:null,
-    prescribedApplication:null,
+    bankPassbookFirstCopy: null,
+    prescribedApplication: null,
     signature: null,
     otherDocument1: null,
     otherDocument2: null,
@@ -126,7 +124,7 @@ const UploadForm8 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
       const token = localStorage.getItem("accessToken");
       // Make API call with user ID as query parameter
       const response = await axios.post(
-        `https://sra-government-project-thane-1.onrender.com/api/v1/users/documents-upload?formId=${userId}`,
+        `${CONFIG.API_BASE_URL}/api/v1/users/documents-upload?formId=${userId}`,
         formDataObj,
         {
           headers: {
@@ -153,15 +151,16 @@ const UploadForm8 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
       // Clear form
       setFiles({
         aadharCard: null,
-    bankPassbookFirstCopy:null,
-    prescribedApplication:null,
-    signature: null,
-    otherDocument1: null,
-    otherDocument2: null,
+        bankPassbookFirstCopy: null,
+        prescribedApplication: null,
+        signature: null,
+        otherDocument1: null,
+        otherDocument2: null,
       });
-      setPreviews({  aadharCard: null,
-        bankPassbookFirstCopy:null,
-        prescribedApplication:null,
+      setPreviews({
+        aadharCard: null,
+        bankPassbookFirstCopy: null,
+        prescribedApplication: null,
         signature: null,
         otherDocument1: null,
         otherDocument2: null,
@@ -251,14 +250,13 @@ const UploadForm8 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
                   </div>
                 )}
               </div>
-
             </div>
 
             {/* PAN Card Upload */}
             <div className="space-y-2">
               <label className="flex items-start text-sm font-medium text-gray-700">
                 <span className="text-red-500 mr-1">*</span>
-                बँकेचे पासबूक प्रथम प्रत    
+                बँकेचे पासबूक प्रथम प्रत
               </label>
               <div className="relative">
                 <input
@@ -311,7 +309,7 @@ const UploadForm8 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
             <div className="space-y-2">
               <label className="flex items-start text-sm font-medium text-gray-700">
                 <span className="text-red-500 mr-1">*</span>
-                विहीत नमुन्यातील अर्ज     
+                विहीत नमुन्यातील अर्ज
               </label>
               <div className="relative">
                 <input
@@ -415,9 +413,7 @@ const UploadForm8 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
             </div>
 
             {/* etc Upload */}
-           
 
-                
             {/*  Upload */}
             <div className="space-y-2">
               <label className="flex items-start text-sm font-medium text-gray-700">
@@ -540,38 +536,35 @@ const UploadForm8 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
           </div>
           {/* Error Message */}
           {error && (
-              <div className="md:col-span-2 bg-red-50 text-red-600 p-3 rounded">
-                {error}
-              </div>
-            )}
-
-            {/* Success Message */}
-            {successMessage && (
-              <div className="md:col-span-2 bg-green-50 text-green-600 p-3 rounded">
-                {successMessage}
-              </div>
-            )}
-
-            {/* Submit Button */}
-            <div className="md:col-span-2 flex justify-center mt-6">
-              <button
-                onClick={handleSubmit}
-                disabled={
-                  isLoading || !Object.values(files).some((file) => file)
-                }
-                className={`px-6 py-2 rounded-md text-white font-medium ${
-                  isLoading || !Object.values(files).some((file) => file)
-                    ? "bg-gray-400 cursor-not-allowed"
-                    : "bg-blue-600 hover:bg-blue-700"
-                }`}
-              >
-                {isLoading ? "Uploading..." : "Upload Files"}
-              </button>
+            <div className="md:col-span-2 bg-red-50 text-red-600 p-3 rounded">
+              {error}
             </div>
+          )}
+
+          {/* Success Message */}
+          {successMessage && (
+            <div className="md:col-span-2 bg-green-50 text-green-600 p-3 rounded">
+              {successMessage}
+            </div>
+          )}
+
+          {/* Submit Button */}
+          <div className="md:col-span-2 flex justify-center mt-6">
+            <button
+              onClick={handleSubmit}
+              disabled={isLoading || !Object.values(files).some((file) => file)}
+              className={`px-6 py-2 rounded-md text-white font-medium ${
+                isLoading || !Object.values(files).some((file) => file)
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-blue-600 hover:bg-blue-700"
+              }`}
+            >
+              {isLoading ? "Uploading..." : "Upload Files"}
+            </button>
           </div>
         </div>
       </div>
-    
+    </div>
   );
 };
 

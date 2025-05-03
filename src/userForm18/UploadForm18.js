@@ -143,7 +143,9 @@ const UploadForm1 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
       const token = localStorage.getItem("accessToken");
       // Make API call with user ID as query parameter
       const response = await axios.post(
-        `https://sra-government-project-thane-1.onrender.com/api/v1/users/documents-upload?id=${userId}`,
+
+        `${CONFIG.API_BASE_URL}/api/v1/users/documents-upload?formId=${userId}`,
+
         formDataObj,
         {
           headers: {

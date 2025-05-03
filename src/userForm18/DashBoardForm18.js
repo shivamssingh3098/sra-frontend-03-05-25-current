@@ -96,8 +96,8 @@ const DashboardForm18 = forwardRef(
       cityCouncil: "",
       municipalCorporation: "",
       department: "",
-      deathCertificateHusbandWifeSonDaughter:"",
-      rehabilitationScheme:"",
+      deathCertificateHusbandWifeSonDaughter: "",
+      rehabilitationScheme: "",
       governmentServiceBranch: "",
       sectorNo: "",
       wardNo: "",
@@ -112,6 +112,7 @@ const DashboardForm18 = forwardRef(
       nagarpalika: "",
       WordNo: "",
       schemeDeveloper: "",
+      deathCertificateHusbandWifeSonDaughter: "",
     });
 
     const [errorMessage, setErrorMessage] = useState("");
@@ -289,10 +290,11 @@ const DashboardForm18 = forwardRef(
 
             {/* Form */}
             <form
-              className={`mt-6 text-sm ${window.innerWidth < 768
+              className={`mt-6 text-sm ${
+                window.innerWidth < 768
                   ? "flex flex-col gap-4"
                   : "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"
-                }`}
+              }`}
               onSubmit={handleSubmit}
             >
               {/* Name */}
@@ -456,8 +458,6 @@ const DashboardForm18 = forwardRef(
                 </select>
               </div>
 
-
-
               <div className="flex-1">
                 <label className="font-medium block mb-1">
                   सहकारी गृह संस्था <span className="text-red-500">*</span>
@@ -472,10 +472,9 @@ const DashboardForm18 = forwardRef(
                 />
               </div>
 
-
               <div className="flex-1">
                 <label className="font-medium block mb-1">
-                पती/ पत्नी /आई /वडील मृत्यू दिनांक.{" "}
+                  पती/ पत्नी /आई /वडील मृत्यू दिनांक.{" "}
                   <span className="text-red-500">*</span>
                 </label>
                 <input

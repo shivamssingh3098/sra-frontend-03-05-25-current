@@ -349,8 +349,8 @@ const DashboardForm = forwardRef(
                 </label>
                 <input
                   type="tel"
-                  name="mobile"
-                  value={formData.mobile}
+                  name="phone"
+                  value={formData.phone}
                   onChange={handleChange}
                   className="w-full border rounded px-3 py-2"
                   required

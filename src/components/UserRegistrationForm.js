@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./UserRegistrationForm.css";
+import CONFIG from "../app.config"; // adjust path as needed
 
 const UserRegisterForm = () => {
   const [formData, setFormData] = useState({
@@ -109,11 +110,15 @@ const UserRegisterForm = () => {
     }
 
     try {
-      const res = await axios.post("/api/v1/users/register", data, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const res = await axios.post(
+        CONFIG.API_BASE_URL + "/api/v1/users/register",
+        data,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
 
       if (res.data.success) {
         // Reset form after successful submission
@@ -373,4 +378,4 @@ const UserRegisterForm = () => {
   );
 };
 
-export default UserRegisterForm;    
+export default UserRegisterForm;

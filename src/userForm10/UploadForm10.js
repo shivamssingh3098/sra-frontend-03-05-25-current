@@ -149,7 +149,7 @@ const UploadForm10 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
       const token = localStorage.getItem("accessToken");
       // Make API call with user ID as query parameter
       const response = await axios.post(
-        `https://sra-government-project-thane-1.onrender.com/api/v1/users/documents-upload?id=${userId}`,
+        `${CONFIG.API_BASE_URL}/api/v1/users/documents-upload?formId=${userId}`,
         formDataObj,
         {
           headers: {
@@ -1260,6 +1260,21 @@ const UploadForm10 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
               </div>
             </div>
           </div>
+
+          {/* Error Message */}
+          {error && (
+            <div className="md:col-span-2 bg-red-50 text-red-600 p-3 rounded">
+              {error}
+            </div>
+          )}
+
+          {/* Success Message */}
+          {successMessage && (
+            <div className="md:col-span-2 bg-green-50 text-green-600 p-3 rounded">
+              {successMessage}
+            </div>
+          )}
+
           <div className="md:col-span-2 flex justify-center mt-6">
             <button
               onClick={handleSubmit}
