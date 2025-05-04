@@ -1050,6 +1050,36 @@ const UploadForm1 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
                 </div>
               </div>
             </div>
+
+            {/* Error Message */}
+            {error && (
+              <div className="md:col-span-2 bg-red-50 text-red-600 p-3 rounded">
+                {error}
+              </div>
+            )}
+
+            {/* Success Message */}
+            {successMessage && (
+              <div className="md:col-span-2 bg-green-50 text-green-600 p-3 rounded">
+                {successMessage}
+              </div>
+            )}
+            {/* Submit Button */}
+            <div className="md:col-span-2 flex justify-center mt-6">
+              <button
+                onClick={handleSubmit}
+                disabled={
+                  isLoading || !Object.values(files).some((file) => file)
+                }
+                className={`px-6 py-2 rounded-md text-white font-medium ${
+                  isLoading || !Object.values(files).some((file) => file)
+                    ? "bg-gray-400 cursor-not-allowed"
+                    : "bg-blue-600 hover:bg-blue-700"
+                }`}
+              >
+                {isLoading ? "Uploading..." : "Upload Files"}
+              </button>
+            </div>
           </div>
         </div>
       </div>

@@ -132,21 +132,41 @@ export const NavBar = () => {
 
   const handleLogout = async () => {
     try {
+      const token = localStorage.getItem("accessToken");
+      const userType = localStorage.getItem("userType");
+      console.log("userLogout", token);
+      console.log("userType", userType);
+
       const config = {
         headers: {
-          "Content-Type": "application/json",
-          Authorization: localStorage.getItem("accessToken"),
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
         },
-        withCredentials: true,
       };
-      const response = await axios.post(
-        CONFIG.API_BASE_URL + "/api/v1/users/logout",
-        {
-          method: "POST",
-          credentials: "include",
-        },
-        config
-      );
+      let response;
+      if (userType == "DEPARTMENT_MANAGER") {
+        console.log("DEPARTMENT_MANAGER is this ", userType);
+        response = await axios.post(
+          CONFIG.API_BASE_URL + "/api/v1/department-managers/logout",
+          {
+            method: "POST",
+            credentials: "include",
+          },
+          config
+        );
+      }
+      if (userType == "USER") {
+        console.log("USER is this ", userType);
+
+        response = await axios.post(
+          CONFIG.API_BASE_URL + "/api/v1/users/logout",
+          {
+            method: "POST",
+            credentials: "include",
+          },
+          config
+        );
+      }
 
       console.log("response logout ", response);
 

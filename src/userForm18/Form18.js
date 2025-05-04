@@ -203,7 +203,10 @@ const Form18 = ({ formData: initialFormData, formId }) => {
                   <span>दि. </span>
                   <span className="mx-2">:</span>
                   <span className="flex-1 border-b border-gray-300">
-                    {formData.applyDate || "_____________"}
+                    {/* {formData.applyDate || "_____________"} */}
+                    {formData.applyDate
+                      ? new Date(formData.applyDate).toLocaleDateString("en-IN")
+                      : "_____________"}{" "}
                   </span>
                 </div>
               </div>
@@ -280,8 +283,13 @@ const Form18 = ({ formData: initialFormData, formId }) => {
                     {formData.name || "_______"}
                     यांना निवासी /अनिवासी /प्रयोगनार्थ पात्र करण्यात आलेले आहे.
                     माझे पती/ पत्नी /आई /वडील आईने दि.
-                    {formData.deathCertificateHusbandWifeSonDaughter ||
-                      "_______"}
+                    {/* {formData.deathCertificateHusbandWifeSonDaughter ||
+                      "_______"} */}
+                    {formData.deathCertificateHusbandWifeSonDaughter
+                      ? new Date(
+                          formData.deathCertificateHusbandWifeSonDaughter
+                        ).toLocaleDateString("en-IN")
+                      : "_____________"}{" "}
                     रोजी निधन झाले आहे. त्यावर वारसदार म्हणून पती/ पत्नी / मुलगा
                     /मुलगी ह्या नात्याने माझे नाव परिशिष्ट - २ मधील अ. क्र
                     {formData.rehabilitationScheme || "_______"}

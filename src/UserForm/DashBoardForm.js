@@ -147,7 +147,7 @@ const DashboardForm = forwardRef(
             ...prev,
             department: service.department,
             // Set the schemeDeveloper based on the department
-            schemeDeveloper: service.department,
+            // schemeDeveloper: service.department,
           }));
         }
       }
@@ -298,7 +298,7 @@ const DashboardForm = forwardRef(
               <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mt-4">
                 {successMessage}
               </div>
-            )} 
+            )}
 
             {/* Progress / Step Tracker */}
             <div className="flex justify-between items-center mt-4">
@@ -310,10 +310,11 @@ const DashboardForm = forwardRef(
 
             {/* Form */}
             <form
-              className={`mt-6 text-sm ${window.innerWidth < 768
+              className={`mt-6 text-sm ${
+                window.innerWidth < 768
                   ? "flex flex-col gap-4"
                   : "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"
-                }`}
+              }`}
               onSubmit={handleSubmit}
             >
               {/* Name */}
@@ -453,7 +454,7 @@ const DashboardForm = forwardRef(
                   onChange={handleChange}
                   className="border p-2 w-full"
                   required
-                  readOnly
+                  // readOnly
                 />
               </div>
 

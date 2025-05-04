@@ -104,7 +104,7 @@ const DashboardForm18 = forwardRef(
       landNumber: "",
       surveyNo: "",
       finalPlot: "",
-      mouje: "",
+
       bhukhandType: "",
       bhukhandNo: "",
       wardType: "",
@@ -112,13 +112,23 @@ const DashboardForm18 = forwardRef(
       nagarpalika: "",
       WordNo: "",
       schemeDeveloper: "",
-      deathCertificateHusbandWifeSonDaughter: "",
+      competentAuthorityNo: "",
+      // deathCertificateHusbandWifeSonDaughter: "",
     });
 
     const [errorMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
     const [userId, setUserId] = useState(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+
+    const serviceId = parseInt(queryParams.get("serviceId"));
+
+    const serviceDescription =
+      servicesData[0].services.find((service) => service.id == serviceId)
+        ?.description || "";
+
     useImperativeHandle(ref, () => ({
       setSuccessMsg(data) {
         setSuccessMessage(data);
@@ -130,6 +140,25 @@ const DashboardForm18 = forwardRef(
         setIsSubmitting(data);
       },
     }));
+
+    useEffect(() => {
+      if (serviceId) {
+        // Find the service in services.json
+        const service = servicesData[0].services.find(
+          (s) => s.id === serviceId
+        );
+        if (service) {
+          // Update the formData with the department from services.json
+          setFormData((prev) => ({
+            ...prev,
+            department: service.department,
+            // Set the schemeDeveloper based on the department
+            // schemeDeveloper: service.department,
+          }));
+        }
+      }
+    }, [serviceId, setFormData]);
+
     // Check if we already have a userId from localStorage
     useEffect(() => {
       const storedUserId = localStorage.getItem("currentUserId");
@@ -247,14 +276,7 @@ const DashboardForm18 = forwardRef(
       // setSuccessMessage("Form submitted successfully!");
       // setCanProceed(true);
     };
-    const location = useLocation();
-    const queryParams = new URLSearchParams(location.search);
 
-    const serviceId = parseInt(queryParams.get("serviceId"));
-
-    const serviceDescription =
-      servicesData[0].services.find((service) => service.id == serviceId)
-        ?.description || "";
     return (
       <div>
         <div className="min-h-screen bg-gray-50 px-0 py-0 flex justify-center items-center">
@@ -312,7 +334,6 @@ const DashboardForm18 = forwardRef(
                   required
                 />
               </div>
-
               {/* Date */}
               <div className="flex-1">
                 <label className="font-medium block mb-1">
@@ -328,7 +349,6 @@ const DashboardForm18 = forwardRef(
                   required
                 />
               </div>
-
               {/* Mobile */}
               <div className="flex-1">
                 <label className="font-medium block mb-1">
@@ -344,7 +364,6 @@ const DashboardForm18 = forwardRef(
                   required
                 />
               </div>
-
               {/* Address */}
               <div className="flex-1">
                 <label className="font-medium block mb-1">
@@ -360,7 +379,6 @@ const DashboardForm18 = forwardRef(
                   required
                 />
               </div>
-
               {/* Taluka */}
               <div className="flex-1">
                 <label className="font-medium block mb-1">
@@ -376,27 +394,24 @@ const DashboardForm18 = forwardRef(
                   required
                 />
               </div>
-
               {/* Bhukhand */}
               <div className="flex-1 md:col-span-3">
                 <BhukhandForm formData={formData} setFormData={setFormData} />
               </div>
-
-              {/* Mouje */}
+              {/* village */}
               <div className="flex-1">
                 <label className="font-medium block mb-1">
                   मौजे <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
-                  name="mouje"
-                  value={formData.mouje}
+                  name="village"
+                  value={formData.village}
                   onChange={handleChange}
                   className="w-full border rounded px-3 py-2"
                   required
                 />
               </div>
-
               {/* District */}
               <div className="flex-1">
                 <label className="font-medium block mb-1">
@@ -412,16 +427,13 @@ const DashboardForm18 = forwardRef(
                   required
                 />
               </div>
-
               {/* Ward */}
               <WordForm formData={formData} setFormData={setFormData} />
-
               {/* Nagarpalika */}
               <MuncipalCooperation
                 formData={formData}
                 setFormData={setFormData}
               />
-
               {/* Scheme Developer */}
               <div className="flex-1">
                 <label className="font-medium block mb-1">
@@ -429,16 +441,16 @@ const DashboardForm18 = forwardRef(
                 </label>
                 <input
                   type="text"
-                  name="schemeDeveloper"
-                  placeholder="Scheme Developer"
-                  value={formData.schemeDeveloper}
+                  name="competentAuthorityNo"
+                  placeholder="सक्षम प्राधिकारी क्र."
+                  value={formData.competentAuthorityNo}
                   onChange={handleChange}
                   className="w-full border rounded px-3 py-2"
                   required
                 />
               </div>
-
-              <div className="flex-1">
+              {/* // hiding this form data for department */}
+              {/* <div className="flex-1 d-none ">
                 <label className="font-medium block mb-1">
                   विभाग निवडा <span className="text-red-500">*</span>
                 </label>
@@ -456,14 +468,14 @@ const DashboardForm18 = forwardRef(
                     </option>
                   ))}
                 </select>
-              </div>
-
+              </div> */}
               <div className="flex-1">
                 <label className="font-medium block mb-1">
                   सहकारी गृह संस्था <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
+                  placeholder="सहकारी गृह संस्था"
                   name="governmentServiceBranch"
                   value={formData.governmentServiceBranch}
                   onChange={handleChange}
@@ -471,7 +483,6 @@ const DashboardForm18 = forwardRef(
                   required
                 />
               </div>
-
               <div className="flex-1">
                 <label className="font-medium block mb-1">
                   पती/ पत्नी /आई /वडील मृत्यू दिनांक.{" "}
@@ -487,7 +498,6 @@ const DashboardForm18 = forwardRef(
                   required
                 />
               </div>
-
               <div className="flex-1">
                 <label className="font-medium block mb-1">
                   पुनर्वसन योजनेमधील परिशिष्ट-२ अ. क्र.{" "}
@@ -496,7 +506,7 @@ const DashboardForm18 = forwardRef(
                 <input
                   type="text"
                   name="rehabilitationScheme"
-                  placeholder="rehabilitationScheme"
+                  placeholder=" पुनर्वसन योजनेमधील परिशिष्ट-२ अ. क्र."
                   value={formData.rehabilitationScheme}
                   onChange={handleChange}
                   className="w-full border rounded px-3 py-2"
@@ -504,7 +514,6 @@ const DashboardForm18 = forwardRef(
                 />
               </div>
               {/* Sarkari */}
-
               {/* Submit Button */}
               <div className="col-span-3 flex justify-end mt-4">
                 <button

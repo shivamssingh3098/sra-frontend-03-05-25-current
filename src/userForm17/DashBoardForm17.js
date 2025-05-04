@@ -438,20 +438,20 @@ const DashboardForm17 = forwardRef(
               />
 
               {/* Department */}
-              <div className="flex-1">
+              {/* <div className="flex-1">
                 <label className="font-medium block mb-1">
-                  योजनेचे विकासक <span className="text-red-500">*</span>
+                  योजनेचे विकासक <span className="text-red-500"></span>
                 </label>
                 <input
                   type="text"
-                  name="department"
-                  value={formData.department}
+                  name="schemeDeveloper"
+                  value={formData.schemeDeveloper}
                   onChange={handleChange}
                   className="border p-2 w-full"
-                  required
-                  readOnly
+                  // required
+                  // readOnly
                 />
-              </div>
+              </div> */}
 
               {/* Scheme Developer */}
 
@@ -469,7 +469,20 @@ const DashboardForm17 = forwardRef(
                   required
                 />
               </div>
-
+              <div className="flex-1">
+                <label className="font-medium block mb-1">
+                  सक्षम प्राधिकारी क्र. <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="competentAuthorityNo"
+                  placeholder="सक्षम प्राधिकारी क्र."
+                  value={formData.competentAuthorityNo}
+                  onChange={handleChange}
+                  className="w-full border rounded px-3 py-2"
+                  required
+                />
+              </div>
               <div className="flex-1">
                 <label className="font-medium block mb-1">
                   झोपडी क्र. <span className="text-red-500">*</span>

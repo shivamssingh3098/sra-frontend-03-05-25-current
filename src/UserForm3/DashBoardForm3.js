@@ -144,7 +144,7 @@ const DashboardForm = forwardRef(
             ...prev,
             department: service.department,
             // Set the schemeDeveloper based on the department
-            schemeDeveloper: service.department,
+            // schemeDeveloper: service.department,
           }));
         }
       }
@@ -428,7 +428,7 @@ const DashboardForm = forwardRef(
                   onChange={handleChange}
                   className="border p-2 w-full"
                   required
-                  readOnly
+                  // readOnly
                 />
               </div>
 

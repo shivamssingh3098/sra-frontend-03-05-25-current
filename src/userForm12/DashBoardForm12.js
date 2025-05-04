@@ -116,7 +116,7 @@ const DashBoardForm12 = forwardRef(
       schemeDeveloper: "",
       punervasanDate: "",
       hutNo: "",
-      punervasan:""
+      punervasan: "",
     });
 
     const [errorMessage, setErrorMessage] = useState("");
@@ -146,7 +146,7 @@ const DashBoardForm12 = forwardRef(
             ...prev,
             department: service.department,
             // Set the schemeDeveloper based on the department
-            schemeDeveloper: service.department,
+            // schemeDeveloper: service.department,
           }));
         }
       }
@@ -453,7 +453,7 @@ const DashBoardForm12 = forwardRef(
                   onChange={handleChange}
                   className="border p-2 w-full"
                   required
-                  readOnly
+                  // readOnly
                 />
               </div>
 
@@ -494,7 +494,7 @@ const DashBoardForm12 = forwardRef(
                   value={formData.hutNo}
                   onChange={handleChange}
                   className="w-full border rounded px-3 py-2"
-                  required 
+                  required
                 />
               </div>
 

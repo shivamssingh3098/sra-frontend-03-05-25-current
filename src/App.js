@@ -88,6 +88,16 @@ function App() {
         <div className="py-8">
           <Routes>
             <Route path="/" element={<HomeOrLogin />} />
+
+            {/* <Route
+              path="/"
+              element={
+                <DepartmentProtectedRoute>
+                  <AdminDashboard />
+                </DepartmentProtectedRoute>
+              }
+            /> */}
+
             <Route path="/register" element={<UserRegistrationForm />} />
 
             <Route

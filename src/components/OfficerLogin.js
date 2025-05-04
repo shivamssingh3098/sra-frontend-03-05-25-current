@@ -72,7 +72,8 @@ const OfficerLogin = ({ onSwitchToUser }) => {
         localStorage.setItem("UserId", data.data.departmentManager._id);
         localStorage.setItem("userName", data.data.departmentManager.userName);
         localStorage.setItem("fullName", data.data.departmentManager.fullName);
-
+        const userType = localStorage.getItem("userType");
+        console.log("user type is on login ", userType);
         setMessageType("success");
         setMessage("Login successful!");
 

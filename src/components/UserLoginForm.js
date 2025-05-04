@@ -60,6 +60,8 @@ const UserLoginForm = () => {
           "userType",
           JSON.stringify(response.data.data.user.userType)
         );
+        const userType = localStorage.getItem("userType");
+        console.log("user type is on login ", userType);
 
         // 🔁 Redirect to protected page
         navigate("/services", { replace: true });

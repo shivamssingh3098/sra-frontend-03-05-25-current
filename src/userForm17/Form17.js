@@ -211,8 +211,11 @@ const Form17 = ({ formData: initialFormData, formId }) => {
               <div className="mt-8">
                 <p className="">प्रति,</p>
                 <div className="space-y-1">
-                  <p>उपलेखापाल</p>
-                  <p>वित्त विभाग</p>
+                  <p>
+                    सक्षम प्राधिकारी क्र.
+                    {formData.competentAuthorityNo || "_____________"}
+                  </p>
+                  <p>मुंबई महानगर प्रदेश</p>
                   <p>मुंबई महानगर प्रदेश</p>
                   <p>झोपडपट्टी पुनर्वसन प्राधिकरण ठाणे.</p>
                 </div>
