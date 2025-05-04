@@ -8,7 +8,7 @@ import Dashboard from "./components/Dashboard";
 import AdminDashboard from "./components/AdminDashboard";
 import UserCourse from "./components/UserCourse";
 import ServiceDetails from "./components/ServiceDetails";
-import Home from "./components/Home";
+// import Home from "./components/Home";
 // import UserForm from "./components/UserForm";
 import { NavBar } from "./components/NavBar"; // ✅ Import your NavBar
 import UserRegistrationForm from "./components/UserRegistrationForm";
@@ -127,12 +127,15 @@ function App() {
             <Route path="/payment" element={<PaymentForm />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/deptdas" element={<DashBoard />} />
-            
+
             <Route path="/services" element={<ServicesDashboard />} />
             <Route path="/courses" element={<UserCourse />} />
             <Route path="/deptform" element={<DeptForm />} />
             <Route path="/remarks" element={<Remark />} />
-            <Route path="/applicationapproval" element={<ApplicationApproval />} />
+            <Route
+              path="/applicationapproval"
+              element={<ApplicationApproval />}
+            />
             <Route path="/form1" element={<Form1 />} />
             <Route path="/form2" element={<Form2 />} />
             <Route path="/form3" element={<Form3 />} />
@@ -252,10 +255,7 @@ function App() {
               path="/application22"
               element={<ApplicationForm22 formData={FormData} />}
             />
-          <Route
-            path="/thank"
-            element={<ThankYou/>}>
-          </Route>
+            <Route path="/thank" element={<ThankYou />}></Route>
           </Routes>
         </div>
       </div>
