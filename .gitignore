@@ -1,11 +1,12 @@
 <<<<<<< HEAD
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
+# ignoring files
+src/app.config.js
 # dependencies
 /node_modules
 /.pnp
 .pnp.js
-/src/app.config.js
+
 # testing
 /coverage
 
