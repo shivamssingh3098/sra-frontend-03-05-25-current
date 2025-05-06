@@ -31,7 +31,6 @@ export const NavBar = () => {
   const menuButtonRef = useRef(null);
   const navigate = useNavigate();
 
-  const token = localStorage.getItem("accessToken");
   //const userType = localStorage.getItem("userType");
   const [userType, setUserType] = useState(() => {
     return localStorage.getItem("userType");
@@ -44,9 +43,11 @@ export const NavBar = () => {
   useEffect(() => {
     const fetchCurrentUser = async () => {
       var userType = localStorage.getItem("userType")?.trim().toUpperCase();
-
+      const token = localStorage.getItem("accessToken");
       userType = userType?.replace(/"/g, "").trim();
       let apiUrl = "";
+      console.log("userType", userType);
+      console.log("token", token);
 
       if (!userType) {
         console.error("userType is not yet available:", userType);
@@ -66,8 +67,8 @@ export const NavBar = () => {
           console.error("Unknown userType:", userType);
       }
       try {
+        console.log("userType", userType);
         const response = await axios.get(CONFIG.API_BASE_URL + apiUrl, {
-          withCredentials: true,
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -133,8 +134,9 @@ export const NavBar = () => {
   const handleLogout = async () => {
     try {
       const token = localStorage.getItem("accessToken");
-      const userType = localStorage.getItem("userType");
+      let userType = localStorage.getItem("userType");
       console.log("userLogout", token);
+      userType = userType?.replace(/"/g, "").trim();
       console.log("userType", userType);
 
       const config = {
@@ -144,7 +146,7 @@ export const NavBar = () => {
         },
       };
       let response;
-      if (userType == "DEPARTMENT_MANAGER") {
+      if (userType === "DEPARTMENT_MANAGER") {
         console.log("DEPARTMENT_MANAGER is this ", userType);
         response = await axios.post(
           CONFIG.API_BASE_URL + "/api/v1/department-managers/logout",
@@ -155,7 +157,7 @@ export const NavBar = () => {
           config
         );
       }
-      if (userType == "USER") {
+      if (userType === "USER") {
         console.log("USER is this ", userType);
 
         response = await axios.post(
@@ -176,7 +178,8 @@ export const NavBar = () => {
       setIsLoggedIn(false);
       setShowPopup(false);
       setUserType(""); //check
-      navigate("/");
+      // navigate("/");
+      navigate("/login");
     } catch (err) {
       console.error("Logout failed:", err);
     }
@@ -297,26 +300,26 @@ export const NavBar = () => {
             >
               <MdDashboard className="nav-icon" /> DASHBOARD
             </NavLink>
-
-            {/* <NavLink
-              // to="/deptdas"
-              // onClick={handleNavClick}
+            {/* 
+            <NavLink
+              to="/deptdas"
+              onClick={handleNavClick}
               className={({ isActive }) =>
                 `nav-link ${isActive ? "active" : ""}`
               }
             >
-              <FaUser className="nav-icon" />
-              {userTypeData?.user?.fullName}
+              <FaSignOutAlt /> Logout
             </NavLink> */}
-
-            {isLoggedIn && ( //check
-              <button
-                className="logout-btn bg-red-500 p-2 rounded-md"
-                onClick={() => setShowPopup(true)}
-              >
-                <FaSignOutAlt /> Logout
-              </button>
-            )}
+            <NavLink to="/deptdas">
+              {isLoggedIn && ( //check
+                <button
+                  className="logout-btn bg-red-500 p-2 rounded-md"
+                  onClick={() => setShowPopup(true)}
+                >
+                  <FaSignOutAlt /> Logout
+                </button>
+              )}
+            </NavLink>
             <div className="language-select">
               <select>
                 <option>मराठी</option>

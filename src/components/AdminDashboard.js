@@ -199,6 +199,8 @@ const AdminDashboard = () => {
 
   const userData = JSON.parse(localStorage.getItem("userData") || "{}");
   const departmentCode = localStorage.getItem("department");
+  console.log("userData", userData);
+
   const departmentName =
     {
       AD: "अकाउंट",

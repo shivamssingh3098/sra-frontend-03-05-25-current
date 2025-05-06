@@ -62,24 +62,32 @@ const OfficerLogin = ({ onSwitchToUser }) => {
       console.log("API Response:", data);
 
       if (
-        response.ok &&
-        data.data?.departmentManager?.userType === "DEPARTMENT_MANAGER"
+        data.success
+        // response.ok &&
+        // data.data?.departmentManager?.userType === "DEPARTMENT_MANAGER"
       ) {
         localStorage.setItem("isAuthenticated", "true");
+        // localStorage.setItem("accessToken", data.data.accessToken);
         localStorage.setItem("accessToken", data.data.accessToken);
         localStorage.setItem("refreshToken", data.data.refreshToken);
         localStorage.setItem("userType", data.data.departmentManager.userType);
         localStorage.setItem("UserId", data.data.departmentManager._id);
         localStorage.setItem("userName", data.data.departmentManager.userName);
         localStorage.setItem("fullName", data.data.departmentManager.fullName);
+        localStorage.setItem(
+          "department",
+          data.data.departmentManager.department
+        );
+
         const userType = localStorage.getItem("userType");
         console.log("user type is on login ", userType);
         setMessageType("success");
         setMessage("Login successful!");
-
-        setTimeout(() => {
-          navigate("/admin");
-        }, 1000);
+        // window.location.reload();
+        // setTimeout(() => {
+        navigate("/admin");
+        // }, 1000);
+        window.location.reload();
       } else {
         setMessageType("error");
         setMessage(data.message || "Login failed.");

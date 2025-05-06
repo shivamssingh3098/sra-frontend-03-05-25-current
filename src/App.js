@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Outlet,
+} from "react-router-dom";
 // import ServiceForm from "./commponents/ServiceForm";
 import MultiStepForm from "./commponents/MultiStepFrom";
 import PaymentForm from "./components/PaymentForm";
@@ -66,6 +71,7 @@ import ApplicationForm22 from "./userForm22/ApplicationForm22";
 import Form22 from "./userForm22/Form22";
 import ApplicationApproval from "./DepartmentComponent/DepartmentComponent/ApplicationApproval";
 import ThankYou from "./UserForm/Thankyou";
+import UserProtectedRoutes from "./components/protectedRoutes/UserProtectedRoutes";
 
 function App() {
   const [formData, setFormData] = useState({
@@ -88,6 +94,7 @@ function App() {
         <div className="py-8">
           <Routes>
             <Route path="/" element={<HomeOrLogin />} />
+            <Route path="/login" element={<HomeOrLogin />} />
 
             {/* <Route
               path="/"
@@ -122,7 +129,7 @@ function App() {
                 </DepartmentProtectedRoute>
               }
             />
-
+            {/* this is original */}
             <Route
               path="/services"
               element={
@@ -131,6 +138,13 @@ function App() {
                 </UserProtectedRoute>
               }
             />
+
+            {/* User protected routes --- */}
+            {/* <Route path="/services" element={<UserProtectedRoutes />}>
+              <Route path="" element={<ServiceList />} />
+              <Route path="form1" element={<MultiStepForm />} />
+            </Route> */}
+            {/* End User protected routes --- */}
             <Route path="/userdashboard" element={<ServiceDasborad />} />
             <Route path="/form" element={<MultiStepForm />} />
             <Route path="/form1" element={<MultiStepForm />} />
