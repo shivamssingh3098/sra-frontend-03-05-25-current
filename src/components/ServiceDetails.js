@@ -26,7 +26,7 @@ function ServiceDetails({ selectedServiceId }) {
             },
           },
           requiredDocuments: selected.requiredDocuments || [],
-          formPath: "application?serviceId="+selected.id || "/form",
+          formPath: "application?serviceId=" + selected.id || "/form",
         });
       }
     }
@@ -38,16 +38,14 @@ function ServiceDetails({ selectedServiceId }) {
     navigate(serviceData.formPath);
   };
 
-
   return (
-    <div className="flex min-h-screen bg-blue-50">
+    <div className="d-flex min-h-screen bg-blue-50">
       {/* Left 20% space */}
       <div className="w-[20%] hidden sm:block"></div>
 
       {/* Right 80% content */}
       <div className="w-full sm:w-[80%] p-4 sm:p-6">
         <div className="max-w-6xl mx-auto bg-white rounded-lg shadow-md p-6">
-
           {/* Header Title */}
           <h2 className="text-xl sm:text-2xl font-semibold text-blue-700 mb-4 text-center">
             {serviceData.title}
@@ -76,7 +74,9 @@ function ServiceDetails({ selectedServiceId }) {
                 <tr>
                   <th className="p-2 border">सेवा क्र</th>
                   <th className="p-2 border">सेवेचे नाव</th>
-                  <th className="p-2 border">सेवेचे पूर्णत्व करण्याची कालावधी (दिवस)</th>
+                  <th className="p-2 border">
+                    सेवेचे पूर्णत्व करण्याची कालावधी (दिवस)
+                  </th>
                   <th className="p-2 border">पदनिर्देशित अधिकारी</th>
                   <th className="p-2 border">प्रथम अपील अधिकारी</th>
                   <th className="p-2 border">द्वितीय अपील अधिकारी</th>
@@ -84,9 +84,15 @@ function ServiceDetails({ selectedServiceId }) {
               </thead>
               <tbody>
                 <tr>
-                  <td className="p-2 border">{serviceData.serviceTable.serviceNo}</td>
-                  <td className="p-2 border">{serviceData.serviceTable.serviceName}</td>
-                  <td className="p-2 border">{serviceData.serviceTable.timeLimit}</td>
+                  <td className="p-2 border">
+                    {serviceData.serviceTable.serviceNo}
+                  </td>
+                  <td className="p-2 border">
+                    {serviceData.serviceTable.serviceName}
+                  </td>
+                  <td className="p-2 border">
+                    {serviceData.serviceTable.timeLimit}
+                  </td>
                   <td className="p-2 border whitespace-pre-wrap">
                     {serviceData.serviceTable.officers.designated}
                   </td>
@@ -110,7 +116,6 @@ function ServiceDetails({ selectedServiceId }) {
               पुढे जा
             </button>
           </div>
-
         </div>
       </div>
     </div>
