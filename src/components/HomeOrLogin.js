@@ -2,6 +2,7 @@ import React from "react";
 import Home from "./Home";
 import ServiceDasborad from "./ServiceDashboard";
 import AdminDashboard from "./AdminDashboard";
+import UserServices from "./userServicesListComp/UserServices";
 
 const HomeOrLogin = () => {
   const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
@@ -12,10 +13,11 @@ const HomeOrLogin = () => {
     if (token && userType === "DEPARTMENT_MANAGER") {
       return <Home />;
     } else {
-      return <ServiceDasborad />;
+      // return <ServiceDasborad />;
+      return <UserServices />;
     }
   }
-  
+
   return <Home />;
 };
 

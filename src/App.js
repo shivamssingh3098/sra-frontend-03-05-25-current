@@ -72,6 +72,7 @@ import Form22 from "./userForm22/Form22";
 import ApplicationApproval from "./DepartmentComponent/DepartmentComponent/ApplicationApproval";
 import ThankYou from "./UserForm/Thankyou";
 import UserProtectedRoutes from "./components/protectedRoutes/UserProtectedRoutes";
+import UserServices from "./components/userServicesListComp/UserServices";
 
 function App() {
   const [formData, setFormData] = useState({
@@ -130,15 +131,27 @@ function App() {
               }
             />
             {/* this is original */}
-            <Route
+            {/* <Route
               path="/services"
               element={
                 <UserProtectedRoute>
                   <ServiceList />
                 </UserProtectedRoute>
               }
-            />
+            /> */}
 
+            {/* created by shivam , user services list */}
+
+            <Route
+              // path="/user-services"
+              path="services"
+              element={
+                <UserProtectedRoute>
+                  <UserServices />
+                </UserProtectedRoute>
+              }
+            />
+            {/* end created by shivam , user services list */}
             {/* User protected routes --- */}
             {/* <Route path="/services" element={<UserProtectedRoutes />}>
               <Route path="" element={<ServiceList />} />
