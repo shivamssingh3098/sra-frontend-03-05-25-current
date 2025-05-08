@@ -320,12 +320,12 @@ export const NavBar = () => {
                 </button>
               )}
             </NavLink>
-            <div className="language-select">
+            {/* <div className="language-select">
               <select>
                 <option>मराठी</option>
                 <option>English</option>
               </select>
-            </div>
+            </div> */}
           </nav>
         </div>
       </header>

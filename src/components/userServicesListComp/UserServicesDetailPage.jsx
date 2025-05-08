@@ -1,9 +1,9 @@
-import CONFIG from "../app.config"; // adjust path as needed
+import CONFIG from "../../app.config"; // adjust path as needed
 import React, { useEffect, useState } from "react";
-import servicesData from "../data/services.json";
+import servicesData from "../../data/services.json";
 import { useNavigate } from "react-router-dom";
 
-function ServiceDetails({ selectedServiceId }) {
+function UserServicesDetailPage({ selectedServiceId }) {
   const [serviceData, setServiceData] = useState(null);
   const navigate = useNavigate();
 
@@ -39,12 +39,11 @@ function ServiceDetails({ selectedServiceId }) {
   };
 
   return (
-    <div className="flex min-h-screen bg-blue-50 ">
+    <div className=" border">
       {/* Left 20% space */}
-      <div className="w-[20%] hidden sm:block "></div>
 
       {/* Right 80% content */}
-      <div className="w-full sm:w-[80%] p-4 sm:p-6">
+      <div className="w-full  p-4 sm:p-6">
         <div className="max-w-6xl mx-auto bg-white rounded-lg shadow-md p-6">
           {/* Header Title */}
           <h2 className="text-xl sm:text-2xl font-semibold text-blue-700 mb-4 text-center">
@@ -122,4 +121,4 @@ function ServiceDetails({ selectedServiceId }) {
   );
 }
 
-export default ServiceDetails;
+export default UserServicesDetailPage;

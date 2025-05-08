@@ -3,8 +3,8 @@ import React, { useState, useEffect } from "react";
 import ServiceForm from "../commponents/ServiceForm";
 import servicesData from "../data/services.json";
 
-// 👇 Accept onServiceClick as a prop from parent
-function ServiceListComponent({ onServiceClick }) {
+// 👇 Accept setSelectedServiceId as a prop from parent
+function ServiceListComponent({ setSelectedServiceId }) {
   const [showServices, setShowServices] = useState(false);
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -25,7 +25,7 @@ function ServiceListComponent({ onServiceClick }) {
   }, []);
 
   return (
-    <div>
+    <div className="">
       {/* Toggle Button for mobile view */}
       <button
         onClick={() => setShowServices(true)}
@@ -47,13 +47,14 @@ function ServiceListComponent({ onServiceClick }) {
           showServices ? "translate-x-0" : "translate-x-full"
         } sm:translate-x-0 w-4/5 sm:w-full max-w-md sm:max-w-none shadow-lg sm:shadow-none`}
       >
+        {/* left bar || list of all services */}
         {loading ? (
           <div className="p-4 text-center">Loading services...</div>
         ) : (
           <ServiceForm
             services={services}
             onClose={() => setShowServices(false)}
-            onServiceClick={onServiceClick} // ✅ Now using the prop
+            setSelectedServiceId={setSelectedServiceId} // ✅ Now using the prop
           />
         )}
       </div>

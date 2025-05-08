@@ -6,10 +6,20 @@ const ServicesDashboard = ({ serverId }) => {
   const [selectedServiceId, setSelectedServiceId] = useState(null);
 
   return (
-    <div>
+    <div className="">
       {/* this is service left bar from where we chose service to fill form and see
       form info */}
-      <ServiceListComponent onServiceClick={setSelectedServiceId} />
+      {/* <div className="row">
+        <div className="col-4 border">
+          <ServiceListComponent onServiceClick={setSelectedServiceId} />
+        </div>
+
+        <div className="col-8 border">
+          <ServiceDetails selectedServiceId={selectedServiceId} />
+        </div>
+      </div> */}
+
+      <ServiceListComponent setSelectedServiceId={setSelectedServiceId} />
       <ServiceDetails selectedServiceId={selectedServiceId} />
     </div>
   );
