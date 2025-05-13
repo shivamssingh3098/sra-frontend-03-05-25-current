@@ -87,7 +87,7 @@ const OfficerLogin = ({ onSwitchToUser }) => {
         // setTimeout(() => {
         navigate("/admin");
         // }, 1000);
-        window.location.reload();
+        // window.location.reload();
       } else {
         setMessageType("error");
         setMessage(data.message || "Login failed.");
