@@ -45,7 +45,7 @@ const ApplicationApproval = ({ formData }) => {
   const [applicationData, setApplicationData] = useState(null);
   const [acceptRejectBtnEnable, setAcceptRejectBtnEnable] = useState(false);
   const [acceptRejectBtnHide, setAcceptRejectBtnHide] = useState(false);
-
+  const userType = localStorage.getItem("userType");
   // Open modal when checkbox or label is clicked
   const handleCheckboxClick = (labelText, imageUrl) => {
     setSelectedCheckbox(labelText); // Save which checkbox was clicked
@@ -341,25 +341,30 @@ const ApplicationApproval = ({ formData }) => {
         </div>
 
         {/* Centered Approve and Reject Buttons */}
-        <div className="d-flex justify-content-center gap-3">
-          <button
-            type="submit"
-            className="btn btn-success"
-            hidden={app?.serviceStatus != "PENDING"}
-            disabled={!acceptRejectBtnEnable}
-            onClick={() => handleAcceptRejectClick("ACCEPTED")}
-          >
-            Accept
-          </button>
-          <button
-            type="button"
-            className="btn btn-danger"
-            hidden={app?.serviceStatus != "PENDING"}
-            onClick={() => handleAcceptRejectClick("REJECTED")}
-          >
-            Reject
-          </button>
-        </div>
+
+        {userType !== "ADMIN" ? (
+          <div className="d-flex justify-content-center gap-3">
+            <button
+              type="submit"
+              className="btn btn-success"
+              hidden={app?.serviceStatus != "PENDING"}
+              disabled={!acceptRejectBtnEnable}
+              onClick={() => handleAcceptRejectClick("ACCEPTED")}
+            >
+              Accept
+            </button>
+            <button
+              type="button"
+              className="btn btn-danger"
+              hidden={app?.serviceStatus != "PENDING"}
+              onClick={() => handleAcceptRejectClick("REJECTED")}
+            >
+              Reject
+            </button>
+          </div>
+        ) : (
+          ""
+        )}
 
         {/* Custom Checkbox Styles */}
         <style jsx>{`

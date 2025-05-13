@@ -41,6 +41,7 @@ const UserServices = () => {
                   aria-label="Close"
                 ></button>
               </div>
+              {/* for mobile screens side bar */}
               <div className="offcanvas-body">
                 <ol>
                   {servicesData[0].services.map((service, index) => (
@@ -70,7 +71,11 @@ const UserServices = () => {
                         <div className="flex-grow">
                           <p
                             className="text-gray-700 group-hover:text-blue-600"
-                            style={{ fontSize: "12px" }}
+                            style={{
+                              fontSize: "12px",
+                              color:
+                                selectedServiceId == service.id ? "blue" : "",
+                            }}
                           >
                             {service.description}
                           </p>
@@ -82,6 +87,7 @@ const UserServices = () => {
               </div>
             </div>
           </div>
+          {/* for laptop screens side bar */}
           <div className="d-none d-md-block">
             <h5 className="m-2">सेवेचे नाव</h5>
             <ol>
@@ -112,7 +118,10 @@ const UserServices = () => {
                     <div className="flex-grow">
                       <p
                         className="text-gray-700 group-hover:text-blue-600"
-                        style={{ fontSize: "12px" }}
+                        style={{
+                          fontSize: "12px",
+                          color: selectedServiceId == service.id ? "blue" : "",
+                        }}
                       >
                         {service.description}
                       </p>

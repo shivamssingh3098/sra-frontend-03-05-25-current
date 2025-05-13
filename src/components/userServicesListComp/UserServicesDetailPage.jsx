@@ -43,7 +43,7 @@ function UserServicesDetailPage({ selectedServiceId }) {
       {/* Left 20% space */}
 
       {/* Right 80% content */}
-      <div className="w-full  p-4 sm:p-6">
+      <div className="  ">
         <div className="max-w-6xl mx-auto bg-white rounded-lg shadow-md p-6">
           {/* Header Title */}
           <h2 className="text-xl sm:text-2xl font-semibold text-blue-700 mb-4 text-center">
@@ -53,7 +53,7 @@ function UserServicesDetailPage({ selectedServiceId }) {
           {/* Required Documents AFTER Title */}
           <div className="bg-blue-50 p-4 rounded mb-6">
             <h3 className="text-lg font-medium mb-2 text-blue-800">
-              लागणारे कागदपत्र (कोणतेही एक)
+              लागणारे कागदपत्र
             </h3>
             <ul className="list-disc list-inside space-y-1 pl-4">
               {serviceData.requiredDocuments.length ? (

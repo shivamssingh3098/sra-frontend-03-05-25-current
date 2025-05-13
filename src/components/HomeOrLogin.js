@@ -10,8 +10,8 @@ const HomeOrLogin = () => {
   const token = localStorage.getItem("accessToken");
 
   if (isAuthenticated) {
-    if (token && userType === "DEPARTMENT_MANAGER") {
-      return <Home />;
+    if (token && (userType === "DEPARTMENT_MANAGER" || userType === "ADMIN")) {
+      return <AdminDashboard />;
     } else {
       // return <ServiceDasborad />;
       return <UserServices />;

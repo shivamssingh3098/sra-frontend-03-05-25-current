@@ -151,6 +151,24 @@ const DashBoardForm9 = forwardRef(
       }
     }, [setCanProceed]);
 
+    useEffect(() => {
+      if (serviceId) {
+        // Find the service in services.json
+        const service = servicesData[0].services.find(
+          (s) => s.id === serviceId
+        );
+        if (service) {
+          // Update the formData with the department from services.json
+          setFormData((prev) => ({
+            ...prev,
+            department: service.department,
+            // Set the schemeDeveloper based on the department
+            // schemeDeveloper: service.department,
+          }));
+        }
+      }
+    }, [serviceId, setFormData]);
+
     // Fetch government service branches from API
 
     const handleChange = (e) => {
@@ -491,12 +509,12 @@ const DashBoardForm9 = forwardRef(
 
               <div>
                 <label className="font-medium block mb-1">
-                  पुनर्वसन योजनेचा दिनांक{" "}
+                  पुनर्वसनासाठी सोडतीचे दिनांक{" "}
                   <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="date"
-                  name="date"
+                  name="redevelopmentLeavingDate"
                   value={formData.redevelopmentLeavingDate}
                   onChange={handleChange}
                   className="w-full border rounded px-3 py-2"

@@ -26,7 +26,7 @@ const UserRegisterForm = () => {
   const validateForm = () => {
     const newErrors = {};
     const requiredFields = [
-      "userName",
+      // "userName",
       "fullName",
       "phone",
       "state",
@@ -159,7 +159,7 @@ const UserRegisterForm = () => {
           <div className="form-content">
             <div className="form-with-profile">
               <div className="main-form-grid">
-                <div className="form-group">
+                {/* <div className="form-group">
                   <label className="form-label required">Username</label>
                   <input
                     type="text"
@@ -172,7 +172,7 @@ const UserRegisterForm = () => {
                   {errors.userName && (
                     <span className="error-message">{errors.userName}</span>
                   )}
-                </div>
+                </div> */}
                 <div className="form-group">
                   <label className="form-label required">Full Name</label>
                   <input
@@ -322,7 +322,9 @@ const UserRegisterForm = () => {
 
             <div className="auth-fields">
               <div className="form-group">
-                <label className="form-label required">Email</label>
+                <label className="form-label required">
+                  Provide Email ID as username
+                </label>
                 <input
                   type="email"
                   name="email"

@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
+
 import {
   BrowserRouter as Router,
   Routes,
@@ -73,6 +76,7 @@ import ApplicationApproval from "./DepartmentComponent/DepartmentComponent/Appli
 import ThankYou from "./UserForm/Thankyou";
 import UserProtectedRoutes from "./components/protectedRoutes/UserProtectedRoutes";
 import UserServices from "./components/userServicesListComp/UserServices";
+import UserServiceHistory from "./components/userServicesListComp/UserServiceHistory";
 
 function App() {
   const [formData, setFormData] = useState({
@@ -107,9 +111,9 @@ function App() {
             /> */}
 
             <Route path="/register" element={<UserRegistrationForm />} />
-
+            {/* <Route path="/users-services" element={<ServicesDashboard />} /> */}
             <Route
-              path="/deptdas"
+              path="/manager-dashboard"
               element={
                 <DepartmentProtectedRoute>
                   <DashBoard />
@@ -144,13 +148,24 @@ function App() {
 
             <Route
               // path="/user-services"
-              path="services"
+              path="/services"
               element={
                 <UserProtectedRoute>
                   <UserServices />
                 </UserProtectedRoute>
               }
             />
+
+            <Route
+              // path="/user-services"
+              path="/history"
+              element={
+                <UserProtectedRoute>
+                  <UserServiceHistory />
+                </UserProtectedRoute>
+              }
+            />
+
             {/* end created by shivam , user services list */}
             {/* User protected routes --- */}
             {/* <Route path="/services" element={<UserProtectedRoutes />}>
@@ -163,9 +178,9 @@ function App() {
             <Route path="/form1" element={<MultiStepForm />} />
             <Route path="/payment" element={<PaymentForm />} />
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/deptdas" element={<DashBoard />} />
+            {/* <Route path="/deptdas" element={<DashBoard />} /> */}
 
-            <Route path="/services" element={<ServicesDashboard />} />
+            {/* <Route path="/services" element={<ServicesDashboard />} /> */}
             <Route path="/courses" element={<UserCourse />} />
             <Route path="/deptform" element={<DeptForm />} />
             <Route path="/remarks" element={<Remark />} />

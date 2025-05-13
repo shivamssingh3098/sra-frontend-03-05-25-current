@@ -54,6 +54,7 @@ const DashboardForm13 = ({ setCanProceed, onFormSubmit, ref }) => {
       ...prev,
       [name]: value,
     }));
+    console.log("formData", formData);
   };
   useEffect(() => {
     if (serviceId) {
@@ -195,8 +196,8 @@ const DashboardForm13 = ({ setCanProceed, onFormSubmit, ref }) => {
             </label>
             <input
               type="text"
-              name="taluka"
-              value={formData.taluka}
+              name="governmentServiceBranch"
+              value={formData.governmentServiceBranch}
               onChange={handleChange}
               required
               className="w-full border rounded px-3 py-2"

@@ -1,6 +1,8 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { Card, Row, Col } from "react-bootstrap";
 import { FaUsers, FaUserClock, FaTimesCircle } from "react-icons/fa";
+import CONFIG from "../../app.config";
 
 const DashBoardCard = ({ type, count, lastWeek, lastMonth }) => {
   const getColor = () => {
@@ -31,11 +33,11 @@ const DashBoardCard = ({ type, count, lastWeek, lastMonth }) => {
 
   const cardStyle = {
     transform: "scale(1)",
-    transition: "transform 0.3s ease-in-out"
+    transition: "transform 0.3s ease-in-out",
   };
 
   const hoverStyle = {
-    transform: "scale(1.1)"
+    transform: "scale(1.1)",
   };
 
   return (
@@ -51,7 +53,9 @@ const DashBoardCard = ({ type, count, lastWeek, lastMonth }) => {
     >
       <Card className="text-center shadow-sm" style={cardStyle}>
         <Card.Body>
-          <div className={`text-${getColor()} d-flex justify-content-center align-items-center mb-2`}>
+          <div
+            className={`text-${getColor()} d-flex justify-content-center align-items-center mb-2`}
+          >
             {getIcon()}
             <strong>{type}</strong>
           </div>
@@ -65,10 +69,48 @@ const DashBoardCard = ({ type, count, lastWeek, lastMonth }) => {
 };
 
 const DashBoard = () => {
+  // /api/v1/department-managers/request-count
+  const [serviceCount, setServiceCount] = useState({});
+  const getServiceCount = async () => {
+    try {
+      // console.log("userType", userType);
+      const token = localStorage.getItem("accessToken");
+      const response = await axios.get(
+        CONFIG.API_BASE_URL + "/api/v1/department-managers/request-count",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setServiceCount(response.data.data);
+      console.log("response request-count ", serviceCount);
+    } catch (error) {
+      console.log("Error while getting all request ", error);
+    }
+  };
+  useEffect(() => {
+    getServiceCount();
+  }, []);
   const data = [
-    { type: "Accepted", count: 26, lastWeek: 5, lastMonth: 10 },
-    { type: "Pending", count: 26, lastWeek: 5, lastMonth: 10 },
-    { type: "Reject", count: 26, lastWeek: 5, lastMonth: 10 }
+    {
+      type: "Accepted",
+      count: serviceCount.ACCEPTED || 0,
+      lastWeek: 5,
+      lastMonth: 10,
+    },
+    {
+      type: "Pending",
+      count: serviceCount.PENDING || 0,
+      lastWeek: 5,
+      lastMonth: 10,
+    },
+    {
+      type: "Reject",
+      count: serviceCount.REJECTED || 0,
+      lastWeek: 5,
+      lastMonth: 10,
+    },
   ];
 
   return (

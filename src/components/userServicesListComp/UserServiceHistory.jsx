@@ -1,12 +1,11 @@
-import CONFIG from "../app.config"; // adjust path as needed
+import CONFIG from "../../app.config"; // adjust path as needed
 import React, { useState, useEffect } from "react";
-import { FaSearch, FaDownload, FaEye } from "react-icons/fa";
-import { BsBriefcase } from "react-icons/bs";
+
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Button } from "react-bootstrap";
 
-const AdminDashboard = () => {
+const UserServiceHistory = () => {
   // Initialize useNavigate
 
   const location = useLocation();
@@ -16,7 +15,7 @@ const AdminDashboard = () => {
   };
   const [applications, setApplications] = useState([]);
   const [error, setError] = useState(null);
-  const [remarkByAdminForManager, setRemarkByAdminForManager] = useState("");
+  const [userRemark, setUserRemark] = useState({});
   const [formId, setFormId] = useState(null);
   const navigate = useNavigate();
   useEffect(() => {
@@ -33,7 +32,7 @@ const AdminDashboard = () => {
     const response = await axios
       .get(
         CONFIG.API_BASE_URL +
-          `/api/v1/department-managers/form-request?page=1&limit=100&serviceStatus=${
+          `/api/v1/users/get-service-request?page=1&limit=100&serviceStatus=${
             status || "PENDING"
           }`,
 
@@ -51,16 +50,17 @@ const AdminDashboard = () => {
           headers: response.headers,
         });
 
-        if (response.data && response.data?.data?.data.length > 0) {
-          console.log("API response", response.data?.data?.data);
-          setApplications(response.data?.data?.data);
+        if (response.data && response.data?.data?.length > 0) {
+          console.log("API response---", response.data?.data);
+          setApplications(response.data?.data);
         } else {
           console.log("No data found in response");
-          setApplications(response.data?.data?.data);
+          setApplications(response.data?.data);
         }
         //setApplications(mockData);
         setError(null);
       })
+
       .catch((error) => {
         setError("Failed to fetch applications. Please try again later.");
         console.error("Error fetching applications:", error);
@@ -76,62 +76,23 @@ const AdminDashboard = () => {
     navigate("/applicationapproval", { state: { app } });
   };
   // admin Submit remark
-  const openModalToAddRemark = (id, remark) => {
+  const openModalToViewRemark = (id, remark) => {
     console.log("id", id);
     console.log("remark", remark);
-    setRemarkByAdminForManager(remark ? remark : "");
+    setUserRemark(remark ? remark : {});
     setFormId(id);
     // setRemarkByAdminForManager(remark);
   };
-  const onSubmitRemarkByAdmin = async (e) => {
-    try {
-      e.preventDefault();
-      console.log("remarkByAdminForManager", remarkByAdminForManager);
-      const token = localStorage.getItem("accessToken");
-
-      if (!remarkByAdminForManager) {
-        alert("Remark is require to submit ");
-      }
-
-      const config = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      };
-
-      const response = await axios.post(
-        CONFIG.API_BASE_URL +
-          `/api/v1/department-managers/create-admin-remark-for-manager?formId=${formId}`,
-        { remarkByAdminForManager },
-        config
-      );
-      console.log("response", response);
-      setRemarkByAdminForManager("");
-      fetchApplications();
-      // setIsRejectModalOpen(false);
-      if (response.data?.success) alert(`Remark has been created successfully`);
-    } catch (error) {}
+  const handleDownload = async () => {
+    const response = await fetch(userRemark.document);
+    const blob = await response.blob();
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "attachment"; // Optional: give a custom filename
+    a.click();
+    window.URL.revokeObjectURL(url);
   };
-
-  const userData = JSON.parse(localStorage.getItem("userData") || "{}");
-  const departmentCode = localStorage.getItem("department");
-  // console.log("userData", userData);
-
-  const departmentName =
-    {
-      AD: "अकाउंट",
-      TPD: "नगर रचना",
-      CSD: "नगर भूमापन",
-      COD: "सहकारी",
-      EMD: "मिळकत",
-      TVD: "विशेषकक्ष",
-      CAD: "सक्षम प्राधिकरण",
-      ED: "अभियांत्रिकी",
-      ADMIN: "प्रशासक",
-      // Add other departments as needed
-    }[departmentCode] || "Unknown Department";
-
   return (
     <div className="min-h-screen bg-gray-100">
       <div className="d-flex justify-content-start align-items-start flex-row ">
@@ -140,13 +101,7 @@ const AdminDashboard = () => {
           {/* Header */}
           <header className="bg-white shadow">
             <div className="flex justify-between items-center px-6 py-4">
-              <div className="flex items-center space-x-3">
-                <BsBriefcase className="text-xl" />
-                <h1 className="text-xl font-semibold">
-                  {" "}
-                  {departmentName} डिपार्टमेंट
-                </h1>
-              </div>
+              <div className="flex items-center space-x-3"></div>
               <div className="flex space-x-2">
                 <button
                   className="px-4 py-1 bg-red-700 text-white rounded"
@@ -189,9 +144,6 @@ const AdminDashboard = () => {
                         Service Number
                       </th>
                       <th className="px-4 py-2 text-left font-medium">
-                        Department
-                      </th>
-                      <th className="px-4 py-2 text-left font-medium">
                         Payment Date
                       </th>
                       <th className="px-4 py-2 text-left font-medium">
@@ -204,11 +156,14 @@ const AdminDashboard = () => {
                         Status
                       </th>
                       <th className="px-4 py-2 text-left font-medium">
-                        Download Application
+                        Department
                       </th>
                       <th className="px-4 py-2 text-left font-medium">
-                        View Application
+                        View Remark
                       </th>
+                      {/* <th className="px-4 py-2 text-left font-medium">
+                        View Application
+                      </th> */}
                       {/* {departmentCode == "ADMIN" ? (
                         <th className="px-4 py-2 text-left font-medium">
                           Send Remark To Officer
@@ -216,15 +171,6 @@ const AdminDashboard = () => {
                       ) : (
                         ""
                       )} */}
-                      {departmentCode == "ADMIN" ? (
-                        <th className="px-4 py-2 text-left font-medium">
-                          Send Remark To Officer
-                        </th>
-                      ) : (
-                        <th className="px-4 py-2 text-left font-medium">
-                          View Remark
-                        </th>
-                      )}
                     </tr>
                   </thead>
                   <tbody>
@@ -236,7 +182,6 @@ const AdminDashboard = () => {
                             {app.applicationId} <br /> {app.applicationId2}
                           </td>
                           <td className="px-4 py-3">{app.serviceNumber}</td>
-                          <td className="px-4 py-3">{app.department}</td>
                           <td className="px-4 py-3">
                             {" "}
                             {app.applyDate ? app.applyDate.split("T")[0] : "-"}
@@ -257,56 +202,12 @@ const AdminDashboard = () => {
                               {app.serviceStatus}
                             </Button>
                           </td>
-                          <td className="px-4 py-3">
-                            <button className="text-white bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded text-sm flex items-center space-x-1">
-                              <FaDownload className="text-sm" />
-                              <span>Download</span>
-                            </button>
-                          </td>
-                          <td>
-                            <Button
-                              variant="dark"
-                              size="sm"
-                              style={{ backgroundColor: "#2c3e7b" }}
-                              onClick={() => handleViewApplication(app)}
-                            >
-                              View Application
-                            </Button>
-                          </td>
-                          {/* original */}
-                          {departmentCode == "ADMIN" ? (
+                          <td className="px-4 py-3">{app.department}</td>
+                          {app?.remark && (
                             <td>
                               <button
                                 onClick={() =>
-                                  openModalToAddRemark(
-                                    app._id,
-                                    app?.remarkByAdminForManager
-                                  )
-                                }
-                                type="button"
-                                className="btn btn-primary"
-                                style={{
-                                  backgroundColor: app?.remarkByAdminForManager
-                                    ? "purple"
-                                    : "",
-                                }}
-                                data-bs-toggle="modal"
-                                data-bs-target="#staticBackdrop"
-                              >
-                                {app?.remarkByAdminForManager
-                                  ? "Edit Remark"
-                                  : "   Add Remark"}
-                              </button>
-                            </td>
-                          ) : departmentCode !== "ADMIN" &&
-                            app?.remarkByAdminForManager ? (
-                            <td>
-                              <button
-                                onClick={() =>
-                                  openModalToAddRemark(
-                                    app._id,
-                                    app?.remarkByAdminForManager
-                                  )
+                                  openModalToViewRemark(app._id, app?.remark)
                                 }
                                 type="button"
                                 className="btn btn-primary"
@@ -316,9 +217,19 @@ const AdminDashboard = () => {
                                 View Remark
                               </button>
                             </td>
-                          ) : (
-                            ""
                           )}
+
+                          {/* <td>
+                            <Button
+                              variant="dark"
+                              size="sm"
+                              style={{ backgroundColor: "#2c3e7b" }}
+                              onClick={() => handleViewApplication(app)}
+                            >
+                              View Application
+                            </Button>
+                          </td> */}
+                          {/* original */}
                         </tr>
                       ))}
                   </tbody>
@@ -344,6 +255,7 @@ const AdminDashboard = () => {
           </main>
         </div>
       </div>
+
       {/* // modal for admin remark  */}
       <div>
         {/* <!-- Button trigger modal --> */}
@@ -359,7 +271,7 @@ const AdminDashboard = () => {
           aria-hidden="true"
         >
           <div className="modal-dialog">
-            <form onSubmit={onSubmitRemarkByAdmin}>
+            <div>
               <div className="modal-content">
                 <div className="modal-header">
                   <h5 className="modal-title" id="staticBackdropLabel">
@@ -373,38 +285,27 @@ const AdminDashboard = () => {
                   ></button>
                 </div>
                 <div className="modal-body">
-                  {departmentCode == "ADMIN" ? (
-                    <div class="mb-3">
-                      <label
-                        for="exampleFormControlInput1"
-                        className="form-label"
-                      >
-                        Enter Remark For Department Officer
-                      </label>
-                      <input
-                        onChange={(e) =>
-                          setRemarkByAdminForManager(e.target.value)
-                        }
-                        type="text"
-                        // required="true"
-                        name="remarkByAdminForManager"
-                        value={remarkByAdminForManager}
-                        className="form-control"
-                        id="exampleFormControlInput1"
-                        // placeholder="name@example.com"
-                      />
-                    </div>
-                  ) : (
-                    <div class="mb-3">
-                      <label
-                        for="exampleFormControlInput1"
-                        className="form-label"
-                      >
-                        Remark From Admin -
-                      </label>
-                      {remarkByAdminForManager}
-                    </div>
-                  )}
+                  <div class="mb-3 ">
+                    {/* <label
+                      for="exampleFormControlInput1"
+                      className="form-label"
+                    >
+                      Remark From  -
+                    </label> */}
+                    {userRemark.remark}
+                  </div>
+                  <div class="mb-3">
+                    {/* <label
+                      for="exampleFormControlInput1"
+                      className="form-label"
+                    >
+                      Download Attachment -
+                    </label> */}
+                    <button type="button" onClick={handleDownload}>
+                      Click here to{" "}
+                      <span style={{ color: "blue" }}>download</span> document
+                    </button>
+                  </div>
                 </div>
                 <div className="modal-footer">
                   <button
@@ -415,20 +316,16 @@ const AdminDashboard = () => {
                     Close
                   </button>
 
-                  {departmentCode == "ADMIN" ? (
-                    <button
-                      type="submit"
-                      className="btn btn-primary"
-                      data-bs-dismiss="modal"
-                    >
-                      Submit
-                    </button>
-                  ) : (
-                    ""
-                  )}
+                  {/* <button
+                    type="submit"
+                    className="btn btn-primary"
+                    data-bs-dismiss="modal"
+                  >
+                    Submit
+                  </button> */}
                 </div>
               </div>
-            </form>
+            </div>
           </div>
         </div>
       </div>
@@ -436,4 +333,4 @@ const AdminDashboard = () => {
   );
 };
 
-export default AdminDashboard;
+export default UserServiceHistory;

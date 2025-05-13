@@ -64,7 +64,7 @@ const UserLoginForm = () => {
         console.log("user type is on login ", userType);
 
         // 🔁 Redirect to protected page
-        navigate("/services", { replace: true });
+        navigate("/", { replace: true });
 
         window.location.reload();
       } else {

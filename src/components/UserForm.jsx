@@ -1,36 +1,36 @@
 import CONFIG from "../app.config"; // adjust path as needed
-import React, { useState } from 'react';
-import userFormImage from '../images/Pankaj.png'; // Make sure to add this image to your assets
+import React, { useState } from "react";
+import userFormImage from "../images/Pankaj.png"; // Make sure to add this image to your assets
 
 const UserForm = () => {
   const [formData, setFormData] = useState({
-    fullName: '',
-    mobile: '',
-    taluka: '',
-    district: '',
-    address: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-    photo: null
+    fullName: "",
+    mobile: "",
+    taluka: "",
+    district: "",
+    address: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    photo: null,
   });
 
   const [photoPreview, setPhotoPreview] = useState(null);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handlePhotoChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setFormData(prev => ({
+      setFormData((prev) => ({
         ...prev,
-        photo: file
+        photo: file,
       }));
       const reader = new FileReader();
       reader.onloadend = () => {
@@ -48,7 +48,10 @@ const UserForm = () => {
 
   return (
     <div className="w-full max-w-4xl mx-auto p-6">
-      <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-lg p-8">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white rounded-lg shadow-lg p-8"
+      >
         {/* Basic Info Section */}
         <div className="mb-8">
           <div className="flex items-start gap-6 mb-6">
@@ -58,14 +61,14 @@ const UserForm = () => {
               </h2>
             </div>
             <div className="flex-shrink-0">
-              <img 
-                src={userFormImage} 
-                alt="Registration" 
+              <img
+                src={userFormImage}
+                alt="Registration"
                 className="w-24 h-24 object-cover rounded-lg shadow-md"
               />
             </div>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Full Name */}
             <div className="form-group">
@@ -156,7 +159,7 @@ const UserForm = () => {
           <h2 className="text-xl font-semibold mb-6 bg-blue-50 p-3 rounded-md text-blue-800">
             वेरीफिकेशन (Verification)
           </h2>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Email */}
             <div className="form-group">
@@ -181,10 +184,16 @@ const UserForm = () => {
               <div className="flex items-center gap-4">
                 <div className="w-32 h-32 border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center bg-gray-50 relative overflow-hidden">
                   {photoPreview ? (
-                    <img src={photoPreview} alt="Preview" className="w-full h-full object-cover" />
+                    <img
+                      src={photoPreview}
+                      alt="Preview"
+                      className="w-full h-full object-cover"
+                    />
                   ) : (
                     <div className="text-center">
-                      <span className="text-gray-500 text-sm">Upload Photo</span>
+                      <span className="text-gray-500 text-sm">
+                        Upload Photo
+                      </span>
                     </div>
                   )}
                   <input
@@ -250,4 +259,4 @@ const UserForm = () => {
   );
 };
 
-export default UserForm; 
+export default UserForm;

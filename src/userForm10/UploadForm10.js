@@ -215,8 +215,12 @@ const UploadForm10 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
         otherDocument2: null,
       });
     } catch (err) {
-      setError(err.response?.data?.message || "Error uploading files");
-      console.error("Upload error:", err);
+      setError(
+        err.response?.data?.message ||
+          err.response?.statusText ||
+          "Error uploading files"
+      );
+      console.error("Upload error----:", err.response?.statusText);
 
       // If setCanProceed is provided, set it to false to prevent proceeding
       if (setCanProceed) {

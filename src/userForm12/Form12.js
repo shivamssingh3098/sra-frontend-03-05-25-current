@@ -221,8 +221,7 @@ const Form12 = ({ formData: initialFormData, formId }) => {
               <div className="mt-8">
                 <p className="">प्रति,</p>
                 <div className="space-y-1">
-                  <p>उपलेखापाल</p>
-                  <p>वित्त विभाग</p>
+                  <p>सहाय्यक निबंधक, सहकारी संस्था,</p>
                   <p>मुंबई महानगर प्रदेश</p>
                   <p>झोपडपट्टी पुनर्वसन प्राधिकरण ठाणे.</p>
                 </div>
@@ -252,17 +251,22 @@ const Form12 = ({ formData: initialFormData, formId }) => {
                     {getWardDisplay()} मधील न.भू.क्र {getPlotDisplay()} ये थील{" "}
                     {formData.governmentServiceBranch || "_______"} सहकारी
                     गृहनिर्माण संस्थेच्या झोपडपट्टी पुनर्वसन योजनेमद्धे अनु क्र{" "}
-                    {formData.punervasan || "_______"} झोपडी क्र.{" "}
+                    {formData.srNo || "_______"} झोपडी क्र.{" "}
                     {formData.hutNo || "_______"} वर पात्र आसून मला दि{" "}
-                    {formData.punervasanDate || "_______"} . रोजीच्या पुनर्वसन
-                    योजनेच्या सोडती मध्ये सदनिका क्र. वाटप करण्यात आलेली आहे.
+                    {formData.leavingDate
+                      ? new Date(formData.leavingDate).toLocaleDateString(
+                          "en-GB"
+                        ) // or "en-US"
+                      : "_______"}{" "}
+                    . रोजीच्या पुनर्वसन योजनेच्या सोडती मध्ये सदनिका क्र.
+                    {formData.apartmentNo || "_______"} वाटप करण्यात आलेली आहे.
                     माझे पती / पत्नी यांचे दि.
                     {formData.spouseDeathDate
                       ? new Date(formData.spouseDeathDate).toLocaleDateString(
                           "en-GB"
                         ) // or "en-US"
-                      : "_______"}
-                     रोजी निधन झाले असून माझे पती / पत्नीच्या नंतर संस्थेमधील
+                      : "_______"}{" "}
+                    रोजी निधन झाले असून माझे पती / पत्नीच्या नंतर संस्थेमधील
                     सदनिकेचे सभासदत्व व सदनिकेचे हस्तांतरण करण्यात यावे ही
                     विनंती.
                   </p>

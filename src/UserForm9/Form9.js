@@ -242,11 +242,12 @@ const Form9 = ({ formData: initialFormData, formId }) => {
                     संस्थेच्या झोपडपट्टी पुनर्वसन योजने मध्ये अनु. क्र.
                     {formData.redevelopmentServicesNo || "_______"} झोपडी क्र.
                     {formData.hutNo || "_______"} वर पात्र असून मला दि.
-                    {formData.redevelopmentLeavingDate || "_______"}रोजीच्या
-                    पुनर्वसन योजनेच्या सोडती मध्ये सदनिका क्र.
-                    {formData.apartmentNoShopProvidingDate || "_______"} वाटप
-                    करण्यात आलेली आहे. सदर सदनिकेच्या वाटप पत्राची छायांकित प्रत
-                    देण्यात यावी.
+                    {new Date(
+                      formData.redevelopmentLeavingDate
+                    ).toLocaleDateString("en-IN") || "_______"}{" "}
+                    रोजीच्या पुनर्वसन योजनेच्या सोडती मध्ये सदनिका क्र.
+                    {formData.apartmentNo || "_______"} वाटप करण्यात आलेली आहे.
+                    सदर सदनिकेच्या वाटप पत्राची छायांकित प्रत देण्यात यावी.
                   </p>
                 </div>
               </div>

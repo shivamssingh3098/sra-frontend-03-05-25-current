@@ -58,7 +58,7 @@ export const NavBar = () => {
           apiUrl = "/api/v1/department-managers/current-manager";
           break;
         case "ADMIN":
-          apiUrl = "/api/v1/admin/current-admin";
+          apiUrl = "/api/v1/department-managers/current-manager";
           break;
         case "USER":
           apiUrl = "/api/v1/users/current-user";
@@ -146,7 +146,7 @@ export const NavBar = () => {
         },
       };
       let response;
-      if (userType === "DEPARTMENT_MANAGER") {
+      if (userType === "DEPARTMENT_MANAGER" || userType === "ADMIN") {
         console.log("DEPARTMENT_MANAGER is this ", userType);
         response = await axios.post(
           CONFIG.API_BASE_URL + "/api/v1/department-managers/logout",
@@ -253,7 +253,10 @@ export const NavBar = () => {
           >
             <NavLink
               to={
-                isLoggedIn && userType === "DEPARTMENT_MANAGER" ? "/admin" : "/"
+                (isLoggedIn && userType === "DEPARTMENT_MANAGER") ||
+                userType === "ADMIN"
+                  ? "/admin"
+                  : "/"
               } //check
               onClick={handleNavClick}
               className={({ isActive }) =>
@@ -262,16 +265,16 @@ export const NavBar = () => {
             >
               <AiOutlineHome className="nav-icon" /> HOME
             </NavLink>
-            <NavLink
-              to="/services"
+            {/* <NavLink
+              to="/users-services"
               onClick={handleNavClick}
               className={({ isActive }) =>
                 `nav-link ${isActive ? "active" : ""}`
               }
             >
               <AiOutlineAppstore className="nav-icon" /> OUR SERVICES
-            </NavLink>
-            {userType !== "USER" && ( //check
+            </NavLink> */}
+            {/* {userType !== "USER" && ( //check
               <NavLink
                 to="/remarks"
                 onClick={handleNavClick}
@@ -281,25 +284,35 @@ export const NavBar = () => {
               >
                 <AiOutlineMail className="nav-icon" /> REMARK
               </NavLink>
+            )} */}
+
+            {userType == "USER" && ( //check
+              <NavLink
+                to="/history"
+                onClick={handleNavClick}
+                className={({ isActive }) =>
+                  `nav-link ${isActive ? "active" : ""}`
+                }
+              >
+                <FaHistory className="nav-icon" /> HISTORY
+              </NavLink>
             )}
-            <NavLink
-              to="/history"
-              onClick={handleNavClick}
-              className={({ isActive }) =>
-                `nav-link ${isActive ? "active" : ""}`
-              }
-            >
-              <FaHistory className="nav-icon" /> HISTORY
-            </NavLink>
-            <NavLink
-              to="/deptdas"
-              onClick={handleNavClick}
-              className={({ isActive }) =>
-                `nav-link ${isActive ? "active" : ""}`
-              }
-            >
-              <MdDashboard className="nav-icon" /> DASHBOARD
-            </NavLink>
+
+            {userType === "DEPARTMENT_MANAGER" || userType === "ADMIN" ? (
+              //check
+
+              <NavLink
+                to="/manager-dashboard"
+                onClick={handleNavClick}
+                className={({ isActive }) =>
+                  `nav-link ${isActive ? "active" : ""}`
+                }
+              >
+                <MdDashboard className="nav-icon" /> DASHBOARD
+              </NavLink>
+            ) : (
+              ""
+            )}
             {/* 
             <NavLink
               to="/deptdas"
@@ -310,7 +323,7 @@ export const NavBar = () => {
             >
               <FaSignOutAlt /> Logout
             </NavLink> */}
-            <NavLink to="/deptdas">
+            <NavLink to="/">
               {isLoggedIn && ( //check
                 <button
                   className="logout-btn bg-red-500 p-2 rounded-md"
