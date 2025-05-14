@@ -4,6 +4,7 @@ import "./UserRegistrationForm.css";
 import CONFIG from "../app.config"; // adjust path as needed
 
 const UserRegisterForm = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     userName: "",
     fullName: "",
@@ -90,12 +91,16 @@ const UserRegisterForm = () => {
   };
 
   const handleSubmit = async (e) => {
+    console.log("hitting registration");
+
     e.preventDefault();
 
     if (!validateForm()) {
       // Scroll to the first error
       const firstErrorField = document.querySelector(".error-message");
       if (firstErrorField) {
+        console.log("firstErrorField", (firstErrorField.style.color = "red"));
+
         firstErrorField.scrollIntoView({ behavior: "smooth", block: "center" });
       }
       return;
@@ -110,6 +115,7 @@ const UserRegisterForm = () => {
     }
 
     try {
+      setIsLoading(true);
       const res = await axios.post(
         CONFIG.API_BASE_URL + "/api/v1/users/register",
         data,
@@ -143,6 +149,7 @@ const UserRegisterForm = () => {
       }
     } catch (err) {
       console.error(err);
+      setIsLoading(false);
       alert(
         err.response?.data?.message || "Registration failed. Please try again."
       );
@@ -372,8 +379,16 @@ const UserRegisterForm = () => {
           </div>
         </div>
 
-        <button type="submit" className="submit-button">
-          Create
+        <button
+          type="submit"
+          disabled={isLoading}
+          className="submit-button"
+          style={{
+            backgroundColor: isLoading ? "Gray" : "red",
+            cursor: isLoading ? "not-allowed" : "pointer",
+          }}
+        >
+          {isLoading ? "Creating..." : "Create"}
         </button>
       </form>
     </div>
