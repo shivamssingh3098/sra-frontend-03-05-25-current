@@ -84,6 +84,8 @@ const UserServiceHistory = () => {
     // setRemarkByAdminForManager(remark);
   };
   const handleDownload = async () => {
+    console.log("userRemark.document", userRemark.document);
+
     const response = await fetch(userRemark.document);
     const blob = await response.blob();
     const url = window.URL.createObjectURL(blob);
@@ -305,6 +307,14 @@ const UserServiceHistory = () => {
                       Click here to{" "}
                       <span style={{ color: "blue" }}>download</span> document
                     </button>
+                    {/* <a
+                      href={userRemark.document}
+                      download
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Download Attachment
+                    </a> */}
                   </div>
                 </div>
                 <div className="modal-footer">
