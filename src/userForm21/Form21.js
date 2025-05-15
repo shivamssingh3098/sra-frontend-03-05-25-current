@@ -13,8 +13,8 @@ const Form21 = ({ formData: initialFormData, formId }) => {
   const serviceId = parseInt(queryParams.get("serviceId"));
 
   const serviceDescription =
-  servicesData[0].services.find((service) => service.id === serviceId)
-    ?.description || "";
+    servicesData[0].services.find((service) => service.id === serviceId)
+      ?.description || "";
   console.log("Form21 Component Rendered with:", { initialFormData, formId });
 
   const [formData, setFormData] = useState(
@@ -163,13 +163,11 @@ const Form21 = ({ formData: initialFormData, formId }) => {
             {/* Certificate Header */}
             <div className="text-center mb-6">
               <div className="flex justify-between items-start mb-4">
-                <div className="text-left flex  ml-[50%]">
-                  सेवा क्र.{serviceId}
-                </div>
+                <div className="text-left flex  ml-[50%]">सेवा क्र.२१</div>
               </div>
               <p className="text-sm mb-4">
-                (महाराष्ट्र लोकसेवा हक्क अनियमित २०१५ अंतर्गत सेवा मिळणेकरीत
-                सादर करावयाचा आरजाचा नमूना)
+                (महाराष्ट्र लोकसेवा हक्क अधिनियम २०१५ अंतर्गत अधिसूचित सेवा
+                मिळणबाबतच्या अर्जाचा नमूना )
               </p>
               {/* Photo Box */}
               <div className="flex justify-end mb-4">
@@ -215,7 +213,7 @@ const Form21 = ({ formData: initialFormData, formId }) => {
               <div className="mt-8">
                 <p className="">प्रति,</p>
                 <div className="space-y-1">
-                <p>कार्यकारी अभियंता ,</p>
+                  <p>कार्यकारी अभियंता ,</p>
                   <p>अभियांत्रिकी विभाग ,</p>
                   <p>मुंबई महानगर प्रदेश झोपडपट्टी ,</p>
                   <p>पुनर्वसन प्राधिकरण ठाणे ४०० ६१० .</p>

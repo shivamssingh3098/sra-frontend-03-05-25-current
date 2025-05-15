@@ -17,6 +17,12 @@ const AdminDashboard = () => {
   const [applications, setApplications] = useState([]);
   const [error, setError] = useState(null);
   const [remarkByAdminForManager, setRemarkByAdminForManager] = useState("");
+  const [formStatus, setFormStatus] = useState("");
+  const [activeStatus, setActiveStatus] = useState({
+    pending: true,
+    accepted: false,
+    rejected: false,
+  });
   const [formId, setFormId] = useState(null);
   const navigate = useNavigate();
   useEffect(() => {
@@ -50,6 +56,30 @@ const AdminDashboard = () => {
           data: response.data,
           headers: response.headers,
         });
+        if (status === "PENDING") {
+          setActiveStatus((prev) => ({
+            ...prev,
+            pending: true,
+            accepted: false,
+            rejected: false,
+          }));
+        }
+        if (status === "ACCEPTED") {
+          setActiveStatus((prev) => ({
+            ...prev,
+            pending: false,
+            accepted: true,
+            rejected: false,
+          }));
+        }
+        if (status === "REJECTED") {
+          setActiveStatus((prev) => ({
+            ...prev,
+            pending: false,
+            accepted: false,
+            rejected: true,
+          }));
+        }
 
         if (response.data && response.data?.data?.data.length > 0) {
           console.log("API response", response.data?.data?.data);
@@ -76,11 +106,12 @@ const AdminDashboard = () => {
     navigate("/applicationapproval", { state: { app } });
   };
   // admin Submit remark
-  const openModalToAddRemark = (id, remark) => {
+  const openModalToAddRemark = (id, remark, formStatus) => {
     console.log("id", id);
     console.log("remark", remark);
     setRemarkByAdminForManager(remark ? remark : "");
     setFormId(id);
+    setFormStatus(formStatus);
     // setRemarkByAdminForManager(remark);
   };
   const onSubmitRemarkByAdmin = async (e) => {
@@ -108,7 +139,7 @@ const AdminDashboard = () => {
       );
       console.log("response", response);
       setRemarkByAdminForManager("");
-      fetchApplications();
+      fetchApplications(formStatus);
       // setIsRejectModalOpen(false);
       if (response.data?.success) alert(`Remark has been created successfully`);
     } catch (error) {}
@@ -149,19 +180,31 @@ const AdminDashboard = () => {
               </div>
               <div className="flex space-x-2">
                 <button
-                  className="px-4 py-1 bg-red-700 text-white rounded"
+                  style={{
+                    backgroundColor: activeStatus.pending ? "red" : "white",
+                    color: activeStatus.pending ? "white" : "black",
+                  }}
+                  className="px-4 py-1  border border-blue-200  rounded"
                   onClick={() => handleNavigation("PENDING")}
                 >
                   Pending
                 </button>
                 <button
-                  className="px-4 py-1 bg-white text-blue-600 border border-blue-200 rounded"
+                  style={{
+                    backgroundColor: activeStatus.accepted ? "red" : "white",
+                    color: activeStatus.accepted ? "white" : "black",
+                  }}
+                  className="px-4 py-1  border border-blue-200 rounded"
                   onClick={() => handleNavigation("ACCEPTED")}
                 >
                   Accepted
                 </button>
                 <button
-                  className="px-4 py-1 bg-white text-pink-600 border border-pink-200 rounded"
+                  style={{
+                    backgroundColor: activeStatus.rejected ? "red" : "white",
+                    color: activeStatus.rejected ? "white" : "black",
+                  }}
+                  className="px-4 py-1  border border-pink-200 rounded"
                   onClick={() => handleNavigation("REJECTED")}
                 >
                   Rejected
@@ -181,32 +224,32 @@ const AdminDashboard = () => {
                 <table className="w-full">
                   <thead>
                     <tr className="bg-red-600 text-white text-sm">
-                      <th className="px-4 py-2 text-left font-medium">Sr.No</th>
-                      <th className="px-4 py-2 text-left font-medium">
+                      <th className="px-2 py-2 text-left font-medium">Sr.No</th>
+                      <th className="px-2 py-2 text-left font-medium">
                         Application ID
                       </th>
-                      <th className="px-4 py-2 text-left font-medium">
+                      <th className="px-2 py-2 text-left font-medium">
                         Service Number
                       </th>
-                      <th className="px-4 py-2 text-left font-medium">
+                      <th className="px-2 py-2 text-left font-medium">
                         Department
                       </th>
-                      <th className="px-4 py-2 text-left font-medium">
+                      <th className="px-2 py-2 text-left font-medium">
                         Payment Date
                       </th>
-                      <th className="px-4 py-2 text-left font-medium">
+                      <th className="px-2 py-2 text-left font-medium">
                         Maximum Days
                       </th>
-                      <th className="px-4 py-2 text-left font-medium">
+                      <th className="px-2 py-2 text-left font-medium">
                         Expecting Service Delivery Date
                       </th>
-                      <th className="px-4 py-2 text-left font-medium">
+                      <th className="px-2 py-2 text-left font-medium">
                         Status
                       </th>
-                      <th className="px-4 py-2 text-left font-medium">
+                      {/* <th className="px-4 py-2 text-left font-medium">
                         Download Application
-                      </th>
-                      <th className="px-4 py-2 text-left font-medium">
+                      </th> */}
+                      <th className="px-2 py-2 text-left font-medium">
                         View Application
                       </th>
                       {/* {departmentCode == "ADMIN" ? (
@@ -217,11 +260,11 @@ const AdminDashboard = () => {
                         ""
                       )} */}
                       {departmentCode == "ADMIN" ? (
-                        <th className="px-4 py-2 text-left font-medium">
+                        <th className="px-2 py-2 text-left font-medium">
                           Send Remark To Officer
                         </th>
                       ) : (
-                        <th className="px-4 py-2 text-left font-medium">
+                        <th className="px-2 py-2 text-left font-medium">
                           View Remark
                         </th>
                       )}
@@ -231,23 +274,23 @@ const AdminDashboard = () => {
                     {applications &&
                       applications.map((app, index) => (
                         <tr key={index}>
-                          <td>{index + 1}</td>
-                          <td>
+                          <td className="px-2 py-1">{index + 1}</td>
+                          <td className="px-2 py-1">
                             {app.applicationId} <br /> {app.applicationId2}
                           </td>
-                          <td className="px-4 py-3">{app.serviceNumber}</td>
-                          <td className="px-4 py-3">{app.department}</td>
-                          <td className="px-4 py-3">
+                          <td className="px-2 py-1">{app.serviceNumber}</td>
+                          <td className="px-2 py-1">{app.department}</td>
+                          <td className="px-2 py-1">
                             {" "}
                             {app.applyDate ? app.applyDate.split("T")[0] : "-"}
                           </td>
-                          <td className="px-4 py-3"> {app.maximumDays}</td>
-                          <td className="px-4 py-3">
+                          <td className="px-2 py-1"> {app.maximumDays}</td>
+                          <td className="px-2 py-1">
                             {app.expectingServiceDeliveryDate
                               ? app.expectingServiceDeliveryDate.split("T")[0]
                               : "-"}
                           </td>
-                          <td>
+                          <td className="px-2 ">
                             <Button
                               variant={
                                 app.status === "Accepted" ? "success" : "danger"
@@ -257,13 +300,13 @@ const AdminDashboard = () => {
                               {app.serviceStatus}
                             </Button>
                           </td>
-                          <td className="px-4 py-3">
+                          {/* <td className="px-4 py-3">
                             <button className="text-white bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded text-sm flex items-center space-x-1">
                               <FaDownload className="text-sm" />
                               <span>Download</span>
                             </button>
-                          </td>
-                          <td>
+                          </td> */}
+                          <td className="px-2 py-1">
                             <Button
                               variant="dark"
                               size="sm"
@@ -275,12 +318,13 @@ const AdminDashboard = () => {
                           </td>
                           {/* original */}
                           {departmentCode == "ADMIN" ? (
-                            <td>
+                            <td className="px-2 py-1">
                               <button
                                 onClick={() =>
                                   openModalToAddRemark(
                                     app._id,
-                                    app?.remarkByAdminForManager
+                                    app?.remarkByAdminForManager,
+                                    app?.serviceStatus
                                   )
                                 }
                                 type="button"
@@ -300,7 +344,7 @@ const AdminDashboard = () => {
                             </td>
                           ) : departmentCode !== "ADMIN" &&
                             app?.remarkByAdminForManager ? (
-                            <td>
+                            <td px-0 py-0>
                               <button
                                 onClick={() =>
                                   openModalToAddRemark(
@@ -312,8 +356,13 @@ const AdminDashboard = () => {
                                 className="btn btn-primary"
                                 data-bs-toggle="modal"
                                 data-bs-target="#staticBackdrop"
+                                style={{
+                                  padding: "2px 6px", // Adjust as needed
+                                  margin: "2px", // Optional
+                                  fontSize: "15px", // Optional for smaller text
+                                }}
                               >
-                                View Remark
+                                Admin Remark
                               </button>
                             </td>
                           ) : (

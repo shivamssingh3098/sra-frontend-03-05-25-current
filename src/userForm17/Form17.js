@@ -159,13 +159,11 @@ const Form17 = ({ formData: initialFormData, formId }) => {
             {/* Certificate Header */}
             <div className="text-center mb-6">
               <div className="flex justify-between items-start mb-4">
-                <div className="text-left flex  ml-[50%]">
-                  सेवा क्र.{serviceId}
-                </div>
+                <div className="text-left flex  ml-[50%]">सेवा क्र.१७</div>
               </div>
               <p className="text-sm mb-4">
-                (महाराष्ट्र लोकसेवा हक्क अनियमित २०१५ अंतर्गत सेवा मिळणेकरीत
-                सादर करावयाचा आरजाचा नमूना)
+                (महाराष्ट्र लोकसेवा हक्क अधिनियम २०१५ अंतर्गत अधिसूचित सेवा
+                मिळणबाबतच्या अर्जाचा नमूना )
               </p>
               {/* Photo Box */}
               <div className="flex justify-end mb-4">
@@ -216,7 +214,7 @@ const Form17 = ({ formData: initialFormData, formId }) => {
                     {formData.competentAuthorityNo || "_____________"}
                   </p>
                   <p>मुंबई महानगर प्रदेश</p>
-                  <p>मुंबई महानगर प्रदेश</p>
+
                   <p>झोपडपट्टी पुनर्वसन प्राधिकरण ठाणे.</p>
                 </div>
               </div>
@@ -226,10 +224,8 @@ const Form17 = ({ formData: initialFormData, formId }) => {
                   className="font-medium text-wrap d-flex"
                   style={{ marginLeft: "40px" }}
                 >
-                  विषय :- परिपत्रक क्र. ३ अन्वये एकात्रिकुत विकास नियंत्रक व
-                  प्रोत्साहन नियमावलीतिल विनियम क्र. १४.७ अंतर्गत प्राप्त
-                  प्रस्थावांच्या अनुषंगाने निर्गमित केलेल्या परिशिष्ट - VI च्या
-                  प्रमाणित प्रती देणे.{" "}
+                  विषय :-शासन निर्णय दि. १६/५/२०१५ अन्वये परिशिष्ट-II निर्गमित
+                  करून पात्रता निश्चित करण्याबाबत.
                 </p>
 
                 <p className="mt-5">महोदय,</p>
@@ -243,13 +239,9 @@ const Form17 = ({ formData: initialFormData, formId }) => {
                     महानगरपालिका हद्दीतील सेक्टर क्र./वार्ड क्र{" "}
                     {getWardDisplay()} मधील न.भू.क्र {getPlotDisplay()} येथील{" "}
                     {formData.governmentServiceBranch || "_______"} सहकारी
-                    गृहनिर्माण संस्थेच्या झोपडपट्टी पुनर्वसन योजना विकासक{" "}
-                    {formData.schemeDeveloper || "_______"} सहकारी गृहनिर्माण
-                    संस्थेच्या झोपडपट्टी पुनर्वसन योजनेच्या अनुषंगाने मुंबई
-                    महानगर प्रदेश झोपडपट्टी पुनर्वसन प्राधिकारणकडील परिपत्रक
-                    क्र. ३ अंतर्गत प्रस्तावाच्या अनुषंगाने नगर रचना विभागाने
-                    निर्गमित केलेल्या परिशिष्ट IV च्या अभिप्रायची प्रत उपलब्ध
-                    करून देण्यात यावी, ही विनंती
+                    गृहनिर्माण संस्थेच्या झोपडपट्टी पुनर्वसनयोजने मध्ये झोपडी
+                    क्र {formData.hutNo || "_______"} ची पात्रता ठरवण्यासाठी
+                    तयार केलेले परिशिष्ट - II निर्गमित करण्यात यावे, ही विनंती .
                   </p>
                 </div>
               </div>

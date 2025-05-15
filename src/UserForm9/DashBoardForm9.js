@@ -449,7 +449,7 @@ const DashBoardForm9 = forwardRef(
               />
 
               {/* Scheme Developer */}
-              <div className="flex-1">
+              {/* <div className="flex-1">
                 <label className="font-medium block mb-1">
                   योजनेचे विकासक <span className="text-red-500">*</span>
                 </label>
@@ -462,7 +462,7 @@ const DashBoardForm9 = forwardRef(
                   required
                   // readOnly
                 />
-              </div>
+              </div> */}
 
               {/* Sarkari - Government Service Branch Dropdown */}
               <div className="flex-1">

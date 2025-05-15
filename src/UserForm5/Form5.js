@@ -41,8 +41,7 @@ const Form4 = ({ formData: initialFormData, formId }) => {
   const [error, setError] = useState(null);
   const [signatureUrl, setSignatureUrl] = useState(null);
   const serviceDescription =
-    servicesData[0].services.find((service) => service.id === 5)?.title ||
-    "";
+    servicesData[0].services.find((service) => service.id === 5)?.title || "";
   // Function to fetch certified rent deposit copies data
   // const fetchDepositData = async () => {
   //   try {
@@ -165,8 +164,8 @@ const Form4 = ({ formData: initialFormData, formId }) => {
                 <div className="text-left flex  ml-[50%]">सेवा क्र.५</div>
               </div>
               <p className="text-sm mb-4">
-                (महाराष्ट्र लोकसेवा हक्क अनियमित २०१५ अंतर्गत सेवा मिळणेकरीत
-                सादर करावयाचा आरजाचा नमूना)
+                (महाराष्ट्र लोकसेवा हक्क अधिनियम २०१५ अंतर्गत अधिसूचित सेवा
+                मिळणबाबतच्या अर्जाचा नमूना )
               </p>
               {/* Photo Box */}
               <div className="flex justify-end mb-4">

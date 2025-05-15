@@ -159,13 +159,11 @@ const Form9 = ({ formData: initialFormData, formId }) => {
             {/* Certificate Header */}
             <div className="text-center mb-6">
               <div className="flex justify-between items-start mb-4">
-                <div className="text-left flex  ml-[50%]">
-                  सेवा क्र.{serviceId}
-                </div>
+                <div className="text-left flex  ml-[50%]">सेवा क्र.९</div>
               </div>
               <p className="text-sm mb-4">
-                (महाराष्ट्र लोकसेवा हक्क अनियमित २०१५ अंतर्गत सेवा मिळणेकरीत
-                सादर करावयाचा आरजाचा नमूना)
+                (महाराष्ट्र लोकसेवा हक्क अधिनियम २०१५ अंतर्गत अधिसूचित सेवा
+                मिळणबाबतच्या अर्जाचा नमूना )
               </p>
               {/* Photo Box */}
               <div className="flex justify-end mb-4">

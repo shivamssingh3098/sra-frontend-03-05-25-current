@@ -160,13 +160,11 @@ const Form15 = ({ formData: initialFormData, formId }) => {
             {/* Certificate Header */}
             <div className="text-center mb-6">
               <div className="flex justify-between items-start mb-4">
-                <div className="text-left flex  ml-[50%]">
-                  सेवा क्र.{serviceId}
-                </div>
+                <div className="text-left flex  ml-[50%]">सेवा क्र.१५</div>
               </div>
               <p className="text-sm mb-4">
-                (महाराष्ट्र लोकसेवा हक्क अनियमित २०१५ अंतर्गत सेवा मिळणेकरीत
-                सादर करावयाचा आरजाचा नमूना)
+                (महाराष्ट्र लोकसेवा हक्क अधिनियम २०१५ अंतर्गत अधिसूचित सेवा
+                मिळणबाबतच्या अर्जाचा नमूना )
               </p>
               {/* Photo Box */}
               <div className="flex justify-end mb-4">
@@ -212,8 +210,11 @@ const Form15 = ({ formData: initialFormData, formId }) => {
               <div className="mt-8">
                 <p className="">प्रति,</p>
                 <div className="space-y-1">
-                  <p>उपलेखापाल</p>
-                  <p>वित्त विभाग</p>
+                  <p>तहसिलदार</p>
+                  <p>
+                    सक्षम प्राधिकारी क्र.{" "}
+                    {formData.competentAuthorityNo || "_____________"}
+                  </p>
                   <p>मुंबई महानगर प्रदेश</p>
                   <p>झोपडपट्टी पुनर्वसन प्राधिकरण ठाणे.</p>
                 </div>

@@ -164,13 +164,11 @@ const Form14 = ({ formData: initialFormData, formId }) => {
             {/* Certificate Header */}
             <div className="text-center mb-6">
               <div className="flex justify-between items-start mb-4">
-                <div className="text-left flex  ml-[50%]">
-                  सेवा क्र . १४
-                </div>
+                <div className="text-left flex  ml-[50%]">सेवा क्र . १४</div>
               </div>
               <p className="text-sm mb-4">
-                (महाराष्ट्र लोकसेवा हक्क अनियमित २०१५ अंतर्गत सेवा मिळणेकरीत
-                सादर करावयाचा आरजाचा नमूना)
+                (महाराष्ट्र लोकसेवा हक्क अधिनियम २०१५ अंतर्गत अधिसूचित सेवा
+                मिळणबाबतच्या अर्जाचा नमूना )
               </p>
               {/* Photo Box */}
               <div className="flex justify-end mb-4">
@@ -243,9 +241,9 @@ const Form14 = ({ formData: initialFormData, formId }) => {
                     महानगरपालिका हद्दीतील सेक्टर क्र./वार्ड क्र{" "}
                     {getWardDisplay()} मधील न.भू.क्र {getPlotDisplay()} येथील{" "}
                     {formData.governmentServiceBranch || "_______"} सहकारी
-                    गृहनिर्माण संस्थेच्या झोपडपट्टी पुनर्वसन योजनेच्या प्रस्तावासाठी
-                    परिपत्रक ३ व ३अ नुसार आपल्या विभागाने केलेले ना हरकत पत्राची
-                    प्रत उपलब्ध करून देण्यात यावे ही विनंती.
+                    गृहनिर्माण संस्थेच्या झोपडपट्टी पुनर्वसन योजनेच्या
+                    प्रस्तावासाठी परिपत्रक ३ व ३अ नुसार आपल्या विभागाने केलेले
+                    ना हरकत पत्राची प्रत उपलब्ध करून देण्यात यावे ही विनंती.
                   </p>
                 </div>
               </div>
