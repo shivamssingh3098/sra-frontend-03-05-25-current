@@ -40,76 +40,6 @@ const Form18 = ({ formData: initialFormData, formId }) => {
   const [error, setError] = useState(null);
   const [signatureUrl, setSignatureUrl] = useState(null);
 
-  // Function to fetch certified rent deposit copies data
-  // const fetchDepositData = async () => {
-  //   try {
-  //     console.log("Starting fetchDepositData with formId:", formId);
-  //     if (!formId) {
-  //       console.log("No formId available yet, skipping fetch");
-  //       return;
-  //     }
-
-  //     console.log("Making API request to fetch data...");
-  //     const response = await axios.get(CONFIG.API_BASE_URL +
-  //       "/api/v1/users/create-common-form",
-  //       {
-  //         params: {
-  //           formId: formId,
-  //         },
-  //       }
-  //     );
-
-  //     console.log("API Response received:", {
-  //       status: response.status,
-  //       data: response.data,
-  //       headers: response.headers,
-  //     });
-
-  //     if (
-  //       response.data &&
-  //       response.data.data &&
-  //       response.data.data.length > 0
-  //     ) {
-  //       const data = response.data.data[0];
-  //       console.log("Setting form data with:", data);
-
-  //       // Format the date
-  //       const formattedDate = data.applyDate
-  //         ? new Date(data.applyDate).toLocaleDateString("en-IN")
-  //         : "";
-
-  //       setFormData({
-  //         ...data,
-  //         applyDate: formattedDate,
-  //       });
-
-  //       // Extract signature URL from the response
-  //       if (data.documents && data.documents.signature) {
-  //         setSignatureUrl(data.documents.signature);
-  //         console.log("Signature URL set to:", data.documents.signature);
-  //       }
-  //     } else {
-  //       console.log("No data found in response");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error details:", {
-  //       message: error.message,
-  //       response: error.response?.data,
-  //       status: error.response?.status,
-  //     });
-  //     setError("Failed to fetch deposit data");
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   console.log("useEffect triggered with formId:", formId);
-  //   if (formId) {
-  //     fetchDepositData();
-  //   }
-  // }, [formId]);
-
   const CertificateStage = ({ formData }) => {
     // Determine which plot number to display
     const getPlotDisplay = () => {
@@ -159,13 +89,11 @@ const Form18 = ({ formData: initialFormData, formId }) => {
             {/* Certificate Header */}
             <div className="text-center mb-6">
               <div className="flex justify-between items-start mb-4">
-                <div className="text-left flex  ml-[50%]">
-                  सेवा क्र.{serviceId}
-                </div>
+                <div className="text-left flex  ml-[50%]">सेवा क्र.१८</div>
               </div>
               <p className="text-sm mb-4">
-                (महाराष्ट्र लोकसेवा हक्क अनियमित २०१५ अंतर्गत सेवा मिळणेकरीत
-                सादर करावयाचा आरजाचा नमूना)
+                (महाराष्ट्र लोकसेवा हक्क अधिनियम २०१५ अंतर्गत अधिसूचित सेवा
+                मिळणबाबतच्या अर्जाचा नमूना )
               </p>
               {/* Photo Box */}
               <div className="flex justify-end mb-4">
@@ -214,7 +142,10 @@ const Form18 = ({ formData: initialFormData, formId }) => {
               <div className="mt-8">
                 <p className="">प्रति,</p>
                 <div className="space-y-1">
-                  <p>सक्षम प्राधिकारी क्र......</p>
+                  <p>
+                    सक्षम प्राधिकारी क्र{" "}
+                    {formData.competentAuthorityNo || "_____________"}
+                  </p>
                   <p>मुंबई महानगर प्रदेश ,</p>
                   <p>झोपडपट्टी पुनर्वसन प्राधिकरण </p>
                   <p>ठाणे .</p>
@@ -232,11 +163,10 @@ const Form18 = ({ formData: initialFormData, formId }) => {
                       <p>
                         मौजे {formData.village || "_______"} तालुका{" "}
                         {formData.village || "_______"} ठाणे येथील न. भू.
-                        प्र./अ. भू. क्र/स न{getPlotDisplay()} या मिळकतीवरील
-                      </p>
-                      <p>
-                        सह : गृह संस्थेच्या झोपडपट्टी पुनर्वसन योजनेमधील
-                        परिशिष्ट- २ मधील अ. क्र.
+                        प्र./अ. भू. क्र/स न{getPlotDisplay()} या मिळकतीवरील{" "}
+                        {formData.governmentServiceBranch || "_____________"} सह
+                        : गृह संस्थेच्या झोपडपट्टी पुनर्वसन योजनेमधील परिशिष्ट-
+                        २ मधील अ. क्र.
                         {formData.rehabilitationScheme || "_______"}
                         वरील माझे पती/ पत्नी/ आई / वडील याचा मृत्यूनंतर माझे नाव
                         नौदविण्याबाबत.
@@ -266,7 +196,7 @@ const Form18 = ({ formData: initialFormData, formId }) => {
 
                 <p className="mt-5">महोदय,</p>
 
-                <div className="space-y-4 p-4">
+                <div className="space-x-4 px-4">
                   <p>
                     उपरोक्त विषयास अनुसरुन मला मौजे -
                     {formData.village || "_______"} तालुका{" "}

@@ -2,10 +2,14 @@ import React, { useState, useEffect } from "react";
 import servicesData from "../data/services.json";
 import axios from "axios";
 import CONFIG from "../app.config"; // adjust path as needed
+import { useLocation } from "react-router-dom";
 const UploadForm1 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const serviceId = parseInt(queryParams.get("serviceId"));
   const serviceDescription =
-    servicesData[0].services.find((service) => service.id === 1)?.description ||
-    "";
+    servicesData[0].services.find((service) => service.id === serviceId)
+      ?.description || "";
 
   // State for files and previews
   const [files, setFiles] = useState({
@@ -238,7 +242,7 @@ const UploadForm1 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
         <div className="w-full max-w-6xl bg-white rounded-lg shadow p-6">
           {/* Header */}
           <div className="bg-blue-900 text-white text-center p-2 rounded text-sm md:text-base font-semibold mb-6">
-            सेवा क्र. १० {serviceDescription}
+            सेवा क्र. १८ {serviceDescription}
           </div>
 
           <div

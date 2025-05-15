@@ -28,7 +28,7 @@ const Form8 = ({ formData: initialFormData, formId }) => {
       surveyNo: "",
       cityCouncil: "",
       villageCouncil: "",
-      hutNo:"",
+      hutNo: "",
       landNumber: "",
     }
   );
@@ -160,8 +160,8 @@ const Form8 = ({ formData: initialFormData, formId }) => {
                 <div className="text-left flex  ml-[50%]">सेवा क्र. ८</div>
               </div>
               <p className="text-sm mb-4">
-                (महाराष्ट्र लोकसेवा हक्क अनियमित २०१५ अंतर्गत सेवा मिळणेकरीत
-                सादर करावयाचा आरजाचा नमूना)
+                (महाराष्ट्र लोकसेवा हक्क अधिनियम २०१५ अंतर्गत अधिसूचित सेवा
+                मिळणबाबतच्या अर्जाचा नमूना )
               </p>
               {/* Photo Box */}
               <div className="flex justify-end mb-4">
@@ -237,11 +237,12 @@ const Form8 = ({ formData: initialFormData, formId }) => {
                     गृहनिर्माण संस्थेच्या झोपडपट्टी पुनर्वसन योजना विकासक मे{" "}
                     {formData.schemeDeveloper || "_______"}
                     यांचेमार्फत विकसित करण्यात येत आहे
-                    </p> 
-                    <p>
-                     सदर योजनेत झोपडी क्र.   {formData.hutNo|| "_______"}  च्या निवासी वापरासाठी
-                    मला पात्र करण्यात आले असुनही मला पर्यायी जागेपोटी भाडे
-                    मिळालेले नाही. तरी मला भाडे देण्यात यावे, ही विनंती.
+                  </p>
+                  <p>
+                    सदर योजनेत झोपडी क्र. {formData.hutNo || "_______"} च्या
+                    निवासी वापरासाठी मला पात्र करण्यात आले असुनही मला पर्यायी
+                    जागेपोटी भाडे मिळालेले नाही. तरी मला भाडे देण्यात यावे, ही
+                    विनंती.
                   </p>
                 </div>
               </div>
