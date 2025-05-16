@@ -14,7 +14,10 @@ const UserLoginForm = () => {
   const [actualCaptcha, setActualCaptcha] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
+  const [showPassword, setShowPassword] = useState(false);
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
   const handleCaptchaChange = (value) => {
     setActualCaptcha(value);
   };
@@ -95,18 +98,31 @@ const UserLoginForm = () => {
             required
           />
         </div>
-        <div>
+        <div style={{ position: "relative" }}>
           <label className="flex items-center gap-2">
             <FaKey className="text-blue-600" /> Password
           </label>
           <input
-            type="password"
+            // type="password"
+            type={showPassword ? "text" : "password"}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter password"
             className="w-full px-4 py-2 border border-gray-300 rounded-lg"
             required
           />
+          <span
+            onClick={togglePasswordVisibility}
+            style={{
+              position: "absolute",
+              right: "10px",
+              top: "70%",
+              transform: "translateY(-50%)",
+              cursor: "pointer",
+            }}
+          >
+            {showPassword ? "👁️" : "👁️‍🗨️"}
+          </span>
         </div>
 
         <input

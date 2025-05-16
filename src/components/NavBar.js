@@ -226,13 +226,13 @@ export const NavBar = () => {
             </div>
             <div className="official">
               <img className="ml-5" src={ajitPawar} alt="Shri Ajit Pawar" />
-              <p>Shri Ajit Pawar</p>
+              <p>Shri. Ajit Pawar</p>
               <small>Hon'ble Deputy Chief Minister</small>
             </div>
             <div className="official">
               <img className="ml-5" src={Pankaj} alt="Dr. Pankaj Bhoyar" />
               <p>Dr. Pankaj Bhoyar</p>
-              <small>Hon. Minister of State (Housing)</small>
+              <small>Hon'ble Minister of State (Housing)</small>
             </div>
           </div>
         </div>
@@ -323,7 +323,7 @@ export const NavBar = () => {
             >
               <FaSignOutAlt /> Logout
             </NavLink> */}
-            <NavLink to="/">
+            <NavLink to="/" className="mt-2.5">
               {isLoggedIn && ( //check
                 <button
                   className="logout-btn bg-red-500 p-2 rounded-md"

@@ -14,7 +14,10 @@ const OfficerLogin = ({ onSwitchToUser }) => {
   const [captchaText, setCaptchaText] = useState("ABC123");
   const [message, setMessage] = useState("");
   const [messageType, setMessageType] = useState(""); // "success" or "error"
-
+  const [showPassword, setShowPassword] = useState(false);
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
@@ -139,23 +142,36 @@ const OfficerLogin = ({ onSwitchToUser }) => {
             />
           </div>
 
-          <div className="officer-form-group">
+          <div style={{ position: "relative" }} className="officer-form-group">
             <label>
               <FaKey /> Password
             </label>
             <input
-              type="password"
+              // type="password"
+              type={showPassword ? "text" : "password"}
               name="password"
               value={formData.password}
               onChange={handleInputChange}
               placeholder="Enter password"
               required
             />
+            <span
+              onClick={togglePasswordVisibility}
+              style={{
+                position: "absolute",
+                right: "10px",
+                top: "70%",
+                transform: "translateY(-50%)",
+                cursor: "pointer",
+              }}
+            >
+              {showPassword ? "👁️" : "👁️‍🗨️"}
+            </span>
           </div>
 
           <div className="officer-captcha-section">
-            <div className="captcha-instruction">
-              Enter the captcha shown below
+            <div className="captcha-instruction ">
+              <b>Enter the captcha shown below</b>
             </div>
             <input
               type="text"
@@ -179,14 +195,14 @@ const OfficerLogin = ({ onSwitchToUser }) => {
             </div>
           </div>
 
-          <div className="officer-forgot-links">
+          {/* <div className="officer-forgot-links">
             <a href="#forgot-password">
               <FaKey /> Forgot Password
             </a>
             <a href="#forgot-username">
               <FaUser /> Forgot Username
             </a>
-          </div>
+          </div> */}
 
           {message && (
             <div className={`form-message ${messageType}`}>{message}</div>

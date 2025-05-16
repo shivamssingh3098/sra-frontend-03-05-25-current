@@ -118,6 +118,7 @@ const DashboardForm = forwardRef(
       nagarpalika: "",
       WordNo: "",
       schemeDeveloper: "",
+      apartmentNo: "",
     });
 
     const [errorMessage, setErrorMessage] = useState("");
@@ -334,8 +335,8 @@ const DashboardForm = forwardRef(
                 </label>
                 <input
                   type="date"
-                  name="date"
-                  value={formData.date}
+                  name="applyDate"
+                  value={formData.applyDate}
                   onChange={handleChange}
                   className="w-full border rounded px-3 py-2"
                   required
@@ -432,6 +433,20 @@ const DashboardForm = forwardRef(
                   type="text"
                   name="transferredThroughAddressName"
                   value={formData.transferredThroughAddressName}
+                  onChange={handleChange}
+                  className="w-full border rounded px-3 py-2"
+                  required
+                />
+              </div>
+              <div className="md:col-span-3">
+                <label className="font-medium block mb-1">
+                  *सदनिका क्र.
+                  <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="apartmentNo"
+                  value={formData.apartmentNo}
                   onChange={handleChange}
                   className="w-full border rounded px-3 py-2"
                   required
