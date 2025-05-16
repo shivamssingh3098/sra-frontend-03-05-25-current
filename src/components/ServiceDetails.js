@@ -1,4 +1,4 @@
-import CONFIG from "../app.config"; // adjust path as needed
+// import CONFIG from "../app.config"; // adjust path as needed
 import React, { useEffect, useState } from "react";
 import servicesData from "../data/services.json";
 import { useNavigate } from "react-router-dom";
@@ -78,8 +78,8 @@ function ServiceDetails({ selectedServiceId }) {
                     सेवेचे पूर्णत्व करण्याची कालावधी (दिवस)
                   </th>
                   <th className="p-2 border">पदनिर्देशित अधिकारी</th>
-                  <th className="p-2 border">प्रथम अपील अधिकारी</th>
-                  <th className="p-2 border">द्वितीय अपील अधिकारी</th>
+                  <th className="p-2 border">प्रथम आपिलिय अधिकारी</th>
+                  <th className="p-2 border">द्वितीय आपिलिय अधिकारी</th>
                 </tr>
               </thead>
               <tbody>
