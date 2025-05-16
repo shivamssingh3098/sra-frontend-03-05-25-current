@@ -17,6 +17,12 @@ const UserServiceHistory = () => {
   const [error, setError] = useState(null);
   const [userRemark, setUserRemark] = useState({});
   const [formId, setFormId] = useState(null);
+  const [formStatus, setFormStatus] = useState("");
+  const [activeStatus, setActiveStatus] = useState({
+    pending: true,
+    accepted: false,
+    rejected: false,
+  });
   const navigate = useNavigate();
   useEffect(() => {
     fetchApplications();
@@ -49,7 +55,30 @@ const UserServiceHistory = () => {
           data: response.data,
           headers: response.headers,
         });
-
+        if (status === "PENDING") {
+          setActiveStatus((prev) => ({
+            ...prev,
+            pending: true,
+            accepted: false,
+            rejected: false,
+          }));
+        }
+        if (status === "ACCEPTED") {
+          setActiveStatus((prev) => ({
+            ...prev,
+            pending: false,
+            accepted: true,
+            rejected: false,
+          }));
+        }
+        if (status === "REJECTED") {
+          setActiveStatus((prev) => ({
+            ...prev,
+            pending: false,
+            accepted: false,
+            rejected: true,
+          }));
+        }
         if (response.data && response.data?.data?.length > 0) {
           console.log("API response---", response.data?.data);
           setApplications(response.data?.data);
@@ -76,11 +105,12 @@ const UserServiceHistory = () => {
     navigate("/applicationapproval", { state: { app } });
   };
   // admin Submit remark
-  const openModalToViewRemark = (id, remark) => {
+  const openModalToViewRemark = (id, remark, formStatus) => {
     console.log("id", id);
     console.log("remark", remark);
     setUserRemark(remark ? remark : {});
     setFormId(id);
+    setFormStatus(formStatus);
     // setRemarkByAdminForManager(remark);
   };
   const handleDownload = async () => {
@@ -106,19 +136,31 @@ const UserServiceHistory = () => {
               <div className="flex items-center space-x-3"></div>
               <div className="flex space-x-2">
                 <button
-                  className="px-4 py-1 bg-red-700 text-white rounded"
+                  style={{
+                    backgroundColor: activeStatus.pending ? "red" : "white",
+                    color: activeStatus.pending ? "white" : "black",
+                  }}
+                  className="px-4 py-1  border border-blue-200  rounded"
                   onClick={() => handleNavigation("PENDING")}
                 >
                   Pending
                 </button>
                 <button
-                  className="px-4 py-1 bg-white text-blue-600 border border-blue-200 rounded"
+                  style={{
+                    backgroundColor: activeStatus.accepted ? "red" : "white",
+                    color: activeStatus.accepted ? "white" : "black",
+                  }}
+                  className="px-4 py-1  border border-blue-200 rounded"
                   onClick={() => handleNavigation("ACCEPTED")}
                 >
                   Accepted
                 </button>
                 <button
-                  className="px-4 py-1 bg-white text-pink-600 border border-pink-200 rounded"
+                  style={{
+                    backgroundColor: activeStatus.rejected ? "red" : "white",
+                    color: activeStatus.rejected ? "white" : "black",
+                  }}
+                  className="px-4 py-1  border border-pink-200 rounded"
                   onClick={() => handleNavigation("REJECTED")}
                 >
                   Rejected
@@ -179,7 +221,7 @@ const UserServiceHistory = () => {
                     {applications &&
                       applications.map((app, index) => (
                         <tr key={index}>
-                          <td>{index + 1}</td>
+                          <td className="px-4 py-3">{index + 1}</td>
                           <td>
                             {app.applicationId} <br /> {app.applicationId2}
                           </td>
@@ -209,7 +251,11 @@ const UserServiceHistory = () => {
                             <td>
                               <button
                                 onClick={() =>
-                                  openModalToViewRemark(app._id, app?.remark)
+                                  openModalToViewRemark(
+                                    app._id,
+                                    app?.remark,
+                                    app?.serviceStatus
+                                  )
                                 }
                                 type="button"
                                 className="btn btn-primary"

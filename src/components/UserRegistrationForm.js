@@ -345,7 +345,9 @@ const UserRegisterForm = () => {
                 )}
               </div>
               <div className="form-group">
-                <label className="form-label required">Password</label>
+                <label className="form-label required">
+                  Minimum 6 Character Password
+                </label>
                 <div
                   className="password-input-container"
                   style={{ position: "relative" }}
