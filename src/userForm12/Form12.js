@@ -244,11 +244,11 @@ const Form12 = ({ formData: initialFormData, formId }) => {
                     उपरोक्त विषयास अनुसरुन मला मौजे -
                     {formData.village || "_______"} तालुका{" "}
                     {formData.taluka || "_______"} जिल्हा{" "}
-                    {formData.city || "_______"} ये थील. {getMunicipalDisplay()}{" "}
+                    {formData.city || "_______"} येथील. {getMunicipalDisplay()}{" "}
                     महानगरपालिका हद्दीतील सेक्टर क्र./वार्ड क्र{" "}
-                    {getWardDisplay()} मधील न.भू.क्र {getPlotDisplay()} ये थील{" "}
+                    {getWardDisplay()} मधील न.भू.क्र {getPlotDisplay()} येथील{" "}
                     {formData.governmentServiceBranch || "_______"} सहकारी
-                    गृहनिर्माण संस्थेच्या झोपडपट्टी पुनर्वसन योजनेमद्धे अनु क्र{" "}
+                    गृहनिर्माण संस्थेच्या झोपडपट्टी पुनर्वसन योजनेमध्ये अनु क्र{" "}
                     {formData.srNo || "_______"} झोपडी क्र.{" "}
                     {formData.hutNo || "_______"} वर पात्र आसून मला दि{" "}
                     {formData.leavingDate
