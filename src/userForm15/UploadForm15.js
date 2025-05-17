@@ -53,6 +53,8 @@ const UploadForm15 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
   // Handle file change
   const handleFileChange = (e, field) => {
     const file = e.target.files[0];
+    console.log("field", field);
+
     if (file) {
       // Validate file size (2MB limit)
       if (file.size > 2 * 1024 * 1024) {
@@ -179,7 +181,7 @@ const UploadForm15 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
         aadharCard: null,
         buyerRegisteredDocument: null,
         buyerAffidavit: null,
-
+        identityCard: null,
         otherDocument1: null,
         otherDocument2: null,
       });
@@ -199,7 +201,7 @@ const UploadForm15 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
         aadharCard: null,
         buyerRegisteredDocument: null,
         buyerAffidavit: null,
-
+        identityCard: null,
         otherDocument1: null,
         otherDocument2: null,
       });
@@ -246,18 +248,19 @@ const UploadForm15 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
               <div className="space-y-2">
                 <label className="flex items-start text-sm font-medium text-gray-700">
                   <span className="text-red-500 mr-1">*</span>
-                  मूळ पात्र सभासदाचा अर्ज
+                  {/* मूळ पात्र सभासदाचा अर्ज */}
+                  ओळखपत्र
                 </label>
                 <div className="relative">
                   <input
                     type="file"
                     className="hidden"
-                    id="aadharCard"
+                    id="identityCard"
                     accept=".pdf,.jpg,.jpeg,.png"
-                    onChange={(e) => handleFileChange(e, "aadharCard")}
+                    onChange={(e) => handleFileChange(e, "identityCard")}
                   />
                   <label
-                    htmlFor="aadharCard"
+                    htmlFor="identityCard"
                     className="flex items-center gap-2 w-full border-2 border-dashed border-gray-300 rounded-lg p-4 hover:border-blue-500 cursor-pointer transition-colors group"
                   >
                     <div className="p-2 rounded-full bg-blue-50 group-hover:bg-blue-100">
@@ -283,12 +286,12 @@ const UploadForm15 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
                       </p>
                     </div>
                   </label>
-                  {files.aadharCard && (
+                  {files.identityCard && (
                     <div className="mt-2 text-sm text-gray-600">
-                      <p>Selected: {files.aadharCard.name}</p>
-                      {previews.aadharCard && (
+                      <p>Selected: {files.identityCard.name}</p>
+                      {previews.identityCard && (
                         <img
-                          src={previews.aadharCard}
+                          src={previews.identityCard}
                           alt="Preview"
                           className="mt-2 max-w-full sm:max-w-xs rounded mx-auto"
                         />
@@ -357,118 +360,8 @@ const UploadForm15 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
               <div className="space-y-2">
                 <label className="flex items-start text-sm font-medium text-gray-700">
                   <span className="text-red-500 mr-1">*</span>
-                  मूळ पात्र सभासद आधार कार्ड
-                </label>
-                <div className="relative">
-                  <input
-                    type="file"
-                    className="hidden"
-                    id="otherDocument1"
-                    accept=".pdf,.jpg,.jpeg,.png"
-                    onChange={(e) => handleFileChange(e, "otherDocument1")}
-                  />
-                  <label
-                    htmlFor="otherDocument1"
-                    className="flex items-center gap-2 w-full border-2 border-dashed border-gray-300 rounded-lg p-4 hover:border-blue-500 cursor-pointer transition-colors group"
-                  >
-                    <div className="p-2 rounded-full bg-blue-50 group-hover:bg-blue-100">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-6 w-6 text-blue-600"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
-                        />
-                      </svg>
-                    </div>
-                    <div className="flex-1 text-sm text-gray-500">
-                      <span className="font-medium">Choose from files</span>
-                      <p className="text-xs">
-                        PDF, JPG, JPEG or PNG (max. 2MB)
-                      </p>
-                    </div>
-                  </label>
-                  {files.otherDocument1 && (
-                    <div className="mt-2 text-sm text-gray-600">
-                      <p>Selected: {files.otherDocument1.name}</p>
-                      {previews.otherDocument1 && (
-                        <img
-                          src={previews.otherDocument1}
-                          alt="Preview"
-                          className="mt-2 max-w-full sm:max-w-xs rounded mx-auto"
-                        />
-                      )}
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              {/* etc Upload */}
-              <div className="space-y-2">
-                <label className="flex items-start text-sm font-medium text-gray-700">
-                  <span className="text-red-500 mr-1">*</span>
-                  मूळ पात्र सभासद ताबापावती
-                </label>
-                <div className="relative">
-                  <input
-                    type="file"
-                    className="hidden"
-                    id="otherDocument2"
-                    accept=".pdf,.jpg,.jpeg,.png"
-                    onChange={(e) => handleFileChange(e, "otherDocument2")}
-                  />
-                  <label
-                    htmlFor="otherDocument2"
-                    className="flex items-center gap-2 w-full border-2 border-dashed border-gray-300 rounded-lg p-4 hover:border-blue-500 cursor-pointer transition-colors group"
-                  >
-                    <div className="p-2 rounded-full bg-blue-50 group-hover:bg-blue-100">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-6 w-6 text-blue-600"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
-                        />
-                      </svg>
-                    </div>
-                    <div className="flex-1 text-sm text-gray-500">
-                      <span className="font-medium">Choose from files</span>
-                      <p className="text-xs">
-                        PDF, JPG, JPEG or PNG (max. 2MB)
-                      </p>
-                    </div>
-                  </label>
-                  {files.otherDocument2 && (
-                    <div className="mt-2 text-sm text-gray-600">
-                      <p>Selected: {files.otherDocument2.name}</p>
-                      {previews.otherDocument2 && (
-                        <img
-                          src={previews.otherDocument2}
-                          alt="Preview"
-                          className="mt-2 max-w-full sm:max-w-xs rounded mx-auto"
-                        />
-                      )}
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <label className="flex items-start text-sm font-medium text-gray-700">
-                  <span className="text-red-500 mr-1">*</span>
-                  मूळ पात्र सभासद भागधारक प्रमाणपत्र
+                  {/* मूळ पात्र सभासद आधार कार्ड */}
+                  जोडपत्र-३ किवा जोडपत्र -४
                 </label>
                 <div className="relative">
                   <input
@@ -519,10 +412,12 @@ const UploadForm15 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
                   )}
                 </div>
               </div>
+
+              {/* etc Upload */}
               <div className="space-y-2">
                 <label className="flex items-start text-sm font-medium text-gray-700">
-                  <span className="text-red-500 mr-1">*</span>
-                  मूळ पात्र सभासद पात्रता यादी
+                  <span className="text-red-500 mr-1">*</span> प्रपत्र अ
+                  स्वयंघोषणा पत्र
                 </label>
                 <div className="relative">
                   <input
@@ -575,10 +470,11 @@ const UploadForm15 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
                   )}
                 </div>
               </div>
+
               <div className="space-y-2">
                 <label className="flex items-start text-sm font-medium text-gray-700">
-                  <span className="text-red-500 mr-1">*</span>
-                  मूळ पात्र सभासद प्रतिज्ञा पत्र
+                  <span className="text-red-500 mr-1">*</span> मतदार यादी /मतदार
+                  ओळखपत्र
                 </label>
                 <div className="relative">
                   <input
@@ -633,8 +529,7 @@ const UploadForm15 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
               </div>
               <div className="space-y-2">
                 <label className="flex items-start text-sm font-medium text-gray-700">
-                  <span className="text-red-500 mr-1">*</span>
-                  मूळ पात्र सभासद संस्थेचे नाहरकत प्रमाणपत्र
+                  <span className="text-red-500 mr-1">*</span> विद्युत देयक
                 </label>
                 <div className="relative">
                   <input
@@ -685,19 +580,10 @@ const UploadForm15 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
                   )}
                 </div>
               </div>
-            </div>
-
-            {/*2nd div Upload */}
-
-            <div
-              className="grid grid-cols-1 md:grid-cols-2 rounded gap-6 p-3 w-100 mb-5"
-              style={{ border: "1px solid" }}
-            >
-              {/* Aadhar Card Upload */}
               <div className="space-y-2">
                 <label className="flex items-start text-sm font-medium text-gray-700">
                   <span className="text-red-500 mr-1">*</span>
-                  खरेदीदार आधार कार्ड
+                  झोपडपट्टी गणना फॉर्म
                 </label>
                 <div className="relative">
                   <input
@@ -748,11 +634,10 @@ const UploadForm15 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
                   )}
                 </div>
               </div>
-
               <div className="space-y-2">
                 <label className="flex items-start text-sm font-medium text-gray-700">
                   <span className="text-red-500 mr-1">*</span>
-                  खरेदीदार पॅन कार्ड
+                  मालमत्ता देयक
                 </label>
                 <div className="relative">
                   <input
@@ -803,11 +688,19 @@ const UploadForm15 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
                   )}
                 </div>
               </div>
+            </div>
 
+            {/*2nd div Upload */}
+
+            <div
+              className="grid grid-cols-1 md:grid-cols-2 rounded gap-6 p-3 w-100 mb-5"
+              style={{ border: "1px solid" }}
+            >
+              {/* Aadhar Card Upload */}
               <div className="space-y-2">
                 <label className="flex items-start text-sm font-medium text-gray-700">
                   <span className="text-red-500 mr-1">*</span>
-                  उत्पन्नाचा दाखला/फॉर्म १६
+                  महसूल अकृषिक कर/दंड पावती
                 </label>
                 <div className="relative">
                   <input
@@ -863,11 +756,10 @@ const UploadForm15 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
                 </div>
               </div>
 
-              {/* PAN Card Upload */}
               <div className="space-y-2">
                 <label className="flex items-start text-sm font-medium text-gray-700">
                   <span className="text-red-500 mr-1">*</span>
-                  खरेदीदार नौदणीकृत दस्ताऐवज
+                  गुमास्ता परवाना प्रत
                 </label>
                 <div className="relative">
                   <input
@@ -912,6 +804,117 @@ const UploadForm15 = ({ formData, formId, setCanProceed, onFormSubmit }) => {
                       {previews.duplicateGumastaLicense && (
                         <img
                           src={previews.duplicateGumastaLicense}
+                          alt="Preview"
+                          className="mt-2 max-w-full sm:max-w-xs rounded mx-auto"
+                        />
+                      )}
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <label className="flex items-start text-sm font-medium text-gray-700">
+                  <span className="text-red-500 mr-1">*</span>
+                  इतर कागद पत्रे
+                </label>
+                <div className="relative">
+                  <input
+                    type="file"
+                    className="hidden"
+                    id="otherDocument1"
+                    accept=".pdf,.jpg,.jpeg,.png"
+                    onChange={(e) => handleFileChange(e, "otherDocument1")}
+                  />
+                  <label
+                    htmlFor="otherDocument1"
+                    className="flex items-center gap-2 w-full border-2 border-dashed border-gray-300 rounded-lg p-4 hover:border-blue-500 cursor-pointer transition-colors group"
+                  >
+                    <div className="p-2 rounded-full bg-blue-50 group-hover:bg-blue-100">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6 text-blue-600"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
+                        />
+                      </svg>
+                    </div>
+                    <div className="flex-1 text-sm text-gray-500">
+                      <span className="font-medium">Choose from files</span>
+                      <p className="text-xs">
+                        PDF, JPG, JPEG or PNG (max. 2MB)
+                      </p>
+                    </div>
+                  </label>
+                  {files.otherDocument1 && (
+                    <div className="mt-2 text-sm text-gray-600">
+                      <p>Selected: {files.otherDocument1.name}</p>
+                      {previews.otherDocument1 && (
+                        <img
+                          src={previews.otherDocument1}
+                          alt="Preview"
+                          className="mt-2 max-w-full sm:max-w-xs rounded mx-auto"
+                        />
+                      )}
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* PAN Card Upload */}
+              <div className="space-y-2">
+                <label className="flex items-start text-sm font-medium text-gray-700">
+                  <span className="text-red-500 mr-1">*</span>
+                  इतर कागद पत्रे
+                </label>
+                <div className="relative">
+                  <input
+                    type="file"
+                    className="hidden"
+                    id="otherDocument2"
+                    accept=".pdf,.jpg,.jpeg,.png"
+                    onChange={(e) => handleFileChange(e, "otherDocument2")}
+                  />
+                  <label
+                    htmlFor="otherDocument2"
+                    className="flex items-center gap-2 w-full border-2 border-dashed border-gray-300 rounded-lg p-4 hover:border-blue-500 cursor-pointer transition-colors group"
+                  >
+                    <div className="p-2 rounded-full bg-blue-50 group-hover:bg-blue-100">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6 text-blue-600"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
+                        />
+                      </svg>
+                    </div>
+                    <div className="flex-1 text-sm text-gray-500">
+                      <span className="font-medium">Choose from files</span>
+                      <p className="text-xs">
+                        PDF, JPG, JPEG or PNG (max. 2MB)
+                      </p>
+                    </div>
+                  </label>
+                  {files.otherDocument2 && (
+                    <div className="mt-2 text-sm text-gray-600">
+                      <p>Selected: {files.otherDocument2.name}</p>
+                      {previews.otherDocument2 && (
+                        <img
+                          src={previews.otherDocument2}
                           alt="Preview"
                           className="mt-2 max-w-full sm:max-w-xs rounded mx-auto"
                         />
