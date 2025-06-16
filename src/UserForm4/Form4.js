@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import React from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import CustomButton from "../components/CustomButton";
@@ -6,9 +6,11 @@ import axios from "axios";
 import servicesData from "../data/services.json";
 import DownloadPDF from "../UserForm/DownloadPDF";
 import { useLocation } from "react-router-dom";
+import { UserContext } from "../useContext/UserContext";
 
 const Form4 = ({ formData: initialFormData, formId }) => {
   console.log("Form4 Component Rendered with:", { initialFormData, formId });
+  const { user } = useContext(UserContext);
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -167,7 +169,8 @@ const Form4 = ({ formData: initialFormData, formId }) => {
                 <div className="text-left flex  ml-[50%]">सेवा क्र.४</div>
               </div>
               <p className="text-sm mb-4">
-                (महाराष्ट्र लोकसेवा हक्क अधिनियम २०१५ अंतर्गत सेवा मिळणेकरीता सादर करावयाचा अर्जाचा नमूना)
+                (महाराष्ट्र लोकसेवा हक्क अधिनियम २०१५ अंतर्गत सेवा मिळणेकरीता
+                सादर करावयाचा अर्जाचा नमूना)
               </p>
               {/* Photo Box */}
               <div className="flex justify-end mb-4">
@@ -191,7 +194,7 @@ const Form4 = ({ formData: initialFormData, formId }) => {
                   <span>पत्ता</span>
                   <span className="mx-2">:</span>
                   <span className="flex-1 border-b border-gray-300">
-                    {formData.address || "_____________"}
+                    {user.address || formData.address || "_____________"}
                   </span>
                 </div>
                 <div className="flex">

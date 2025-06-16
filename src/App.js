@@ -77,6 +77,7 @@ import ThankYou from "./UserForm/Thankyou";
 import UserProtectedRoutes from "./components/protectedRoutes/UserProtectedRoutes";
 import UserServices from "./components/userServicesListComp/UserServices";
 import UserServiceHistory from "./components/userServicesListComp/UserServiceHistory";
+import { UserProvider } from "./useContext/UserContext";
 
 function App() {
   const [formData, setFormData] = useState({
@@ -93,15 +94,16 @@ function App() {
   });
 
   return (
-    <Router>
-      <div className="min-h-screen bg-gray-100">
-        <NavBar />
-        <div className="py-8">
-          <Routes>
-            <Route path="/" element={<HomeOrLogin />} />
-            <Route path="/login" element={<HomeOrLogin />} />
+    <UserProvider>
+      <Router>
+        <div className="min-h-screen bg-gray-100">
+          <NavBar />
+          <div className="py-8">
+            <Routes>
+              <Route path="/" element={<HomeOrLogin />} />
+              <Route path="/login" element={<HomeOrLogin />} />
 
-            {/* <Route
+              {/* <Route
               path="/"
               element={
                 <DepartmentProtectedRoute>
@@ -110,32 +112,32 @@ function App() {
               }
             /> */}
 
-            <Route path="/register" element={<UserRegistrationForm />} />
-            {/* <Route path="/users-services" element={<ServicesDashboard />} /> */}
-            <Route
-              path="/manager-dashboard"
-              element={
-                <DepartmentProtectedRoute>
-                  <DashBoard />
-                </DepartmentProtectedRoute>
-              }
-            />
+              <Route path="/register" element={<UserRegistrationForm />} />
+              {/* <Route path="/users-services" element={<ServicesDashboard />} /> */}
+              <Route
+                path="/manager-dashboard"
+                element={
+                  <DepartmentProtectedRoute>
+                    <DashBoard />
+                  </DepartmentProtectedRoute>
+                }
+              />
 
-            <Route path="/userdashboard" element={<ServiceDasborad />} />
-            <Route path="/form" element={<MultiStepForm />} />
+              <Route path="/userdashboard" element={<ServiceDasborad />} />
+              <Route path="/form" element={<MultiStepForm />} />
 
-            <Route path="/form1" element={<MultiStepForm />} />
+              <Route path="/form1" element={<MultiStepForm />} />
 
-            <Route
-              path="/admin"
-              element={
-                <DepartmentProtectedRoute>
-                  <AdminDashboard />
-                </DepartmentProtectedRoute>
-              }
-            />
-            {/* this is original */}
-            {/* <Route
+              <Route
+                path="/admin"
+                element={
+                  <DepartmentProtectedRoute>
+                    <AdminDashboard />
+                  </DepartmentProtectedRoute>
+                }
+              />
+              {/* this is original */}
+              {/* <Route
               path="/services"
               element={
                 <UserProtectedRoute>
@@ -144,174 +146,175 @@ function App() {
               }
             /> */}
 
-            {/* created by shivam , user services list */}
+              {/* created by shivam , user services list */}
 
-            <Route
-              // path="/user-services"
-              path="/services"
-              element={
-                <UserProtectedRoute>
-                  <UserServices />
-                </UserProtectedRoute>
-              }
-            />
+              <Route
+                // path="/user-services"
+                path="/services"
+                element={
+                  <UserProtectedRoute>
+                    <UserServices />
+                  </UserProtectedRoute>
+                }
+              />
 
-            <Route
-              // path="/user-services"
-              path="/history"
-              element={
-                <UserProtectedRoute>
-                  <UserServiceHistory />
-                </UserProtectedRoute>
-              }
-            />
+              <Route
+                // path="/user-services"
+                path="/history"
+                element={
+                  <UserProtectedRoute>
+                    <UserServiceHistory />
+                  </UserProtectedRoute>
+                }
+              />
 
-            {/* end created by shivam , user services list */}
-            {/* User protected routes --- */}
-            {/* <Route path="/services" element={<UserProtectedRoutes />}>
+              {/* end created by shivam , user services list */}
+              {/* User protected routes --- */}
+              {/* <Route path="/services" element={<UserProtectedRoutes />}>
               <Route path="" element={<ServiceList />} />
               <Route path="form1" element={<MultiStepForm />} />
             </Route> */}
-            {/* End User protected routes --- */}
-            <Route path="/userdashboard" element={<ServiceDasborad />} />
-            <Route path="/form" element={<MultiStepForm />} />
-            <Route path="/form1" element={<MultiStepForm />} />
-            <Route path="/payment" element={<PaymentForm />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            {/* <Route path="/deptdas" element={<DashBoard />} /> */}
+              {/* End User protected routes --- */}
+              <Route path="/userdashboard" element={<ServiceDasborad />} />
+              <Route path="/form" element={<MultiStepForm />} />
+              <Route path="/form1" element={<MultiStepForm />} />
+              <Route path="/payment" element={<PaymentForm />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              {/* <Route path="/deptdas" element={<DashBoard />} /> */}
 
-            {/* <Route path="/services" element={<ServicesDashboard />} /> */}
-            <Route path="/courses" element={<UserCourse />} />
-            <Route path="/deptform" element={<DeptForm />} />
-            <Route path="/remarks" element={<Remark />} />
-            <Route
-              path="/applicationapproval"
-              element={<ApplicationApproval />}
-            />
-            <Route path="/form1" element={<Form1 />} />
-            <Route path="/form2" element={<Form2 />} />
-            <Route path="/form3" element={<Form3 />} />
-            <Route path="/form4" element={<Form4 />} />
-            <Route path="/form5" element={<Form5 />} />
-            <Route path="/form6" element={<Form6 />} />
-            <Route path="/form7" element={<Form7 />} />
-            <Route path="/form8" element={<Form8 />} />
-            <Route path="/form9" element={<Form9 />} />
-            <Route path="/form10" element={<Form10 />} />
-            <Route path="/form11" element={<Form11 />} />
-            <Route path="/form12" element={<Form12 />} />
-            <Route path="/form13" element={<Form13 />} />
-            <Route path="/form14" element={<Form14 />} />
-            <Route path="/form22" element={<Form22 />} />
+              {/* <Route path="/services" element={<ServicesDashboard />} /> */}
+              <Route path="/courses" element={<UserCourse />} />
+              <Route path="/deptform" element={<DeptForm />} />
+              <Route path="/remarks" element={<Remark />} />
+              <Route
+                path="/applicationapproval"
+                element={<ApplicationApproval />}
+              />
+              <Route path="/form1" element={<Form1 />} />
+              <Route path="/form2" element={<Form2 />} />
+              <Route path="/form3" element={<Form3 />} />
+              <Route path="/form4" element={<Form4 />} />
+              <Route path="/form5" element={<Form5 />} />
+              <Route path="/form6" element={<Form6 />} />
+              <Route path="/form7" element={<Form7 />} />
+              <Route path="/form8" element={<Form8 />} />
+              <Route path="/form9" element={<Form9 />} />
+              <Route path="/form10" element={<Form10 />} />
+              <Route path="/form11" element={<Form11 />} />
+              <Route path="/form12" element={<Form12 />} />
+              <Route path="/form13" element={<Form13 />} />
+              <Route path="/form14" element={<Form14 />} />
+              <Route path="/form22" element={<Form22 />} />
 
-            <Route
-              path="/application"
-              element={<ApplicationForm formData={FormData} />}
-            />
+              <Route
+                path="/application"
+                element={<ApplicationForm formData={FormData} />}
+              />
 
-            {/* <Route
+              {/* <Route
               path="/application1"
               element={<ApplicationForm1 formData={FormData} />}
             /> */}
-            <Route
-              path="/application2"
-              element={<ApplicationForm2 formData={FormData} />}
-            />
-            <Route
-              path="/application3"
-              element={<ApplicationForm3 formData={FormData} />}
-            />
-            <Route
-              path="/application4"
-              element={<ApplicationForm4 formData={FormData} />}
-            />
-            <Route
-              path="/application5"
-              element={<ApplicationForm5 formData={FormData} />}
-            />
-            <Route
-              path="/application6"
-              element={<ApplicationForm6 formData={FormData} />}
-            />
-            <Route
-              path="/application7"
-              element={<ApplicationForm7 formData={FormData} />}
-            />
-            <Route
-              path="/application8"
-              element={<ApplicationForm8 formData={FormData} />}
-            />
-            <Route
-              path="/application9"
-              element={<ApplicationForm9 formData={FormData} />}
-            />
-            <Route
-              path="/application10"
-              element={<ApplicationForm10 formData={FormData} />}
-            />
-            <Route
-              path="/application11"
-              element={<ApplicationForm11 formData={FormData} />}
-            />
-            <Route
-              path="/application12"
-              element={<ApplicationForm12 formData={FormData} />}
-            />
-            <Route
-              path="/application13"
-              element={<ApplicationForm13 formData={FormData} />}
-            />
-            {/* <Route
+              <Route
+                path="/application2"
+                element={<ApplicationForm2 formData={FormData} />}
+              />
+              <Route
+                path="/application3"
+                element={<ApplicationForm3 formData={FormData} />}
+              />
+              <Route
+                path="/application4"
+                element={<ApplicationForm4 formData={FormData} />}
+              />
+              <Route
+                path="/application5"
+                element={<ApplicationForm5 formData={FormData} />}
+              />
+              <Route
+                path="/application6"
+                element={<ApplicationForm6 formData={FormData} />}
+              />
+              <Route
+                path="/application7"
+                element={<ApplicationForm7 formData={FormData} />}
+              />
+              <Route
+                path="/application8"
+                element={<ApplicationForm8 formData={FormData} />}
+              />
+              <Route
+                path="/application9"
+                element={<ApplicationForm9 formData={FormData} />}
+              />
+              <Route
+                path="/application10"
+                element={<ApplicationForm10 formData={FormData} />}
+              />
+              <Route
+                path="/application11"
+                element={<ApplicationForm11 formData={FormData} />}
+              />
+              <Route
+                path="/application12"
+                element={<ApplicationForm12 formData={FormData} />}
+              />
+              <Route
+                path="/application13"
+                element={<ApplicationForm13 formData={FormData} />}
+              />
+              {/* <Route
               path="/application14"
               element={<ApplicationForm14 formData={FormData} />}
             /> */}
-            <Route
-              path="/application15"
-              element={<ApplicationForm15 formData={FormData} />}
-            />
-            <Route
-              path="/application16"
-              element={<ApplicationForm16 formData={FormData} />}
-            />
-            <Route
-              path="/application17"
-              element={<ApplicationForm17 formData={FormData} />}
-            />
-            <Route
-              path="/application18"
-              element={<ApplicationForm18 formData={FormData} />}
-            />
-            <Route
-              path="/application19"
-              element={<ApplicationForm19 formData={FormData} />}
-            />
-            <Route
-              path="/application20"
-              element={<ApplicationForm20 formData={FormData} />}
-            />
-            <Route
-              path="/application21"
-              element={<ApplicationForm21 formData={FormData} />}
-            />
+              <Route
+                path="/application15"
+                element={<ApplicationForm15 formData={FormData} />}
+              />
+              <Route
+                path="/application16"
+                element={<ApplicationForm16 formData={FormData} />}
+              />
+              <Route
+                path="/application17"
+                element={<ApplicationForm17 formData={FormData} />}
+              />
+              <Route
+                path="/application18"
+                element={<ApplicationForm18 formData={FormData} />}
+              />
+              <Route
+                path="/application19"
+                element={<ApplicationForm19 formData={FormData} />}
+              />
+              <Route
+                path="/application20"
+                element={<ApplicationForm20 formData={FormData} />}
+              />
+              <Route
+                path="/application21"
+                element={<ApplicationForm21 formData={FormData} />}
+              />
 
-            <Route
-              path="/CertifiedRenDepositForm"
-              element={<CertifiedRenDepositForm />}
-            />
-            <Route
-              path="/certified-rent-deposits"
-              element={<CertifiedRenDepositList />}
-            />
+              <Route
+                path="/CertifiedRenDepositForm"
+                element={<CertifiedRenDepositForm />}
+              />
+              <Route
+                path="/certified-rent-deposits"
+                element={<CertifiedRenDepositList />}
+              />
 
-            <Route
-              path="/application22"
-              element={<ApplicationForm22 formData={FormData} />}
-            />
-            <Route path="/thank" element={<ThankYou />}></Route>
-          </Routes>
+              <Route
+                path="/application22"
+                element={<ApplicationForm22 formData={FormData} />}
+              />
+              <Route path="/thank" element={<ThankYou />}></Route>
+            </Routes>
+          </div>
         </div>
-      </div>
-    </Router>
+      </Router>
+    </UserProvider>
   );
 }
 

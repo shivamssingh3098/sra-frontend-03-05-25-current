@@ -209,17 +209,31 @@ const UserRegisterForm = () => {
                   )}
                 </div>
                 <div className="form-group">
-                  <label className="form-label required">District</label>
+                  <label className="form-label required">Address</label>
                   <input
                     type="text"
-                    name="state"
-                    value={formData.state}
+                    name="address"
+                    value={formData.address}
                     onChange={handleChange}
-                    className={`form-input ${errors.state ? "error" : ""}`}
+                    className={`form-input ${errors.address ? "error" : ""}`}
                     required
                   />
-                  {errors.state && (
-                    <span className="error-message">{errors.state}</span>
+                  {errors.address && (
+                    <span className="error-message">{errors.address}</span>
+                  )}
+                </div>
+                <div className="form-group">
+                  <label className="form-label required">Village</label>
+                  <input
+                    type="text"
+                    name="village"
+                    value={formData.village}
+                    onChange={handleChange}
+                    className={`form-input ${errors.village ? "error" : ""}`}
+                    required
+                  />
+                  {errors.village && (
+                    <span className="error-message">{errors.village}</span>
                   )}
                 </div>
                 <div className="form-group">
@@ -237,34 +251,6 @@ const UserRegisterForm = () => {
                   )}
                 </div>
                 <div className="form-group">
-                  <label className="form-label required">Pin Code</label>
-                  <input
-                    type="text"
-                    name="pinCode"
-                    value={formData.pinCode}
-                    onChange={handleChange}
-                    className={`form-input ${errors.pinCode ? "error" : ""}`}
-                    required
-                  />
-                  {errors.pinCode && (
-                    <span className="error-message">{errors.pinCode}</span>
-                  )}
-                </div>
-                <div className="form-group">
-                  <label className="form-label required">Address</label>
-                  <input
-                    type="text"
-                    name="address"
-                    value={formData.address}
-                    onChange={handleChange}
-                    className={`form-input ${errors.address ? "error" : ""}`}
-                    required
-                  />
-                  {errors.address && (
-                    <span className="error-message">{errors.address}</span>
-                  )}
-                </div>
-                <div className="form-group">
                   <label className="form-label required">Taluka</label>
                   <input
                     type="text"
@@ -279,17 +265,32 @@ const UserRegisterForm = () => {
                   )}
                 </div>
                 <div className="form-group">
-                  <label className="form-label required">Village</label>
+                  <label className="form-label required">District</label>
                   <input
                     type="text"
-                    name="village"
-                    value={formData.village}
+                    name="state"
+                    value={formData.state}
                     onChange={handleChange}
-                    className={`form-input ${errors.village ? "error" : ""}`}
+                    className={`form-input ${errors.state ? "error" : ""}`}
                     required
                   />
-                  {errors.village && (
-                    <span className="error-message">{errors.village}</span>
+                  {errors.state && (
+                    <span className="error-message">{errors.state}</span>
+                  )}
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label required">Pin Code</label>
+                  <input
+                    type="text"
+                    name="pinCode"
+                    value={formData.pinCode}
+                    onChange={handleChange}
+                    className={`form-input ${errors.pinCode ? "error" : ""}`}
+                    required
+                  />
+                  {errors.pinCode && (
+                    <span className="error-message">{errors.pinCode}</span>
                   )}
                 </div>
               </div>

@@ -4,6 +4,7 @@ import React, {
   useEffect,
   forwardRef,
   useImperativeHandle,
+  useContext,
 } from "react";
 import servicesData from "../data/services.json";
 // import MuncipalCooperation from "./MuncipalCooperation";
@@ -11,7 +12,8 @@ import servicesData from "../data/services.json";
 import WordForm from "./WordForm";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
-
+import { UserContext } from "../useContext/UserContext";
+import { today } from "../utils/currentDate";
 const DEPARTMENT = ["AD", "TPD", "CSD", "COD", "EMD", "TVD", "CAD", "ED"];
 
 const CITY_COUNCIL = [
@@ -88,11 +90,11 @@ const DashboardForm = forwardRef(
     const queryParams = new URLSearchParams(location.search);
     const serviceId = parseInt(queryParams.get("serviceId"));
     console.log("serviceId-----", serviceId);
-
+    const { user } = useContext(UserContext);
     const [formData, setFormData] = useState({
-      name: "",
-      applyDate: "",
-      phone: "",
+      name: user.fullName || "",
+      applyDate: today || "",
+      phone: user.phone || "",
       address: "",
       city: "",
       taluka: "",
@@ -325,21 +327,7 @@ const DashboardForm = forwardRef(
                   onChange={handleChange}
                   className="w-full border rounded px-3 py-2"
                   required
-                />
-              </div>
-
-              {/* Date */}
-              <div>
-                <label className="font-medium block mb-1">
-                  दिनांक <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="date"
-                  name="applyDate"
-                  value={formData.applyDate}
-                  onChange={handleChange}
-                  className="w-full border rounded px-3 py-2"
-                  required
+                  disabled
                 />
               </div>
 
@@ -355,6 +343,7 @@ const DashboardForm = forwardRef(
                   onChange={handleChange}
                   className="w-full border rounded px-3 py-2"
                   required
+                  disabled
                 />
               </div>
 
@@ -372,7 +361,21 @@ const DashboardForm = forwardRef(
                   required
                 />
               </div>
-
+              {/* Date */}
+              <div>
+                <label className="font-medium block mb-1">
+                  दिनांक <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="date"
+                  name="applyDate"
+                  value={formData.applyDate}
+                  onChange={handleChange}
+                  className="w-full border rounded px-3 py-2"
+                  required
+                  disabled
+                />
+              </div>
               {/* Taluka */}
               <WordForm formData={formData} setFormData={setFormData} />
 
