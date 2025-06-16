@@ -1,22 +1,30 @@
 import CONFIG from "../app.config"; // adjust path as needed
-import React, { useState, useEffect, useImperativeHandle } from "react";
+import React, {
+  useState,
+  useEffect,
+  useImperativeHandle,
+  useContext,
+} from "react";
 import servicesData from "../data/services.json";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
+import { UserContext } from "../useContext/UserContext";
+import { today } from "../utils/currentDate";
 
 const DashboardForm13 = ({ setCanProceed, onFormSubmit, ref }) => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const serviceId = parseInt(queryParams.get("serviceId"));
+  const { user } = useContext(UserContext);
 
   const serviceDescription =
     servicesData[0].services.find((service) => service.id === serviceId)
       ?.description || "";
 
   const [formData, setFormData] = useState({
-    name: "",
-    applyDate: "",
-    phone: "",
+    name: user.fullName || "",
+    applyDate: today || "",
+    phone: user.phone || "",
     address: "",
     taluka: "",
     mouje: "",
@@ -144,20 +152,7 @@ const DashboardForm13 = ({ setCanProceed, onFormSubmit, ref }) => {
               value={formData.name}
               onChange={handleChange}
               required
-              className="w-full border rounded px-3 py-2"
-            />
-          </div>
-
-          <div>
-            <label className="block font-medium mb-1">
-              दिनांक <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="date"
-              name="applyDate"
-              value={formData.applyDate}
-              onChange={handleChange}
-              required
+              disabled
               className="w-full border rounded px-3 py-2"
             />
           </div>
@@ -172,6 +167,7 @@ const DashboardForm13 = ({ setCanProceed, onFormSubmit, ref }) => {
               value={formData.phone}
               onChange={handleChange}
               required
+              disabled
               className="w-full border rounded px-3 py-2"
             />
           </div>
@@ -189,7 +185,20 @@ const DashboardForm13 = ({ setCanProceed, onFormSubmit, ref }) => {
               className="w-full border rounded px-3 py-2"
             />
           </div>
-
+          <div>
+            <label className="block font-medium mb-1">
+              दिनांक <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="date"
+              name="applyDate"
+              value={formData.applyDate}
+              onChange={handleChange}
+              required
+              disabled
+              className="w-full border rounded px-3 py-2"
+            />
+          </div>
           <div>
             <label className="block font-medium mb-1">
               सहकारी गृह संस्था <span className="text-red-500">*</span>

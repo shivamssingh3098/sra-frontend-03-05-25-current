@@ -1,25 +1,27 @@
 import CONFIG from "../app.config"; // adjust path as needed
 import axios from "axios";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
 import "../styles/css/Home.css";
 import logo from "../images/logo.png";
-import serviceIcon from "../images/logo.png";
-import devendraFadnavis from "../images/Shri.Devendra.jpg";
+// import serviceIcon from "../images/logo.png";
+// import devendraFadnavis from "../images/Shri.Devendra.jpg";
+import devendraFadnaviss from "../images/devendraFadnavis.jpg";
 import eknathShinde from "../images/Eknath-Shinde.jpg";
 import ajitPawar from "../images/ajitpawar.jpg";
 import Pankaj from "../images/Pankaj.png";
 import {
   AiOutlineHome,
-  AiOutlineAppstore,
-  AiOutlineMail,
+  // AiOutlineAppstore,
+  // AiOutlineMail,
 } from "react-icons/ai";
 import { BiMenu } from "react-icons/bi";
 import { MdDashboard } from "react-icons/md";
 import { FaHistory } from "react-icons/fa";
 import { FaSignInAlt, FaSignOutAlt, FaUser } from "react-icons/fa";
-
+import { UserContext } from "../useContext/UserContext";
 export const NavBar = () => {
+  const { setUser } = useContext(UserContext);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
@@ -77,7 +79,7 @@ export const NavBar = () => {
 
         // setUserTypeData(response.data.data);
         const data = response.data;
-
+        setUser(data?.data.user);
         if (
           data?.data?.user?.userType ||
           data?.data?.departmentManager?.userType
@@ -209,7 +211,8 @@ export const NavBar = () => {
             <div className="official">
               <img
                 className="ml-5"
-                src={devendraFadnavis}
+                // src={devendraFadnavis}
+                src={devendraFadnaviss}
                 alt="Shri. Devendra Fadnavis"
               />
               <p>Shri. Devendra Fadnavis</p>

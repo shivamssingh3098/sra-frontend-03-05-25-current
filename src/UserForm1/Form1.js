@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import React from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import CustomButton from "../components/CustomButton";
@@ -6,10 +6,11 @@ import servicesData from "../data/services.json";
 import axios from "axios";
 import DownloadPDF from "../UserForm/DownloadPDF";
 import { useLocation } from "react-router-dom";
+import { UserContext } from "../useContext/UserContext";
 
 const Form1 = ({ formData: initialFormData, formId }) => {
   console.log("Form1 Component Rendered with:", { initialFormData, formId });
-
+  const { user } = useContext(UserContext);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const serviceId = parseInt(queryParams.get("serviceId"));
@@ -195,7 +196,7 @@ const Form1 = ({ formData: initialFormData, formId }) => {
                   <span>पत्ता</span>
                   <span className="mx-2">:</span>
                   <span className="flex-1 border-b border-gray-300">
-                    {formData.address || "_____________"}
+                    {user.address || formData.address || "_____________"}
                   </span>
                 </div>
                 <div className="flex">
